@@ -1,0 +1,9 @@
+name: ControllableMobsAPI
+main: de.ntcomputer.minecraft.controllablemobs.plugin.ControllableMobsAPIPlugin
+version: {project.version}
+load: STARTUP
+author: DevCybran
+website: http://dev.bukkit.org/server-mods/controllable-mobs-api/
+description:
+    This plugin is wrapping an API for enhanced mob control.
+    By itself it has no effect, but it is used by several other plugins.
