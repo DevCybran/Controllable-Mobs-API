@@ -1,8 +1,10 @@
 package de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors;
 
-import net.minecraft.server.v1_5_R3.EntityCreature;
-import net.minecraft.server.v1_5_R3.PathfinderGoal;
-import net.minecraft.server.v1_5_R3.PathfinderGoalFleeSun;
+import org.bukkit.entity.Creature;
+
+import net.minecraft.server.v1_6_R2.EntityCreature;
+import net.minecraft.server.v1_6_R2.PathfinderGoal;
+import net.minecraft.server.v1_6_R2.PathfinderGoalFleeSun;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIType;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
 
@@ -13,7 +15,7 @@ import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllable
  * @version v4
  *
  */
-public class AIFleeSun extends AIBehavior {
+public class AIFleeSun extends AIMoving<Creature> {
 	
 	/**
 	 * Create with an automatically given priority.
@@ -28,12 +30,22 @@ public class AIFleeSun extends AIBehavior {
 	 * @param priority the priority of this behavior. Specify 0 to auto-generate it
 	 */
 	public AIFleeSun(final int priority) {
-		super(priority);
+		this(priority,1.0);
+	}
+	
+	/**
+	 * Create with a custom priority and a custom movement speed multiplicator 
+	 * 
+	 * @param priority the priority of this behavior. Specify 0 to auto-generate it
+	 * @param movementSpeedMultiplicator the entity's movement speed is multiplied with this multiplicator when moving to the target
+	 */
+	public AIFleeSun(final int priority, double movementSpeedMultiplicator) {
+		super(priority,movementSpeedMultiplicator);
 	}
 
 	@Override
-	public PathfinderGoal createPathfinderGoal(final CraftControllableMob<?> mob) {
-		return new PathfinderGoalFleeSun((EntityCreature) mob.notchEntity, mob.getProperties().getMovementSpeed());
+	public PathfinderGoal createPathfinderGoal(CraftControllableMob<? extends Creature> mob) {
+		return new PathfinderGoalFleeSun((EntityCreature) mob.notchEntity, this.movementSpeedMultiplicator);
 	}
 
 	@Override

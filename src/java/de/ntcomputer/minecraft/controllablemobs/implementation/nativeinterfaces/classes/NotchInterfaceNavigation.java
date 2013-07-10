@@ -1,8 +1,8 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.classes;
 
-import net.minecraft.server.v1_5_R3.EntityLiving;
-import net.minecraft.server.v1_5_R3.Navigation;
-import net.minecraft.server.v1_5_R3.PathEntity;
+import net.minecraft.server.v1_6_R2.EntityLiving;
+import net.minecraft.server.v1_6_R2.Navigation;
+import net.minecraft.server.v1_6_R2.PathEntity;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.primitives.NativeFieldFloat;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.system.NativeMethodPublic;
 
@@ -20,7 +20,7 @@ public class NotchInterfaceNavigation {
 		public boolean invoke(final Navigation navigation) {
 			try {
 				// return (this.c == null) || (this.c.b());
-				return navigation.f();
+				return navigation.g();
 			} catch(Throwable e) {
 				this.handleException(e);
 				return true;
@@ -32,7 +32,7 @@ public class NotchInterfaceNavigation {
 		public void invoke(final Navigation navigation) {
 			try {
 				// this.c = null;
-				navigation.g();
+				navigation.h();
 			} catch(Throwable e) {
 				this.handleException(e);
 			}
@@ -40,9 +40,9 @@ public class NotchInterfaceNavigation {
 	}
 	
 	public class MoveToEntity extends NativeMethodPublic {
-		public void invoke(final Navigation navigation, EntityLiving entity, float movementSpeed) {
+		public void invoke(final Navigation navigation, EntityLiving entity, double movementSpeedMultiplicator) {
 			try {
-				navigation.a(entity, movementSpeed);
+				navigation.a(entity, movementSpeedMultiplicator);
 			} catch(Throwable e) {
 				this.handleException(e);
 			}
@@ -50,9 +50,9 @@ public class NotchInterfaceNavigation {
 	}
 	
 	public class MoveAlongPath extends NativeMethodPublic {
-		public void invoke(final Navigation navigation, PathEntity path, float movementSpeed) {
+		public void invoke(final Navigation navigation, PathEntity path, double movementSpeedMultiplicator) {
 			try {
-				navigation.a(path, movementSpeed);
+				navigation.a(path, movementSpeedMultiplicator);
 			} catch(Throwable e) {
 				this.handleException(e);
 			}

@@ -1,12 +1,14 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation.ai;
 
+import org.bukkit.entity.LivingEntity;
+
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
 import de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors.PathfinderGoalActionTarget;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;
 
-class AITargetController extends AIController {
+class AITargetController<E extends LivingEntity> extends AIController<E> {
 
-	public AITargetController(CraftControllableMob<?> mob) {
+	public AITargetController(CraftControllableMob<E> mob) {
 		super(mob, NativeInterfaces.ENTITYLIVING.FIELD_TARGETSELECTOR);
 	}
 

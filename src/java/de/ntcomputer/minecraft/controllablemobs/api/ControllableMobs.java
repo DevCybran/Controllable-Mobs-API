@@ -3,6 +3,10 @@ package de.ntcomputer.minecraft.controllablemobs.api;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
+import net.minecraft.server.v1_6_R2.EntityInsentient;
+import net.minecraft.server.v1_6_R2.EntityLiving;
+
+import org.bukkit.craftbukkit.v1_6_R2.entity.CraftLivingEntity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.PluginClassLoader;
@@ -28,7 +32,7 @@ public final class ControllableMobs {
 	private static void onLoad() {
 		try {
 			PluginClassLoader cl = (PluginClassLoader) ControllableMobs.class.getClassLoader();
-			final Plugin[] plugins = NativeInterfaces.JAVAPLUGINLOADER.FIELD_SERVER.get(NativeInterfaces.PLUGINCLASSLOADER.FIELD_LOADER.get(cl)).getPluginManager().getPlugins();
+			Plugin[] plugins = NativeInterfaces.JAVAPLUGINLOADER.FIELD_SERVER.get(NativeInterfaces.PLUGINCLASSLOADER.FIELD_LOADER.get(cl)).getPluginManager().getPlugins();
 			for(Plugin plugin: plugins) {
 				if(plugin.getClass().getClassLoader()==cl) {
 					if(plugin.getName().equals("ControllableMobsAPI")) {
@@ -66,7 +70,7 @@ public final class ControllableMobs {
 	 * @throws IllegalStateException when the entity has not been assigned yet
 	 */
 	@SuppressWarnings("unchecked")
-	public static <E extends LivingEntity> ControllableMob<E> get(final E entity) throws IllegalStateException {
+	public static <E extends LivingEntity> ControllableMob<E> get(E entity) throws IllegalStateException {
 		if(!entities.containsKey(entity)) throw new IllegalStateException("entity "+entity.toString()+" is not assigned yet");
 		return (ControllableMob<E>) entities.get(entity);
 	}
@@ -77,10 +81,10 @@ public final class ControllableMobs {
 	 * 
 	 * @param entity which you want to control
 	 * @return the {@link ControllableMob} you can use to control the entity
-	 * @throws IllegalArgumentException when the entity is null
+	 * @throws InvalidEntityException when the entity is null or can't be controlled
 	 */
 	@SuppressWarnings("unchecked")
-	public static <E extends LivingEntity> ControllableMob<E> getOrAssign(final E entity) throws IllegalArgumentException {
+	public static <E extends LivingEntity> ControllableMob<E> getOrAssign(E entity) throws InvalidEntityException {
 		if(entities.containsKey(entity)) return (ControllableMob<E>) entities.get(entity);
 		else return assign(entity);
 	}
@@ -93,12 +97,12 @@ public final class ControllableMobs {
 	 * @param entity which you want to control
 	 * @param clearAI a boolean indicating whether default behaviors should be removed (true) or not (false).
 	 * @return the {@link ControllableMob} you can use to control the entity
-	 * @throws IllegalArgumentException when the entity is null
+	 * @throws InvalidEntityException when the entity is null or can't be controlled
 	 */
 	@SuppressWarnings("unchecked")
-	public static <E extends LivingEntity> ControllableMob<E> getOrAssign(final E entity, final boolean clearAI) throws IllegalArgumentException {
+	public static <E extends LivingEntity> ControllableMob<E> getOrAssign(E entity, boolean clearAI) throws InvalidEntityException {
 		if(entities.containsKey(entity)) return (ControllableMob<E>) entities.get(entity);
-		else return assign(entity);
+		else return assign(entity, clearAI);
 	}
 	
 	/**
@@ -107,10 +111,10 @@ public final class ControllableMobs {
 	 * 
 	 * @param entity an instance of a subclass of LivingEntity - the entity you want to control
 	 * @return the {@link ControllableMob} you can use to control the entity
-	 * @throws IllegalArgumentException when the entity is null
+	 * @throws InvalidEntityException when the entity is null or can't be controlled
 	 * @throws IllegalStateException when the entity is already being controlled
 	 */
-	public static <E extends LivingEntity> ControllableMob<E> assign(final E entity) throws IllegalStateException, IllegalArgumentException {
+	public static <E extends LivingEntity> ControllableMob<E> assign(E entity) throws IllegalStateException, InvalidEntityException {
 		return assign(entity, false);
 	}
 	
@@ -121,11 +125,20 @@ public final class ControllableMobs {
 	 * @param entity entity an instance of a subclass of LivingEntity - the entity you want to control
 	 * @param clearAI a boolean indicating whether default behaviors should be removed (true) or not (false)
 	 * @return the {@link ControllableMob} you can use to control the entity
-	 * @throws IllegalArgumentException when the entity is null
+	 * @throws InvalidEntityException when the entity is null or can't be controlled
 	 * @throws IllegalStateException when the entity is already being controlled
 	 */
-	public static <E extends LivingEntity> ControllableMob<E> assign(final E entity, final boolean clearAI) throws IllegalStateException, IllegalArgumentException {
-		return assign(entity, clearAI, null);
+	public static <E extends LivingEntity> ControllableMob<E> assign(E entity, boolean clearAI) throws IllegalStateException, InvalidEntityException {
+		if(entity==null) throw new InvalidEntityException("entity must not be null",entity);
+		EntityLiving notchEntity = ((CraftLivingEntity) entity).getHandle();
+		if(!(notchEntity instanceof EntityInsentient)) throw new InvalidEntityException("the entity "+entity.toString()+" can't be controlled",entity);
+		if(entities.containsKey(entity)) throw new IllegalStateException("entity "+entity.toString()+" is already a controlled entity");
+		
+		ControllableMob<E> controllableMob = new CraftControllableMob<E>(entity, (EntityInsentient) notchEntity);
+		if(clearAI) controllableMob.getAI().clear();
+		
+		entities.put(entity,controllableMob);
+		return controllableMob;
 	}
 	
 	/**
@@ -137,13 +150,13 @@ public final class ControllableMobs {
 	 * @param clearAI a boolean indicating whether default behaviors should be removed (true) or not (false)
 	 * @param newMovementSpeed This float value has to be in a range between 0.01 and 2.0, or it will be ignored. The default value is 0.25 for monsters
 	 * @return the {@link ControllableMob} you can use to control the entity
-	 * @throws IllegalArgumentException when the entity is null
+	 * @throws InvalidEntityException when the entity is null or can't be controlled
 	 * @throws IllegalStateException when the entity is already being controlled
 	 * 
 	 * @deprecated contains parameters that should be set elsewhere. Will be removed in v5 or v6.
 	 */
 	@Deprecated
-	public static <E extends LivingEntity> ControllableMob<E> assign(final E entity, final boolean clearAI, final float newMovementSpeed) throws IllegalStateException, IllegalArgumentException {
+	public static <E extends LivingEntity> ControllableMob<E> assign(E entity, boolean clearAI, float newMovementSpeed) throws IllegalStateException, InvalidEntityException {
 		return assign(entity, clearAI, newMovementSpeed, null);
 	}
 	
@@ -156,13 +169,14 @@ public final class ControllableMobs {
 	 * @param clearAI a boolean indicating whether default behaviors should be removed (true) or not (false)
 	 * @param additionalAIBehaviors an array of new AI behaviors. See {@link ControllableMobAI#addAIBehaviors(AIBehavior[])}
 	 * @return the {@link ControllableMob} you can use to control the entity
-	 * @throws IllegalArgumentException when the entity is null
+	 * @throws InvalidEntityException when the entity is null or can't be controlled
 	 * @throws IllegalStateException when the entity is already being controlled
 	 * 
 	 * @deprecated contains parameters that should be set elsewhere. Will be removed in v5 or v6.
 	 */
+	@SuppressWarnings("rawtypes")
 	@Deprecated
-	public static <E extends LivingEntity> ControllableMob<E> assign(final E entity, final boolean clearAI, final AIBehavior[] additionalAIBehaviors) throws IllegalStateException, IllegalArgumentException {
+	public static <E extends LivingEntity> ControllableMob<E> assign(E entity, boolean clearAI, AIBehavior[] additionalAIBehaviors) throws IllegalStateException, InvalidEntityException {
 		return assign(entity, clearAI, 0, additionalAIBehaviors);
 	}
 	
@@ -177,17 +191,20 @@ public final class ControllableMobs {
 	 * @param newMovementSpeed This float value has to be in a range between 0.01 and 2.0, or it will be ignored. The default value is 0.25 for monsters
 	 * @param additionalAIBehaviors an array of new AI behaviors. See {@link ControllableMobAI#addAIBehaviors(AIBehavior[])}
 	 * @return the {@link ControllableMob} you can use to control the entity
-	 * @throws IllegalArgumentException when the entity is null
+	 * @throws InvalidEntityException when the entity is null or can't be controlled
 	 * @throws IllegalStateException when the entity is already being controlled
 	 * 
 	 * @deprecated contains parameters that should be set elsewhere. Will be removed in v5 or v6.
 	 */
+	@SuppressWarnings("rawtypes")
 	@Deprecated
-	public static <E extends LivingEntity> ControllableMob<E> assign(final E entity, final boolean clearAI, final float newMovementSpeed, final AIBehavior[] additionalAIBehaviors) throws IllegalStateException, IllegalArgumentException {
-		if(entity==null) throw new IllegalArgumentException("entity must not be null");
+	public static <E extends LivingEntity> ControllableMob<E> assign(E entity, boolean clearAI, float newMovementSpeed, AIBehavior[] additionalAIBehaviors) throws IllegalStateException, InvalidEntityException {
+		if(entity==null) throw new InvalidEntityException("entity must not be null", entity);
+		EntityLiving notchEntity = ((CraftLivingEntity) entity).getHandle();
+		if(!(notchEntity instanceof EntityInsentient)) throw new InvalidEntityException("the entity "+entity.toString()+" can't be controlled",entity);
 		if(entities.containsKey(entity)) throw new IllegalStateException("entity "+entity.toString()+" is already a controlled entity");
 		
-		final ControllableMob<E> controllableMob = new CraftControllableMob<E>(entity);
+		ControllableMob<E> controllableMob = new CraftControllableMob<E>(entity, (EntityInsentient) notchEntity);
 		if(clearAI) controllableMob.getAI().clearAIBehaviors();
 		controllableMob.getProperties().setMovementSpeed(newMovementSpeed);
 		if(additionalAIBehaviors!=null) controllableMob.getAI().addAIBehaviors(additionalAIBehaviors);
@@ -204,10 +221,10 @@ public final class ControllableMobs {
 	 * @param controllableMob the controller which should be unassigned
 	 * @throws IllegalStateException when the controllableMob is already unassigned
 	 */
-	public static void unassign(final ControllableMob<?> controllableMob) throws IllegalStateException {
+	public static void unassign(ControllableMob<?> controllableMob) throws IllegalStateException {
 		if(!entities.containsKey(controllableMob.getEntity())) throw new IllegalStateException("entity "+controllableMob.toString()+" is already unassigned");
 		entities.remove(controllableMob.getEntity());
-		((CraftControllableMob<?>) controllableMob).dispose();
+		((CraftControllableMob<?>) controllableMob).unassign();
 	}
 
 }

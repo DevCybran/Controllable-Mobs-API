@@ -1,6 +1,6 @@
 package de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors;
 
-import net.minecraft.server.v1_5_R3.EntityLiving;
+import net.minecraft.server.v1_6_R2.EntityLiving;
 
 import org.bukkit.entity.LivingEntity;
 
@@ -14,7 +14,7 @@ import de.ntcomputer.minecraft.controllablemobs.implementation.ControllableMobHe
  * @version 53
  *
  */
-public abstract class AITargetBehaviorEx extends AITargetBehavior {
+public abstract class AITargetBehaviorEx extends AITargetBehavior<LivingEntity> {
 	protected final int maximumNoEyeContactTicks;
 	protected final boolean ignoreInvulnerability;
 	protected final float maximumDistance;

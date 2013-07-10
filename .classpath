@@ -6,10 +6,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/libraries/craftbukkit/craftbukkit-1.5.2-R1.0.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="http://jd.bukkit.org/beta/apidocs/"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="/libraries/craftbukkit/craftbukkit-1.6.2-R0.1-20130710.060229-3.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

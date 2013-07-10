@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import net.minecraft.server.v1_5_R3.DistanceComparator;
-import net.minecraft.server.v1_5_R3.EntityHuman;
-import net.minecraft.server.v1_5_R3.EntityLiving;
+import net.minecraft.server.v1_6_R2.DistanceComparator;
+import net.minecraft.server.v1_6_R2.EntityHuman;
+import net.minecraft.server.v1_6_R2.EntityLiving;
 
 import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
 
@@ -25,7 +25,7 @@ public class PathfinderGoalTargetNearest extends PathfinderGoalTargetEx {
 			final EntitySelector entitySelector) {
 		super(mob, maximumNoEyeContactTicks, ignoreInvulnerability, maximumDistance,	targetClasses);
 		this.searchDistance = maximumDistance<=0 ? 500 : maximumDistance;
-		this.comparator = new DistanceComparator(null, entity);
+		this.comparator = new DistanceComparator(entity);
 		this.entitySelector = entitySelector;
 	}
 

@@ -1,7 +1,10 @@
 package de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors;
 
-import net.minecraft.server.v1_5_R3.PathfinderGoal;
-import net.minecraft.server.v1_5_R3.PathfinderGoalFloat;
+import net.minecraft.server.v1_6_R2.PathfinderGoal;
+import net.minecraft.server.v1_6_R2.PathfinderGoalFloat;
+
+import org.bukkit.entity.LivingEntity;
+
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIType;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
 
@@ -13,7 +16,7 @@ import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllable
  * @version v4
  *
  */
-public class AIFloat extends AIBehavior {
+public class AIFloat extends AIBehavior<LivingEntity> {
 	
 	/**
 	 * Create with an automatically given priority.
@@ -32,7 +35,7 @@ public class AIFloat extends AIBehavior {
 	}
 
 	@Override
-	public PathfinderGoal createPathfinderGoal(final CraftControllableMob<?> mob) {
+	public PathfinderGoal createPathfinderGoal(CraftControllableMob<?> mob) {
 		return new PathfinderGoalFloat(mob.notchEntity);
 	}
 

@@ -1,8 +1,7 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation;
 
-import net.minecraft.server.v1_5_R3.EntityLiving;
+import net.minecraft.server.v1_6_R2.EntityInsentient;
 
-import org.bukkit.craftbukkit.v1_5_R3.entity.CraftLivingEntity;
 import org.bukkit.entity.LivingEntity;
 
 import de.ntcomputer.minecraft.controllablemobs.api.ControllableMob;
@@ -11,26 +10,26 @@ import de.ntcomputer.minecraft.controllablemobs.api.ControllableMobActions;
 import de.ntcomputer.minecraft.controllablemobs.api.ControllableMobProperties;
 import de.ntcomputer.minecraft.controllablemobs.implementation.actions.ControllableMobActionManager;
 
-public class CraftControllableMob<T extends LivingEntity> implements ControllableMob<T> {
-	private T entity;
+public class CraftControllableMob<E extends LivingEntity> implements ControllableMob<E> {
+	private E entity;
 	private CraftControllableMobProperties properties;
-	private CraftControllableMobAI ai;
+	private CraftControllableMobAI<E> ai;
 	private CraftControllableMobActions actions;
-	public EntityLiving notchEntity;
+	public EntityInsentient notchEntity;
 
-	public CraftControllableMob(T entity) {
+	public CraftControllableMob(E entity, EntityInsentient notchEntity) {
 		this.entity = entity;
-		this.notchEntity = ((CraftLivingEntity) entity).getHandle();
+		this.notchEntity = notchEntity;
 		this.properties = new CraftControllableMobProperties(this);
 		this.actions = new CraftControllableMobActions(this);
-		this.ai = new CraftControllableMobAI(this);
+		this.ai = new CraftControllableMobAI<E>(this);
 	}
 	
 	private void disposedCall() throws IllegalStateException {
 		throw new IllegalStateException("[ControllableMobsAPI] the ControllableMob is unassigned");
 	}
 	
-	public void dispose() {
+	public void unassign() {
 		if(this.entity==null) this.disposedCall();
 		
 		// component dispose
@@ -58,7 +57,7 @@ public class CraftControllableMob<T extends LivingEntity> implements Controllabl
 	
 
 	@Override
-	public T getEntity() {
+	public E getEntity() {
 		return entity;
 	}
 
@@ -69,7 +68,7 @@ public class CraftControllableMob<T extends LivingEntity> implements Controllabl
 	}
 
 	@Override
-	public ControllableMobAI getAI() {
+	public ControllableMobAI<E> getAI() {
 		if(this.ai==null) this.disposedCall();
 		return this.ai;
 	}

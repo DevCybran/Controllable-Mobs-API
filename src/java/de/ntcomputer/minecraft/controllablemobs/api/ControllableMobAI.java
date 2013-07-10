@@ -1,5 +1,7 @@
 package de.ntcomputer.minecraft.controllablemobs.api;
 
+import org.bukkit.entity.LivingEntity;
+
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIPart;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIType;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors.AIBehavior;
@@ -11,7 +13,7 @@ import de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors.AIBehavior;
  * @author Cybran
  * @version v4
  */
-public interface ControllableMobAI {
+public interface ControllableMobAI<E extends LivingEntity> {
 	
 	/**
 	 * Adds a given AI behavior - the entity will act corresponding to this behavior.
@@ -25,6 +27,7 @@ public interface ControllableMobAI {
 	 * 
 	 * @deprecated changed to {@link ControllableMobAI#addBehavior(AIBehavior)}. Method will be removed in v5.
 	 */
+	@SuppressWarnings("rawtypes")
 	@Deprecated
 	public void addAIBehavior(AIBehavior behavior) throws IllegalArgumentException;
 	
@@ -38,7 +41,7 @@ public interface ControllableMobAI {
 	 * @return an AI part representing the behavior. You can use it to inspect or temporarily remove the behavior later.
 	 * @throws IllegalArgumentException when behavior is null
 	 */
-	public AIPart addBehavior(AIBehavior behavior) throws IllegalArgumentException;
+	public <B extends AIBehavior<? super E>> AIPart<E,B> addBehavior(B behavior) throws IllegalArgumentException;
 	
 	/**
 	 * Adds the given AI behaviors.
@@ -49,6 +52,7 @@ public interface ControllableMobAI {
 	 * 
 	 * @deprecated changed to {@link ControllableMobAI#addBehaviors(AIBehavior...)}. Method will be removed in v5.
 	 */
+	@SuppressWarnings("rawtypes")
 	public void addAIBehaviors(AIBehavior[] behaviors) throws IllegalArgumentException;
 	
 	/**
@@ -59,7 +63,7 @@ public interface ControllableMobAI {
 	 * @return an array of AI parts. The parts are ordered similar to the behavior order in the behaviors array.
 	 * @throws IllegalArgumentException when behaviors is null or contains null
 	 */
-	public AIPart[] addBehaviors(AIBehavior... behaviors) throws IllegalArgumentException;
+	public AIPart<E,?>[] addBehaviors(AIBehavior<? super E>... behaviors) throws IllegalArgumentException;
 	
 	/**
 	 * Removes the given AI behavior.<br>
@@ -70,6 +74,7 @@ public interface ControllableMobAI {
 	 * 
 	 * @deprecated removing parts of the AI by passing the behavior is deprecated. You should switch to {@link de.ntcomputer.minecraft.controllablemobs.api.ai.AIPart#remove()}. Method will be removed in v5 or v6.
 	 */
+	@SuppressWarnings("rawtypes")
 	@Deprecated
 	public void removeAIBehavior(AIBehavior behavior) throws IllegalArgumentException;
 	
@@ -130,6 +135,7 @@ public interface ControllableMobAI {
 	 * 
 	 * @deprecated retrieving the AI by returning the behaviors is deprecated. You should switch to {@link ControllableMobAI#getAIParts()}. Method will be removed in v5 or v6.
 	 */
+	@SuppressWarnings("rawtypes")
 	@Deprecated
 	public AIBehavior[] getAIBehaviors();
 	
@@ -138,6 +144,6 @@ public interface ControllableMobAI {
 	 * 
 	 * @return an array of all custom and default AI parts. Use it to inspect or remove specific parts.
 	 */
-	public AIPart[] getParts();
+	public AIPart<E,?>[] getParts();
 	
 }

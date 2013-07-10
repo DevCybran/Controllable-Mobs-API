@@ -1,8 +1,10 @@
 package de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors;
 
-import net.minecraft.server.v1_5_R3.EntityCreature;
-import net.minecraft.server.v1_5_R3.PathfinderGoal;
-import net.minecraft.server.v1_5_R3.PathfinderGoalRestrictSun;
+import org.bukkit.entity.Creature;
+
+import net.minecraft.server.v1_6_R2.EntityCreature;
+import net.minecraft.server.v1_6_R2.PathfinderGoal;
+import net.minecraft.server.v1_6_R2.PathfinderGoalRestrictSun;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIType;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
 
@@ -13,7 +15,7 @@ import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllable
  * @version v4
  *
  */
-public class AIRestrictSun extends AIBehavior {
+public class AIRestrictSun extends AIBehavior<Creature> {
 	
 	/**
 	 * Create with an automatically given priority.
@@ -32,7 +34,7 @@ public class AIRestrictSun extends AIBehavior {
 	}
 
 	@Override
-	public PathfinderGoal createPathfinderGoal(final CraftControllableMob<?> mob) {
+	public PathfinderGoal createPathfinderGoal(final CraftControllableMob<? extends Creature> mob) {
 		return new PathfinderGoalRestrictSun((EntityCreature) mob.notchEntity);
 	}
 

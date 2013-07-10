@@ -5,26 +5,29 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.bukkit.entity.LivingEntity;
+
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIPart;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIType;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors.AIBehavior;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors.AITargetBehavior;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
 
-public class AIDispatcher {
-	private AIController goalController;
-	private AIController targetController;
+public class AIDispatcher<E extends LivingEntity> {
+	private AIController<E> goalController;
+	private AIController<E> targetController;
 	
-	public AIDispatcher(CraftControllableMob<?> mob) {
-		this.goalController = new AIGoalController(mob);
-		this.targetController = new AITargetController(mob);
+	public AIDispatcher(CraftControllableMob<E> mob) {
+		this.goalController = new AIGoalController<E>(mob);
+		this.targetController = new AITargetController<E>(mob);
 	}
 	
-	public AIPart add(AIBehavior behavior) throws IllegalArgumentException {
+	public <B extends AIBehavior<? super E>> AIPart<E,B> add(B behavior) throws IllegalArgumentException {
 		if(isTarget(behavior)) return this.targetController.add(behavior);
 		else return this.goalController.add(behavior);
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Deprecated
 	public void remove(AIBehavior behavior) throws IllegalArgumentException {
 		if(isTarget(behavior)) this.targetController.remove(behavior);
@@ -38,13 +41,14 @@ public class AIDispatcher {
 		this.targetController.remove(typeSet, remove);
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@Deprecated
 	public void getBehaviors(List<AIBehavior> list) {
 		this.goalController.getBehaviors(list);
 		this.targetController.getBehaviors(list);
 	}
 	
-	public void get(List<AIPart> list) {
+	public void get(List<AIPart<E,?>> list) {
 		this.goalController.get(list);
 		this.goalController.get(list);
 	}
@@ -59,7 +63,7 @@ public class AIDispatcher {
 		this.targetController.reset();
 	}
 	
-	private boolean isTarget(AIBehavior behavior) {
+	private boolean isTarget(AIBehavior<? super E> behavior) {
 		return behavior instanceof AITargetBehavior;
 	}
 	

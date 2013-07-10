@@ -1,7 +1,11 @@
 package de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors;
 
-import net.minecraft.server.v1_5_R3.PathfinderGoal;
-import net.minecraft.server.v1_5_R3.PathfinderGoalHurtByTarget;
+import net.minecraft.server.v1_6_R2.EntityCreature;
+import net.minecraft.server.v1_6_R2.PathfinderGoal;
+import net.minecraft.server.v1_6_R2.PathfinderGoalHurtByTarget;
+
+import org.bukkit.entity.Creature;
+
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIType;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
 
@@ -13,7 +17,7 @@ import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllable
  * @version v4
  *
  */
-public class AITargetHurtBy extends AITargetBehavior {
+public class AITargetHurtBy extends AITargetBehavior<Creature> {
 	private final boolean crowdAttack;
 	
 	/**
@@ -53,8 +57,8 @@ public class AITargetHurtBy extends AITargetBehavior {
 	}
 
 	@Override
-	public PathfinderGoal createPathfinderGoal(CraftControllableMob<?> mob) {
-		return new PathfinderGoalHurtByTarget(mob.notchEntity, this.crowdAttack);
+	public PathfinderGoal createPathfinderGoal(CraftControllableMob<? extends Creature> mob) {
+		return new PathfinderGoalHurtByTarget((EntityCreature) mob.notchEntity, this.crowdAttack);
 	}
 
 	@Override

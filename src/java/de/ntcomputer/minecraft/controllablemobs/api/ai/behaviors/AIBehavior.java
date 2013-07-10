@@ -1,6 +1,9 @@
 package de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors;
 
-import net.minecraft.server.v1_5_R3.PathfinderGoal;
+import net.minecraft.server.v1_6_R2.PathfinderGoal;
+
+import org.bukkit.entity.LivingEntity;
+
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIType;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
 
@@ -12,19 +15,19 @@ import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllable
  * @version v4
  *
  */
-public abstract class AIBehavior {
+public abstract class AIBehavior<E extends LivingEntity> {
 	private final int priority;
 	
-	protected AIBehavior(final int priority) {
+	protected AIBehavior(int priority) {
 		this.priority = priority;
 	}
 	
-	public int getPriority(final int lastBehaviorPriority) {
+	public final int getPriority(int lastBehaviorPriority) {
 		return this.priority<=0 ? lastBehaviorPriority+1 : this.priority;
 	}
 	
 	public abstract AIType getType();
 
-	public abstract PathfinderGoal createPathfinderGoal(final CraftControllableMob<?> mob);
+	public abstract PathfinderGoal createPathfinderGoal(CraftControllableMob<? extends E> mob);
 	
 }

@@ -1,11 +1,12 @@
 package de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors;
 
-import net.minecraft.server.v1_5_R3.Entity;
-import net.minecraft.server.v1_5_R3.EntityHuman;
-import net.minecraft.server.v1_5_R3.PathfinderGoal;
-import net.minecraft.server.v1_5_R3.PathfinderGoalLookAtPlayer;
+import net.minecraft.server.v1_6_R2.Entity;
+import net.minecraft.server.v1_6_R2.EntityHuman;
+import net.minecraft.server.v1_6_R2.PathfinderGoal;
+import net.minecraft.server.v1_6_R2.PathfinderGoalLookAtPlayer;
 
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIType;
 import de.ntcomputer.minecraft.controllablemobs.implementation.ControllableMobHelper;
@@ -19,7 +20,7 @@ import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllable
  * @version v4
  *
  */
-public class AILookAtEntity extends AIBehavior {
+public class AILookAtEntity extends AIBehavior<LivingEntity> {
 	private final float maxDistance;
 	private final Class<? extends Entity> entityClass;
 	

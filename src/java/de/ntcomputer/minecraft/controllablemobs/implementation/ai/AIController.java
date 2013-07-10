@@ -10,11 +10,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import net.minecraft.server.v1_5_R3.EntityLiving;
-import net.minecraft.server.v1_5_R3.PathfinderGoal;
-import net.minecraft.server.v1_5_R3.PathfinderGoalSelector;
+import net.minecraft.server.v1_6_R2.EntityLiving;
+import net.minecraft.server.v1_6_R2.PathfinderGoal;
+import net.minecraft.server.v1_6_R2.PathfinderGoalSelector;
 
-import org.bukkit.craftbukkit.v1_5_R3.util.UnsafeList;
+import org.bukkit.craftbukkit.v1_6_R2.util.UnsafeList;
+import org.bukkit.entity.LivingEntity;
 
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIState;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIType;
@@ -25,31 +26,31 @@ import de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors.Path
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.primitives.NativeFieldObject;
 
-public abstract class AIController implements Comparator<Object> {
+public abstract class AIController<E extends LivingEntity> implements Comparator<Object> {
 	private ArrayList<PathfinderGoalWrapper> actionGoals;
-	private ArrayList<CraftAIPart> attachedParts;
-	private ArrayList<CraftAIPart> defaultParts;
+	private ArrayList<CraftAIPart<E,?>> attachedParts;
+	private ArrayList<CraftAIPart<E,?>> defaultParts;
 	private PathfinderGoalAIMonitor monitor;
-	CraftControllableMob<?> mob;
+	CraftControllableMob<E> mob;
 	int lastBehaviorPriority = 1;
 	public PathfinderGoalSelector selector;
-	public HashMap<PathfinderGoal,CraftAIPart> goalPartMap;
+	public HashMap<PathfinderGoal,CraftAIPart<E,?>> goalPartMap;
 	
-	public AIController(final CraftControllableMob<?> mob, final NativeFieldObject<EntityLiving,PathfinderGoalSelector> selectorField) {
+	public AIController(CraftControllableMob<E> mob, NativeFieldObject<EntityLiving,PathfinderGoalSelector> selectorField) {
 		this.mob = mob;
 		this.selector = selectorField.get(mob.notchEntity);
 		
 		// create custom parts list
-		this.attachedParts = new ArrayList<CraftAIPart>();
-		this.goalPartMap = new HashMap<PathfinderGoal,CraftAIPart>();
+		this.attachedParts = new ArrayList<CraftAIPart<E,?>>();
+		this.goalPartMap = new HashMap<PathfinderGoal,CraftAIPart<E,?>>();
 		
 		// copy default items
-		this.defaultParts = new ArrayList<CraftAIPart>();
+		this.defaultParts = new ArrayList<CraftAIPart<E,?>>();
 		HashSet<PathfinderGoal> activeDefaultGoals = new HashSet<PathfinderGoal>();
 		List<Object> defaultItems = NativeInterfaces.PATHFINDERGOALSELECTOR.FIELD_GOALITEMS.get(this.selector);
-		CraftAIPart part;
+		CraftAIPart<E,?> part;
 		for(Object item: defaultItems) {
-			part = new CraftAIPart(this, NativeInterfaces.PATHFINDERGOALSELECTORITEM.FIELD_PRIORITY.get(item), NativeInterfaces.PATHFINDERGOALSELECTORITEM.FIELD_GOAL.get(item));
+			part = new CraftAIPart<E,AIBehavior<? super E>>(this, NativeInterfaces.PATHFINDERGOALSELECTORITEM.FIELD_PRIORITY.get(item), NativeInterfaces.PATHFINDERGOALSELECTORITEM.FIELD_GOAL.get(item));
 			if(NativeInterfaces.PATHFINDERGOALSELECTOR.FIELD_ACTIVEGOALITEMS.get(selector).contains(item)) {
 				part.setState(AIState.ACTIVE);
 				activeDefaultGoals.add(part.goal);
@@ -146,36 +147,37 @@ public abstract class AIController implements Comparator<Object> {
 	
 	// external AI access
 	
-	CraftAIPart add(AIBehavior behavior) {
-		CraftAIPart part = new CraftAIPart(this, behavior);
+	<B extends AIBehavior<? super E>> CraftAIPart<E,B> add(B behavior) {
+		CraftAIPart<E,B> part = new CraftAIPart<E,B>(this, behavior);
 		this.attachAndSort(part);
 		return part;
 	}
 	
-	private void attach(CraftAIPart part) {
+	private void attach(CraftAIPart<E,?> part) {
 		this.addGoal(part.priority, part.goal);
 		this.attachedParts.add(part);
 		this.goalPartMap.put(part.goal, part);
 		part.setState(AIState.INACTIVE);
 	}
 	
-	void attachAndSort(CraftAIPart part) throws IllegalStateException {
+	void attachAndSort(CraftAIPart<E,?> part) throws IllegalStateException {
 		this.disposedCall();
 		this.attach(part);
 		this.sortGoals();
 	}
 	
-	void unattach(CraftAIPart part) {
+	void unattach(CraftAIPart<E,?> part) {
 		this.removeGoal(part.goal);
 		this.attachedParts.remove(part);
 		this.goalPartMap.remove(part.goal);
 		part.setState(AIState.UNATTACHED);
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@Deprecated
 	void remove(AIBehavior behavior) {
-		CraftAIPart part = null;
-		for(CraftAIPart searchPart: this.attachedParts) {
+		CraftAIPart<E,?> part = null;
+		for(CraftAIPart<E,?> searchPart: this.attachedParts) {
 			if(searchPart.getBehavior()==behavior) {
 				part = searchPart;
 				break;
@@ -185,16 +187,17 @@ public abstract class AIController implements Comparator<Object> {
 	}
 	
 	void remove(Set<AIType> typeSet, boolean remove) {
-		List<CraftAIPart> toRemove = new LinkedList<CraftAIPart>();
-		for(CraftAIPart searchPart: this.attachedParts) {
+		List<CraftAIPart<E,?>> toRemove = new LinkedList<CraftAIPart<E,?>>();
+		for(CraftAIPart<E,?> searchPart: this.attachedParts) {
 			if(! (typeSet.contains(searchPart.getType()) ^ remove)) toRemove.add(searchPart);
 		}
 		
-		for(CraftAIPart removePart: toRemove) {
+		for(CraftAIPart<E,?> removePart: toRemove) {
 			this.unattach(removePart);
 		}
 	}
 	
+	@SuppressWarnings("rawtypes")
 	@Deprecated
 	void getBehaviors(List<AIBehavior> list) {
 		for(CraftAIPart part: this.attachedParts) {
@@ -202,13 +205,13 @@ public abstract class AIController implements Comparator<Object> {
 		}
 	}
 	
-	void get(List<? super CraftAIPart> list) {
+	void get(List<? super CraftAIPart<E,?>> list) {
 		list.addAll(this.attachedParts);
 	}
 	
 	void clear() {
 		this.clearGoals();
-		for(CraftAIPart part: this.attachedParts) {
+		for(CraftAIPart<E,?> part: this.attachedParts) {
 			part.setState(AIState.UNATTACHED);
 		}
 		this.attachedParts.clear();
@@ -218,7 +221,7 @@ public abstract class AIController implements Comparator<Object> {
 	
 	void reset() {
 		this.clear();
-		for(CraftAIPart defaultPart: this.defaultParts) {
+		for(CraftAIPart<E,?> defaultPart: this.defaultParts) {
 			this.attach(defaultPart);
 		}
 	}
@@ -242,12 +245,12 @@ public abstract class AIController implements Comparator<Object> {
 		NativeInterfaces.PATHFINDERGOALSELECTOR.FIELD_GOALITEMS.get(this.selector).clear();
 		
 		// restore default items
-		for(CraftAIPart defaultPart: this.defaultParts) {
+		for(CraftAIPart<E,?> defaultPart: this.defaultParts) {
 			this.attach(defaultPart);
 		}
 		
 		// set all AI parts to unattached
-		for(CraftAIPart part: this.attachedParts) {
+		for(CraftAIPart<E,?> part: this.attachedParts) {
 			part.setState(AIState.UNATTACHED);
 		}
 		this.attachedParts.clear();

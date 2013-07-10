@@ -1,5 +1,7 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation.ai;
 
+import org.bukkit.entity.LivingEntity;
+
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
 import de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors.PathfinderGoalActionFollow;
 import de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors.PathfinderGoalActionJump;
@@ -8,9 +10,9 @@ import de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors.Path
 import de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors.PathfinderGoalActionWait;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;
 
-class AIGoalController extends AIController {
+class AIGoalController<E extends LivingEntity> extends AIController<E> {
 
-	public AIGoalController(CraftControllableMob<?> mob) {
+	public AIGoalController(CraftControllableMob<E> mob) {
 		super(mob, NativeInterfaces.ENTITYLIVING.FIELD_GOALSELECTOR);
 	}
 

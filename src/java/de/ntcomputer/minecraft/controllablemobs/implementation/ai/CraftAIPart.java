@@ -1,20 +1,24 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation.ai;
 
-import net.minecraft.server.v1_5_R3.PathfinderGoal;
+import net.minecraft.server.v1_6_R2.PathfinderGoal;
+
+import org.bukkit.entity.LivingEntity;
+
+import de.ntcomputer.minecraft.controllablemobs.api.ControllableMob;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIPart;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIState;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIType;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors.AIBehavior;
 
-public class CraftAIPart implements AIPart {
-	private final AIBehavior behavior;
+public class CraftAIPart<E extends LivingEntity, B extends AIBehavior<? super E>> implements AIPart<E,B> {
+	private final B behavior;
 	final int priority;
 	private final AIType type;
-	private final AIController controller;
+	private final AIController<E> controller;
 	final PathfinderGoal goal;
 	private AIState state = AIState.INACTIVE;
 	
-	CraftAIPart(AIController controller, int priority, PathfinderGoal pfg) {
+	CraftAIPart(AIController<E> controller, int priority, PathfinderGoal pfg) {
 		this.controller = controller;
 		this.behavior = null;
 		this.priority = priority;
@@ -23,7 +27,7 @@ public class CraftAIPart implements AIPart {
 		this.type = AIType.getTypeByInstance(pfg);
 	}
 	
-	CraftAIPart(AIController controller, AIBehavior behavior) {
+	CraftAIPart(AIController<E> controller, B behavior) {
 		this.controller = controller;
 		this.behavior = behavior;
 		this.priority = behavior.getPriority(controller.lastBehaviorPriority);
@@ -48,7 +52,7 @@ public class CraftAIPart implements AIPart {
 	}
 
 	@Override
-	public AIBehavior getBehavior() {
+	public B getBehavior() {
 		return this.behavior;
 	}
 
@@ -70,6 +74,11 @@ public class CraftAIPart implements AIPart {
 	@Override
 	public void reattach() throws IllegalStateException {
 		if(this.state==AIState.UNATTACHED) this.controller.attachAndSort(this);
+	}
+
+	@Override
+	public ControllableMob<E> getControllableMob() {
+		return this.controller.mob;
 	}
 
 }

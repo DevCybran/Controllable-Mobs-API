@@ -1,8 +1,11 @@
 package de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors;
 
-import net.minecraft.server.v1_5_R3.IRangedEntity;
-import net.minecraft.server.v1_5_R3.PathfinderGoal;
-import net.minecraft.server.v1_5_R3.PathfinderGoalArrowAttack;
+import net.minecraft.server.v1_6_R2.IRangedEntity;
+import net.minecraft.server.v1_6_R2.PathfinderGoal;
+import net.minecraft.server.v1_6_R2.PathfinderGoalArrowAttack;
+
+import org.bukkit.entity.Creature;
+
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIType;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
 
@@ -15,14 +18,14 @@ import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllable
  * @version v4
  *
  */
-public class AIAttackRanged extends AIBehavior {
+public class AIAttackRanged extends AIMoving<Creature> {
 	private final int attackTicks;
 	private final float maximumRange;
 	
 	/**
 	 * Create with an automatically given priority.
 	 * 
-	 * @see AIAttackRanged#AIAttackRanged(int, float, int)
+	 * @see AIAttackRanged#AIAttackRanged(int, double, float, int)
 	 */
 	public AIAttackRanged() {
 		this(0);
@@ -31,51 +34,54 @@ public class AIAttackRanged extends AIBehavior {
 	/**
 	 * Create with a custom priority.
 	 * 
-	 * @see AIAttackRanged#AIAttackRanged(int, float, int)
+	 * @see AIAttackRanged#AIAttackRanged(int, double, float, int)
 	 * @param priority the priority of this behavior. Specify 0 to auto-generate it
 	 */
 	public AIAttackRanged(final int priority) {
-		this(0, 16.0F);
+		this(priority, 1.0);
 	}
 	
 	/**
-	 * Create with a custom priority and a custom attack speed.
+	 * Create with a custom priority and a custom movement speed multiplicator
 	 * 
-	 * @see AIAttackRanged#AIAttackRanged(int, float, int)
+	 * @see AIAttackRanged#AIAttackRanged(int, double float, int)
 	 * @param priority the priority of this behavior. Specify 0 to auto-generate it
-	 * @param attackTicks the amount of server ticks that are passed between two attacks. the default value is 60 = one attack every 3 seconds
-	 */
-	public AIAttackRanged(final int priority, final int attackTicks) {
-		this(0, 16.0F, attackTicks);
-	}
-	
-	/**
-	 * Create with a custom priority and a custom maximum range for the attacks.
-	 * 
-	 * @see AIAttackRanged#AIAttackRanged(int, float, int)
-	 * @param priority the priority of this behavior. Specify 0 to auto-generate it
+	 * @param movementSpeedMultiplicator the entity's movement speed is multiplied with this multiplicator when moving to the target
 	 * @param maximumRange the maximum range a projectile can be shot at, in blocks. The default range is 16.0 blocks
 	 */
-	public AIAttackRanged(final int priority, final float maximumRange) {
-		this(0, maximumRange, 60);
+	public AIAttackRanged(int priority, double movementSpeedMultiplicator) {
+		this(priority, movementSpeedMultiplicator, 16.0f);
+	}
+	
+	/**
+	 * Create with a custom priority, a custom movement speed multiplicator and a custom maximum range for the attacks.
+	 * 
+	 * @see AIAttackRanged#AIAttackRanged(int, double, float, int)
+	 * @param priority the priority of this behavior. Specify 0 to auto-generate it
+	 * @param movementSpeedMultiplicator the entity's movement speed is multiplied with this multiplicator when moving to the target
+	 * @param maximumRange the maximum range a projectile can be shot at, in blocks. The default range is 16.0 blocks
+	 */
+	public AIAttackRanged(final int priority, double movementSpeedMultiplicator, final float maximumRange) {
+		this(priority, movementSpeedMultiplicator, maximumRange, 60);
 	}
 
 	/**
-	 * Create with a custom priority, a custom attack speed and a custom maximum range for the attacks.
+	 * Create with a custom priority, a custom movement speed multiplicator, a custom attack speed and a custom maximum range for the attacks.
 	 * 
 	 * @param priority the priority of this behavior. Specify 0 to auto-generate it
+	 * @param movementSpeedMultiplicator the entity's movement speed is multiplied with this multiplicator when moving to the target
 	 * @param maximumRange the maximum range a projectile can be shot at, in blocks. The default range is 16.0 blocks
 	 * @param attackTicks the amount of server ticks that are passed between two attacks. the default value is 60 = one attack every 3 seconds
 	 */
-	public AIAttackRanged(final int priority, final float maximumRange, final int attackTicks) {
-		super(priority);
+	public AIAttackRanged(final int priority, double movementSpeedMultiplicator, final float maximumRange, final int attackTicks) {
+		super(priority,movementSpeedMultiplicator);
 		this.attackTicks = attackTicks;
 		this.maximumRange = maximumRange;
 	}
 
 	@Override
-	public PathfinderGoal createPathfinderGoal(final CraftControllableMob<?> mob) {
-		return new PathfinderGoalArrowAttack((IRangedEntity) mob.notchEntity, mob.getProperties().getMovementSpeed(), this.attackTicks, this.maximumRange);
+	public PathfinderGoal createPathfinderGoal(CraftControllableMob<? extends Creature> mob) {
+		return new PathfinderGoalArrowAttack((IRangedEntity) mob.notchEntity, this.movementSpeedMultiplicator, this.attackTicks, this.maximumRange);
 	}
 
 	@Override

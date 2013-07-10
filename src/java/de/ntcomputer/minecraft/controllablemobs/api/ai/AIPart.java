@@ -1,5 +1,8 @@
 package de.ntcomputer.minecraft.controllablemobs.api.ai;
 
+import org.bukkit.entity.LivingEntity;
+
+import de.ntcomputer.minecraft.controllablemobs.api.ControllableMob;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors.AIBehavior;
 
 /**
@@ -11,7 +14,12 @@ import de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors.AIBehavior;
  * @version v4
  *
  */
-public interface AIPart {
+public interface AIPart<E extends LivingEntity, B extends AIBehavior<? super E>> {
+	
+	/**
+	 * @return the controllable mob which this AI part is assigned to
+	 */
+	public ControllableMob<E> getControllableMob();
 	
 	/**
 	 * Unattaches the AI part from the {@link de.ntcomputer.minecraft.controllablemobs.api.ControllableMob}.<br>
@@ -37,7 +45,7 @@ public interface AIPart {
 	/**
 	 * @return the {@link de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors.AIBehavior} represented by this AI part
 	 */
-	public AIBehavior getBehavior();
+	public B getBehavior();
 	
 	/**
 	 * @return the current AI parts state.
