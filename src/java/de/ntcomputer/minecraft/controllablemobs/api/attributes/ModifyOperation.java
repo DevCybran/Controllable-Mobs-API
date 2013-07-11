@@ -15,6 +15,15 @@ public enum ModifyOperation {
 	
 	public int getIntType() {
 		return this.intType;
-	}	
+	}
+	
+	public static ModifyOperation byIntType(int intType) {
+		switch(intType) {
+		case 0: return ADD_TO_BASIS_VALUE;
+		case 1: return ADD_MULTIPLIED_COMBINED_VALUE;
+		case 2: return MULTIPLY_FINAL_VALUE;
+		default: return null;
+		}
+	}
 	
 }

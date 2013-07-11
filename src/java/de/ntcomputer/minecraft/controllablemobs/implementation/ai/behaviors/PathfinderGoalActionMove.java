@@ -4,7 +4,7 @@ import net.minecraft.server.v1_6_R2.PathEntity;
 import de.ntcomputer.minecraft.controllablemobs.api.actions.ActionType;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
 import de.ntcomputer.minecraft.controllablemobs.implementation.actions.ControllableMobActionMove;
-import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;
+import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NmsInterfaces;
 
 public class PathfinderGoalActionMove extends PathfinderGoalActionDelayed<ControllableMobActionMove> {
 	private PathEntity path;
@@ -17,8 +17,8 @@ public class PathfinderGoalActionMove extends PathfinderGoalActionDelayed<Contro
 	@Override
 	protected boolean canStartAction() {
 		if(action.world!=this.mob.notchEntity.world) return false;
-		this.mob.adjustMaximumNavigationDistance((float) NativeInterfaces.ENTITY.METHOD_GETDISTANCETOLOCATION.invoke(this.mob.notchEntity, action.x, action.y, action.z));
-		final PathEntity path = NativeInterfaces.NAVIGATION.METHOD_CREATEPATHTOLOCATION.invoke(this.mob.notchEntity.getNavigation(), action.x, action.y, action.z);
+		this.mob.adjustMaximumNavigationDistance((float) NmsInterfaces.ENTITY.METHOD_GETDISTANCETOLOCATION.invoke(this.mob.notchEntity, action.x, action.y, action.z));
+		final PathEntity path = NmsInterfaces.NAVIGATION.METHOD_CREATEPATHTOLOCATION.invoke(this.mob.notchEntity.getNavigation(), action.x, action.y, action.z);
 		//final PathEntity path = NativeInterfaces.WORLD.METHOD_GENERATEPATHTOCOORDS.invoke(this.mob.notchEntity.world, this.mob.notchEntity, action.x, action.y, action.z, 100F, true, false, false, true);
 		if(path==null) return false;
 		this.path = path;
@@ -27,17 +27,17 @@ public class PathfinderGoalActionMove extends PathfinderGoalActionDelayed<Contro
 
 	@Override
 	protected void onStartAction() {
-		NativeInterfaces.NAVIGATION.METHOD_MOVEALONGPATH.invoke(this.mob.notchEntity.getNavigation(), this.path, this.mob.getProperties().getMovementSpeed());
+		NmsInterfaces.NAVIGATION.METHOD_MOVEALONGPATH.invoke(this.mob.notchEntity.getNavigation(), this.path, this.mob.getProperties().getMovementSpeed());
 	}
 
 	@Override
 	protected boolean canContinueAction() {
-		return !NativeInterfaces.NAVIGATION.METHOD_ISNOTMOVING.invoke(this.mob.notchEntity.getNavigation());
+		return !NmsInterfaces.NAVIGATION.METHOD_ISNOTMOVING.invoke(this.mob.notchEntity.getNavigation());
 	}
 
 	@Override
 	protected void onEndAction() {
-		NativeInterfaces.NAVIGATION.METHOD_STOP.invoke(this.mob.notchEntity.getNavigation());
+		NmsInterfaces.NAVIGATION.METHOD_STOP.invoke(this.mob.notchEntity.getNavigation());
 	}
 
 	@Override

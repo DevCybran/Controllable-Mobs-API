@@ -3,7 +3,7 @@ package de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors;
 import de.ntcomputer.minecraft.controllablemobs.api.actions.ActionType;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
 import de.ntcomputer.minecraft.controllablemobs.implementation.actions.ControllableMobActionJump;
-import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;
+import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NmsInterfaces;
 
 public class PathfinderGoalActionJump extends PathfinderGoalActionBase<ControllableMobActionJump> {
 
@@ -13,7 +13,7 @@ public class PathfinderGoalActionJump extends PathfinderGoalActionBase<Controlla
 
 	@Override
 	protected void onStartAction() {
-		NativeInterfaces.CONTROLLERJUMP.METHOD_JUMP.invoke(this.mob.notchEntity.getControllerJump());
+		NmsInterfaces.CONTROLLERJUMP.METHOD_JUMP.invoke(this.mob.notchEntity.getControllerJump());
 	}
 
 	@Override

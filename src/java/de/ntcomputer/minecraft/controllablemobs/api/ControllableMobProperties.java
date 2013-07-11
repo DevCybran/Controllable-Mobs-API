@@ -5,7 +5,7 @@ package de.ntcomputer.minecraft.controllablemobs.api;
  * You can retrieve an instance by using {@link ControllableMob#getProperties()}
  * 
  * @author Cybran
- * @version v3
+ * @version v4
  * @deprecated use {@link ControllableMobAttributes} instead!
  */
 @Deprecated

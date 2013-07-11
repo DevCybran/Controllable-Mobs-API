@@ -4,7 +4,7 @@ import net.minecraft.server.v1_6_R2.PathEntity;
 import de.ntcomputer.minecraft.controllablemobs.api.actions.ActionType;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
 import de.ntcomputer.minecraft.controllablemobs.implementation.actions.ControllableMobActionFollow;
-import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;
+import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NmsInterfaces;
 
 public class PathfinderGoalActionFollow extends PathfinderGoalActionDelayed<ControllableMobActionFollow> {
 	private PathEntity path;
@@ -16,7 +16,7 @@ public class PathfinderGoalActionFollow extends PathfinderGoalActionDelayed<Cont
 	
 	@Override
 	protected boolean isActionRequired() {
-		return NativeInterfaces.ENTITY.METHOD_GETDISTANCETOENTITYSQUARED.invoke(this.mob.notchEntity, action.target) > action.maximumDistanceSquared;
+		return NmsInterfaces.ENTITY.METHOD_GETDISTANCETOENTITYSQUARED.invoke(this.mob.notchEntity, action.target) > action.maximumDistanceSquared;
 	}
 	
 	@Override
@@ -26,8 +26,8 @@ public class PathfinderGoalActionFollow extends PathfinderGoalActionDelayed<Cont
 	
 	@Override
 	protected boolean canStartAction() {
-		this.mob.adjustMaximumNavigationDistance((float) Math.sqrt(NativeInterfaces.ENTITY.METHOD_GETDISTANCETOENTITYSQUARED.invoke(this.mob.notchEntity, action.target)));
-		final PathEntity path = NativeInterfaces.NAVIGATION.METHOD_CREATEPATHTOENTITY.invoke(this.mob.notchEntity.getNavigation(), this.action.target);
+		this.mob.adjustMaximumNavigationDistance((float) Math.sqrt(NmsInterfaces.ENTITY.METHOD_GETDISTANCETOENTITYSQUARED.invoke(this.mob.notchEntity, action.target)));
+		final PathEntity path = NmsInterfaces.NAVIGATION.METHOD_CREATEPATHTOENTITY.invoke(this.mob.notchEntity.getNavigation(), this.action.target);
 		if(path==null) return false;
 		this.path = path;
 		return true;
@@ -35,17 +35,17 @@ public class PathfinderGoalActionFollow extends PathfinderGoalActionDelayed<Cont
 
 	@Override
 	protected void onStartAction() {
-		NativeInterfaces.NAVIGATION.METHOD_MOVEALONGPATH.invoke(this.mob.notchEntity.getNavigation(), this.path, this.mob.getProperties().getMovementSpeed());
+		NmsInterfaces.NAVIGATION.METHOD_MOVEALONGPATH.invoke(this.mob.notchEntity.getNavigation(), this.path, this.mob.getProperties().getMovementSpeed());
 	}
 
 	@Override
 	protected boolean canContinueAction() {
-		return !NativeInterfaces.NAVIGATION.METHOD_ISNOTMOVING.invoke(this.mob.notchEntity.getNavigation()) && (NativeInterfaces.ENTITY.METHOD_GETDISTANCETOENTITYSQUARED.invoke(this.mob.notchEntity, this.action.target)>this.action.minimumDistanceSquared);
+		return !NmsInterfaces.NAVIGATION.METHOD_ISNOTMOVING.invoke(this.mob.notchEntity.getNavigation()) && (NmsInterfaces.ENTITY.METHOD_GETDISTANCETOENTITYSQUARED.invoke(this.mob.notchEntity, this.action.target)>this.action.minimumDistanceSquared);
 	}
 
 	@Override
 	protected void onEndAction() {
-		NativeInterfaces.NAVIGATION.METHOD_STOP.invoke(this.mob.notchEntity.getNavigation());
+		NmsInterfaces.NAVIGATION.METHOD_STOP.invoke(this.mob.notchEntity.getNavigation());
 	}
 
 	@Override

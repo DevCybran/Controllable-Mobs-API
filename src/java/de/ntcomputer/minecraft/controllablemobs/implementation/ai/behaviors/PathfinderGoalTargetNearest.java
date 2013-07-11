@@ -12,7 +12,7 @@ import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
 
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
 import de.ntcomputer.minecraft.controllablemobs.implementation.ai.EntitySelector;
-import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;
+import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NmsInterfaces;
 
 public class PathfinderGoalTargetNearest extends PathfinderGoalTargetEx {
 	private final float searchDistance;
@@ -38,7 +38,7 @@ public class PathfinderGoalTargetNearest extends PathfinderGoalTargetEx {
 			if(targetClass==EntityHuman.class) {
 				this.findNearbyPlayersOptimized(this.entity, entities);
 			} else {
-				entities.addAll(NativeInterfaces.WORLD.METHOD_SEARCHENTITIES.invoke(this.entity.world, targetClass, this.entity.boundingBox.grow(this.searchDistance, this.searchDistance/4.0, this.searchDistance), this.entitySelector));
+				entities.addAll(NmsInterfaces.WORLD.METHOD_SEARCHENTITIES.invoke(this.entity.world, targetClass, this.entity.boundingBox.grow(this.searchDistance, this.searchDistance/4.0, this.searchDistance), this.entitySelector));
 			}
 		}
 		

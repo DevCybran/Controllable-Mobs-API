@@ -8,12 +8,12 @@ import de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors.Path
 import de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors.PathfinderGoalActionLook;
 import de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors.PathfinderGoalActionMove;
 import de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors.PathfinderGoalActionWait;
-import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;
+import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NmsInterfaces;
 
 class AIGoalController<E extends LivingEntity> extends AIController<E> {
 
 	public AIGoalController(CraftControllableMob<E> mob) {
-		super(mob, NativeInterfaces.ENTITYLIVING.FIELD_GOALSELECTOR);
+		super(mob, NmsInterfaces.ENTITYLIVING.FIELD_GOALSELECTOR);
 	}
 
 	@Override

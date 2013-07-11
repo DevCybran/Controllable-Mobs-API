@@ -4,7 +4,7 @@ import net.minecraft.server.v1_6_R2.EntityCreature;
 import de.ntcomputer.minecraft.controllablemobs.api.actions.ActionType;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
 import de.ntcomputer.minecraft.controllablemobs.implementation.actions.ControllableMobActionTarget;
-import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;
+import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NmsInterfaces;
 
 public class PathfinderGoalActionTarget extends PathfinderGoalActionDelayed<ControllableMobActionTarget> {
 
@@ -20,7 +20,7 @@ public class PathfinderGoalActionTarget extends PathfinderGoalActionDelayed<Cont
 
 	@Override
 	protected void onStartAction() {
-		if(this.action.target!=null) this.mob.adjustMaximumNavigationDistance((float) Math.sqrt(NativeInterfaces.ENTITY.METHOD_GETDISTANCETOENTITYSQUARED.invoke(this.mob.notchEntity, this.action.target) * 2));
+		if(this.action.target!=null) this.mob.adjustMaximumNavigationDistance((float) Math.sqrt(NmsInterfaces.ENTITY.METHOD_GETDISTANCETOENTITYSQUARED.invoke(this.mob.notchEntity, this.action.target) * 2));
 		// set target for AI goals
 		this.mob.notchEntity.setGoalTarget(this.action.target);
 		// set target for old AI & bukkit interface (so "getTarget" on Creature will return the correct entity)

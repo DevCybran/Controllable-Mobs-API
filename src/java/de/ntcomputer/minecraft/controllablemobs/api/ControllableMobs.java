@@ -13,7 +13,7 @@ import org.bukkit.plugin.java.PluginClassLoader;
 
 import de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors.AIBehavior;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
-import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;
+import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NmsInterfaces;
 
 /**
  * This is a static class which lets you retrieve instances of {@link ControllableMob}.
@@ -32,7 +32,7 @@ public final class ControllableMobs {
 	private static void onLoad() {
 		try {
 			PluginClassLoader cl = (PluginClassLoader) ControllableMobs.class.getClassLoader();
-			Plugin[] plugins = NativeInterfaces.JAVAPLUGINLOADER.FIELD_SERVER.get(NativeInterfaces.PLUGINCLASSLOADER.FIELD_LOADER.get(cl)).getPluginManager().getPlugins();
+			Plugin[] plugins = NmsInterfaces.JAVAPLUGINLOADER.FIELD_SERVER.get(NmsInterfaces.PLUGINCLASSLOADER.FIELD_LOADER.get(cl)).getPluginManager().getPlugins();
 			for(Plugin plugin: plugins) {
 				if(plugin.getClass().getClassLoader()==cl) {
 					if(plugin.getName().equals("ControllableMobsAPI")) {

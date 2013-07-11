@@ -7,7 +7,7 @@ import org.bukkit.entity.LivingEntity;
 import de.ntcomputer.minecraft.controllablemobs.api.ControllableMob;
 import de.ntcomputer.minecraft.controllablemobs.api.ControllableMobAI;
 import de.ntcomputer.minecraft.controllablemobs.api.ControllableMobActions;
-import de.ntcomputer.minecraft.controllablemobs.api.ControllableMobAttributes;
+import de.ntcomputer.minecraft.controllablemobs.api.ControllableMobProperties;
 import de.ntcomputer.minecraft.controllablemobs.implementation.actions.ControllableMobActionManager;
 
 public class CraftControllableMob<E extends LivingEntity> implements ControllableMob<E> {
@@ -61,8 +61,9 @@ public class CraftControllableMob<E extends LivingEntity> implements Controllabl
 		return entity;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
-	public ControllableMobAttributes getProperties() throws IllegalStateException {
+	public ControllableMobProperties getProperties() throws IllegalStateException {
 		if(this.properties==null) this.disposedCall();
 		return this.properties;
 	}
