@@ -3,12 +3,11 @@ package de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces
 import net.minecraft.server.v1_6_R2.EntityLiving;
 import net.minecraft.server.v1_6_R2.Navigation;
 import net.minecraft.server.v1_6_R2.PathEntity;
-import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.primitives.NativeFieldFloat;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.system.NativeMethodPublic;
 
 public class NotchInterfaceNavigation {
 	// set in constructor, 3rd argument for world.findPath
-	public final NativeFieldFloat<Navigation> FIELD_MAXPATHLENGTH = new NativeFieldFloat<Navigation>(Navigation.class, "e");
+	//public final NativeFieldFloat<Navigation> FIELD_MAXPATHLENGTH = new NativeFieldFloat<Navigation>(Navigation.class, "e");
 	public final IsMoveFinished METHOD_ISNOTMOVING = new IsMoveFinished();
 	public final StopMove METHOD_STOP = new StopMove();
 	public final MoveToEntity METHOD_MOVETOENTITY = new MoveToEntity();

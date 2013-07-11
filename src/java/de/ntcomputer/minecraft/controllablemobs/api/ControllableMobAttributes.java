@@ -6,10 +6,8 @@ package de.ntcomputer.minecraft.controllablemobs.api;
  * 
  * @author Cybran
  * @version v3
- * @deprecated use {@link ControllableMobAttributes} instead!
  */
-@Deprecated
-public interface ControllableMobProperties {
+public interface ControllableMobAttributes {
 	
 	/**
 	 * Changes the entities movement speed. <b>Works only under special circumstances!</b>
@@ -19,12 +17,13 @@ public interface ControllableMobProperties {
 	 * 
 	 * @param movementSpeed This float value has to be in a range between 0.01 and 2.0, or it will be ignored. The default value is 0.25 for monsters. <i>High values might cause buggy animations and a worse pathfinding.</i>
 	 */
+	@Deprecated
 	public void setMovementSpeed(float movementSpeed);
 	
 	
 	/**
 	 * Gets the entities movement speed.
-	 * The value returned by this method might not be used everywhere, when the value has been changed after parts of the AI or actions were added. See {@link ControllableMobProperties#setMovementSpeed(float)} for details.
+	 * The value returned by this method might not be used everywhere, when the value has been changed after parts of the AI or actions were added. See {@link ControllableMobAttributes#setMovementSpeed(float)} for details.
 	 * @return the current movement speed. The default value is 0.25 for monsters.
 	 */
 	public float getMovementSpeed();

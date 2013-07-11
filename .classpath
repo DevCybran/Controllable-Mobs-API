@@ -6,6 +6,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/libraries/craftbukkit/craftbukkit-1.6.2-R0.1-20130710.060229-3.jar"/>
+	<classpathentry kind="lib" path="/libraries/craftbukkit/craftbukkit-1.6.2-R0.1-20130710.060229-3.jar" sourcepath="/libraries/craftbukkit/craftbukkit-1.6.2-R0.1-20130710.060229-3.src"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

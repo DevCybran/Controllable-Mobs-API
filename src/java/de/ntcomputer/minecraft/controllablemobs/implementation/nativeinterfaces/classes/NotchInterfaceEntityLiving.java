@@ -8,7 +8,7 @@ import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.
 
 public class NotchInterfaceEntityLiving {
 	// protected, set in subclass constructor (like this.bH = 0.25F;) - see EntitySkeleton, default is 0.7F
-	public final NativeFieldFloat<EntityLiving> FIELD_MOVEMENTSPEED = new NativeFieldFloat<EntityLiving>(EntityLiving.class, "bI");
+	//public final NativeFieldFloat<EntityLiving> FIELD_MOVEMENTSPEED = new NativeFieldFloat<EntityLiving>(EntityLiving.class, "bI");
 	public final NativeFieldObject<EntityLiving,PathfinderGoalSelector> FIELD_GOALSELECTOR = new NativeFieldObject<EntityLiving,PathfinderGoalSelector>(EntityLiving.class, "goalSelector");
 	public final NativeFieldObject<EntityLiving,PathfinderGoalSelector> FIELD_TARGETSELECTOR = new NativeFieldObject<EntityLiving,PathfinderGoalSelector>(EntityLiving.class, "targetSelector");
 	public final GetVerticalHeadSpeed METHOD_GETVERTICALHEADSPEED = new GetVerticalHeadSpeed();

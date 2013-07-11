@@ -2,6 +2,8 @@ package de.ntcomputer.minecraft.controllablemobs.api;
 
 import org.bukkit.entity.LivingEntity;
 
+import de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors.AIBehavior;
+
 /**
  * The "main" interface to control a mob.
  * This interface will return objects to control the properties and AI of the underlying entity or assign actions.
@@ -23,8 +25,15 @@ public interface ControllableMob<E extends LivingEntity> {
 	
 	/**
 	 * @return the property management object for this ControllableMob.
+	 * @deprecated use {@link ControllableMob#getAttributes()} instead. 
 	 */
+	@Deprecated
 	public ControllableMobProperties getProperties();
+	
+	/**
+	 * @return the attribute management object for this ControllableMob.
+	 */
+	public ControllableMobAttributes getAttributes();
 	
 	/**
 	 * @return the AI management object for this ControllableMob.

@@ -1,9 +1,9 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation;
 
-import de.ntcomputer.minecraft.controllablemobs.api.ControllableMobProperties;
+import de.ntcomputer.minecraft.controllablemobs.api.ControllableMobAttributes;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;
 
-public class CraftControllableMobProperties implements ControllableMobProperties {
+public class CraftControllableMobProperties implements ControllableMobAttributes {
 	private CraftControllableMob<?> mob;
 	private final float defaultMovementSpeed;
 	private float movementSpeed;
