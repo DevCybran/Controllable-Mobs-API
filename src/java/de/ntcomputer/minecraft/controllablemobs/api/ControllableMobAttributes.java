@@ -12,7 +12,8 @@ import de.ntcomputer.minecraft.controllablemobs.api.attributes.Attribute;
 public interface ControllableMobAttributes {
 	
 	/**
-	 * @return the movement speed attribute
+	 * The default movement speed is 0.7. Default for monsters is 0.25. You should not modify the speed to a value higher than 2.0, or the entity's movement will become unpredictable. 
+	 * @return the movement speed attribute.
 	 */
 	public Attribute getMovementSpeedAttribute();
 	/**
