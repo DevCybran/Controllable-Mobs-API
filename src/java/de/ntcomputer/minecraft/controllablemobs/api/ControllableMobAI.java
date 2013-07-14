@@ -146,4 +146,8 @@ public interface ControllableMobAI<E extends LivingEntity> {
 	 */
 	public AIPart<E,?>[] getParts();
 	
+	public AIPart<E,?>[] getPartsOf(AIType... types);
+	
+	public boolean hasBehavior(AIType type);
+	
 }

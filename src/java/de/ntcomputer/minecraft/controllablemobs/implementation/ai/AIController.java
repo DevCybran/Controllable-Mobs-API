@@ -197,6 +197,13 @@ public abstract class AIController<E extends LivingEntity> implements Comparator
 		}
 	}
 	
+	boolean contains(AIType type) {
+		for(CraftAIPart<E,?> searchPart: this.attachedParts) {
+			if(searchPart.getType()==type) return true;
+		}
+		return false;
+	}
+	
 	@SuppressWarnings("rawtypes")
 	@Deprecated
 	void getBehaviors(List<AIBehavior> list) {
@@ -205,8 +212,14 @@ public abstract class AIController<E extends LivingEntity> implements Comparator
 		}
 	}
 	
-	void get(List<? super CraftAIPart<E,?>> list) {
-		list.addAll(this.attachedParts);
+	void get(List<? super CraftAIPart<E,?>> list, Set<AIType> types) {
+		if(types==null) {
+			list.addAll(this.attachedParts);
+		} else {
+			for(CraftAIPart<E,?> part: this.attachedParts) {
+				if(types.contains(part.getType())) list.add(part);
+			}
+		}
 	}
 	
 	void clear() {

@@ -1,5 +1,6 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation;
 
+import net.minecraft.server.v1_6_R2.AttributeInstance;
 import net.minecraft.server.v1_6_R2.AttributeModifiable;
 import net.minecraft.server.v1_6_R2.EntityInsentient;
 import net.minecraft.server.v1_6_R2.IAttribute;
@@ -19,15 +20,17 @@ public final class CraftControllableMobAttributes implements ControllableMobAttr
 
 	public CraftControllableMobAttributes(CraftControllableMob<?> mob) {
 		this.nmsEntity = mob.notchEntity;
-		this.movementSpeed = new CraftAttribute(this.getAttributeInstance(NativeInterfaces.GENERICATTRIBUTES.STATIC_FIELD_MOVEMENTSPEED.get()));
-		this.attackDamage = new CraftAttribute(this.getAttributeInstance(NativeInterfaces.GENERICATTRIBUTES.STATIC_FIELD_ATTACKDAMAGE.get()));
-		this.maxHealth = new CraftAttribute(this.getAttributeInstance(NativeInterfaces.GENERICATTRIBUTES.STATIC_FIELD_MAXHEALTH.get()));
-		this.knockbackResistance = new CraftAttribute(this.getAttributeInstance(NativeInterfaces.GENERICATTRIBUTES.STATIC_FIELD_KNOCKBACKRESISTANCE.get()));
-		this.followRange = new CraftAttribute(this.getAttributeInstance(NativeInterfaces.GENERICATTRIBUTES.STATIC_FIELD_FOLLOWRANGE.get()));
+		this.movementSpeed = this.getAttributeInstance(NativeInterfaces.GENERICATTRIBUTES.STATIC_FIELD_MOVEMENTSPEED.get());
+		this.attackDamage = this.getAttributeInstance(NativeInterfaces.GENERICATTRIBUTES.STATIC_FIELD_ATTACKDAMAGE.get());
+		this.maxHealth = this.getAttributeInstance(NativeInterfaces.GENERICATTRIBUTES.STATIC_FIELD_MAXHEALTH.get());
+		this.knockbackResistance = this.getAttributeInstance(NativeInterfaces.GENERICATTRIBUTES.STATIC_FIELD_KNOCKBACKRESISTANCE.get());
+		this.followRange = this.getAttributeInstance(NativeInterfaces.GENERICATTRIBUTES.STATIC_FIELD_FOLLOWRANGE.get());
 	}
 	
-	private AttributeModifiable getAttributeInstance(IAttribute attrib) {
-		return (AttributeModifiable) this.nmsEntity.getAttributeInstance(attrib);
+	private CraftAttribute getAttributeInstance(IAttribute attrib) {
+		AttributeInstance attribInstance = this.nmsEntity.getAttributeInstance(attrib);
+		if(attribInstance==null) return null;
+		return new CraftAttribute((AttributeModifiable) attribInstance);
 	}
 
 	@Override

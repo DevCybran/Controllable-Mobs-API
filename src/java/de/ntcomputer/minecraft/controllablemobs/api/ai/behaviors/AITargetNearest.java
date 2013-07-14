@@ -37,8 +37,8 @@ public class AITargetNearest extends AITargetBehaviorEx {
 	 * @see AITargetNearest#AITargetNearest(int, float, boolean, int, EntityFilter, Class...)
 	 * @param priority the priority of this behavior. Specify 0 to auto-generate it
 	 */
-	public AITargetNearest(final int priority) {
-		this(priority, 16.0F);
+	public AITargetNearest(int priority) {
+		this(priority, 16.0D);
 	}
 	
 	/**
@@ -48,7 +48,7 @@ public class AITargetNearest extends AITargetBehaviorEx {
 	 * @param priority the priority of this behavior. Specify 0 to auto-generate it
 	 * @param maximumDistance the maximum distance to search for enemies, in blocks. Default value is 16.0 blocks. If 0 is specified, the range is unlimited
 	 */
-	public AITargetNearest(final int priority, final float maximumDistance) {
+	public AITargetNearest(int priority, double maximumDistance) {
 		this(priority, maximumDistance, false);
 	}
 	
@@ -60,7 +60,7 @@ public class AITargetNearest extends AITargetBehaviorEx {
 	 * @param maximumDistance the maximum distance to search for enemies, in blocks. Default value is 16.0 blocks. If 0 is specified, the range is unlimited
 	 * @param ignoreInvulnerability if set to false, the entity will only attack vulnerable and visible targets. Default is false
 	 */
-	public AITargetNearest(final int priority, final float maximumDistance, final boolean ignoreInvulnerability) {
+	public AITargetNearest(int priority, double maximumDistance, boolean ignoreInvulnerability) {
 		this(priority, maximumDistance, ignoreInvulnerability, 60);
 	}
 	
@@ -73,7 +73,7 @@ public class AITargetNearest extends AITargetBehaviorEx {
 	 * @param ignoreInvulnerability if set to false, the entity will only attack vulnerable and visible targets. Default is false
 	 * @param maximumNoEyeContactTicks If set to a value greater than 0, the entity must have eye contact to its target to start attacking it. The value also describes, after how many server ticks without eye contact the entity will lose its current target. Default value is 60 = 3 seconds to lose its target, when the entity doesn't see it. If you specify 0, eye contact will be totally unnecessary
 	 */
-	public AITargetNearest(final int priority, final float maximumDistance, final boolean ignoreInvulnerability, final int maximumNoEyeContactTicks) {
+	public AITargetNearest(int priority, double maximumDistance, boolean ignoreInvulnerability, int maximumNoEyeContactTicks) {
 		this(priority, maximumDistance, ignoreInvulnerability, maximumNoEyeContactTicks, null);
 	}
 	
@@ -88,7 +88,7 @@ public class AITargetNearest extends AITargetBehaviorEx {
 	 * @param filter an EntityFilter to select only custom entities in range. If set to null, this argument is ignored
 	 */
 	@SuppressWarnings("unchecked")
-	public AITargetNearest(final int priority, final float maximumDistance, final boolean ignoreInvulnerability, final int maximumNoEyeContactTicks, final EntityFilter filter) {
+	public AITargetNearest(int priority, double maximumDistance, boolean ignoreInvulnerability, int maximumNoEyeContactTicks, EntityFilter filter) {
 		this(priority, maximumDistance, ignoreInvulnerability, maximumNoEyeContactTicks, filter, HumanEntity.class);
 	}
 	
@@ -103,13 +103,13 @@ public class AITargetNearest extends AITargetBehaviorEx {
 	 * @param targetClasses Only accept entities with any of the given classes as targets. Default value is [HumanEntity.class]. HumanEntity.class or Player.class handling performance is significantly optimized
 	 * @throws IllegalArgumentException when targetClasses is specified as null or an empty array or it contains null.
 	 */
-	public AITargetNearest(final int priority, final float maximumDistance, final boolean ignoreInvulnerability, final int maximumNoEyeContactTicks, final EntityFilter filter, final Class<? extends LivingEntity>... targetClasses) throws IllegalArgumentException {
+	public AITargetNearest(int priority, double maximumDistance, boolean ignoreInvulnerability, int maximumNoEyeContactTicks, EntityFilter filter, Class<? extends LivingEntity>... targetClasses) throws IllegalArgumentException {
 		super(priority, maximumNoEyeContactTicks, ignoreInvulnerability, maximumDistance, targetClasses);
 		this.entitySelector = filter==null ? null : new EntitySelector(filter);
 	}
 
 	@Override
-	public PathfinderGoal createPathfinderGoal(final CraftControllableMob<?> mob) {
+	public PathfinderGoal createPathfinderGoal(CraftControllableMob<?> mob) {
 		return new PathfinderGoalTargetNearest(mob, this.maximumNoEyeContactTicks, this.ignoreInvulnerability, this.maximumDistance, this.targetClasses, this.entitySelector);
 	}
 

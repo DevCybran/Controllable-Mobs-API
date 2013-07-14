@@ -41,6 +41,12 @@ public class AIDispatcher<E extends LivingEntity> {
 		this.targetController.remove(typeSet, remove);
 	}
 	
+	public boolean contains(AIType type) {
+		if(this.goalController.contains(type)) return true;
+		if(this.targetController.contains(type)) return true;
+		return false;
+	}
+	
 	@SuppressWarnings("rawtypes")
 	@Deprecated
 	public void getBehaviors(List<AIBehavior> list) {
@@ -48,9 +54,14 @@ public class AIDispatcher<E extends LivingEntity> {
 		this.targetController.getBehaviors(list);
 	}
 	
-	public void get(List<AIPart<E,?>> list) {
-		this.goalController.get(list);
-		this.goalController.get(list);
+	public void get(List<AIPart<E,?>> list, AIType[] types) {
+		Set<AIType> typeSet = null;
+		if(types!=null) {
+			typeSet = new HashSet<AIType>();
+			Collections.addAll(typeSet, types);
+		}
+		this.goalController.get(list, typeSet);
+		this.targetController.get(list, typeSet);
 	}
 	
 	public void clear() {

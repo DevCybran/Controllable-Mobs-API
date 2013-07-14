@@ -15,15 +15,12 @@ import de.ntcomputer.minecraft.controllablemobs.implementation.ai.EntitySelector
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;
 
 public class PathfinderGoalTargetNearest extends PathfinderGoalTargetEx {
-	private final float searchDistance;
+	private final double searchDistance;
 	private final DistanceComparator comparator;
 	private final EntitySelector entitySelector;
 
-	public PathfinderGoalTargetNearest(final CraftControllableMob<?> mob,
-			final int maximumNoEyeContactTicks, final boolean ignoreInvulnerability,
-			final float maximumDistance, final Class<? extends EntityLiving>[] targetClasses,
-			final EntitySelector entitySelector) {
-		super(mob, maximumNoEyeContactTicks, ignoreInvulnerability, maximumDistance,	targetClasses);
+	public PathfinderGoalTargetNearest(CraftControllableMob<?> mob, int maximumNoEyeContactTicks, boolean ignoreInvulnerability, double maximumDistance, Class<? extends EntityLiving>[] targetClasses, EntitySelector entitySelector) {
+		super(mob, maximumNoEyeContactTicks, ignoreInvulnerability, maximumDistance, targetClasses);
 		this.searchDistance = maximumDistance<=0 ? 500 : maximumDistance;
 		this.comparator = new DistanceComparator(entity);
 		this.entitySelector = entitySelector;

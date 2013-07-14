@@ -17,11 +17,11 @@ import de.ntcomputer.minecraft.controllablemobs.implementation.ControllableMobHe
 public abstract class AITargetBehaviorEx extends AITargetBehavior<LivingEntity> {
 	protected final int maximumNoEyeContactTicks;
 	protected final boolean ignoreInvulnerability;
-	protected final float maximumDistance;
+	protected final double maximumDistance;
 	protected final Class<? extends EntityLiving>[] targetClasses;
 
 	@SuppressWarnings("unchecked")
-	protected AITargetBehaviorEx(final int priority, final int maximumNoEyeContactTicks, final boolean ignoreInvulnerability, final float maximumDistance, final Class<? extends LivingEntity>[] targetClasses) throws IllegalArgumentException {
+	protected AITargetBehaviorEx(int priority, int maximumNoEyeContactTicks, boolean ignoreInvulnerability, double maximumDistance, Class<? extends LivingEntity>[] targetClasses) throws IllegalArgumentException {
 		super(priority);
 		if(targetClasses==null) throw new IllegalArgumentException("targetClasses must not be null");
 		if(targetClasses.length==0) throw new IllegalArgumentException("targetClasses must not be empty");

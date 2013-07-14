@@ -109,7 +109,20 @@ public class CraftControllableMobAI<E extends LivingEntity> implements Controlla
 	@Override
 	public AIPart<E,?>[] getParts() {
 		ArrayList<AIPart<E,?>> parts = new ArrayList<AIPart<E,?>>();
-		this.dispatcher.get(parts);
+		this.dispatcher.get(parts,null);
+		return parts.toArray(new AIPart[0]);
+	}
+
+	@Override
+	public boolean hasBehavior(AIType type) {
+		return this.dispatcher.contains(type);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public AIPart<E, ?>[] getPartsOf(AIType... types) {
+		ArrayList<AIPart<E,?>> parts = new ArrayList<AIPart<E,?>>();
+		this.dispatcher.get(parts,types);
 		return parts.toArray(new AIPart[0]);
 	}
 

@@ -19,12 +19,12 @@ public abstract class PathfinderGoalTargetEx extends PathfinderGoalWrapper {
 	protected final EntityInsentient entity;
 	private final int maximumNoEyeContactTicks;
 	protected final boolean ignoreInvulnerability;
-	protected final float maximumDistanceSquared;
+	protected final double maximumDistanceSquared;
 	protected final Class<? extends EntityLiving>[] targetClasses;
 	private int noEyeContactTicks = 0;
 	
 
-	public PathfinderGoalTargetEx(final CraftControllableMob<?> mob, final int maximumNoEyeContactTicks, final boolean ignoreInvulnerability, final float maximumDistance, final Class<? extends EntityLiving>[] targetClasses) {
+	public PathfinderGoalTargetEx(CraftControllableMob<?> mob, int maximumNoEyeContactTicks, boolean ignoreInvulnerability, double maximumDistance, Class<? extends EntityLiving>[] targetClasses) {
 		this.mob = mob;
 		this.entity = mob.notchEntity;
 		this.maximumNoEyeContactTicks = maximumNoEyeContactTicks;
@@ -67,7 +67,7 @@ public abstract class PathfinderGoalTargetEx extends PathfinderGoalWrapper {
 		target = ((CraftLivingEntity) event.getTarget()).getHandle();
 		this.entity.setGoalTarget(target);
 		if(this.entity instanceof EntityCreature) ((EntityCreature) this.entity).target = target;
-		this.mob.adjustMaximumNavigationDistance((float) Math.sqrt(NativeInterfaces.ENTITY.METHOD_GETDISTANCETOENTITYSQUARED.invoke(this.entity, target) * 2));
+		this.mob.adjustMaximumNavigationDistance(Math.sqrt(NativeInterfaces.ENTITY.METHOD_GETDISTANCETOENTITYSQUARED.invoke(this.entity, target) * 2));
 		
 		return true;
 	}
