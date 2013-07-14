@@ -44,7 +44,7 @@ public class AIAttackRanged extends AIMoving<Creature> {
 	/**
 	 * Create with a custom priority and a custom movement speed multiplicator
 	 * 
-	 * @see AIAttackRanged#AIAttackRanged(int, double float, int)
+	 * @see AIAttackRanged#AIAttackRanged(int, double, float, int)
 	 * @param priority the priority of this behavior. Specify 0 to auto-generate it
 	 * @param movementSpeedMultiplicator the entity's movement speed is multiplied with this multiplicator when moving to the target
 	 */
