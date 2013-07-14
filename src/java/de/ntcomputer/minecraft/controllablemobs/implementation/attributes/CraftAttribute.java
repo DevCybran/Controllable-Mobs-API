@@ -34,10 +34,14 @@ public final class CraftAttribute implements Attribute {
 		this.nativeAttribute = nativeAttribute;
 		this.nativeAttributeTemplate = (AttributeRanged) NativeInterfaces.ATTRIBUTEMODIFIABLE.METHOD_GETATTRIBUTETEMPLATE.invoke(nativeAttribute);
 		this.defaultBasisValue = this.getBasisValue();
-		CraftAttributeModifier[] modifiers = this.getAttachedModifiers();
-		for(CraftAttributeModifier modifier: modifiers) {
-			modifier.setAttributeAttached(this);
+		
+		Collection<net.minecraft.server.v1_6_R2.AttributeModifier> nativeModifiers = NativeInterfaces.ATTRIBUTEMODIFIABLE.METHOD_GETMODIFIERS.invoke(nativeAttribute);
+		for(net.minecraft.server.v1_6_R2.AttributeModifier nativeModifier: nativeModifiers) {
+			UUID uuid = NativeInterfaces.ATTRIBUTEMODIFIER.METHOD_GETUUID.invoke(nativeModifier);
+			CraftAttributeModifier modifier = modifierMap.get(uuid);
+			if(modifier!=null) modifier.setAttributeAttached(this);
 		}
+		
 		attributes.add(this);
 	}
 
