@@ -44,6 +44,7 @@ import net.minecraft.server.v1_6_R2.PathfinderGoalRestrictSun;
 import net.minecraft.server.v1_6_R2.PathfinderGoalSit;
 import net.minecraft.server.v1_6_R2.PathfinderGoalSwell;
 import net.minecraft.server.v1_6_R2.PathfinderGoalTakeFlower;
+import net.minecraft.server.v1_6_R2.PathfinderGoalTame;
 import net.minecraft.server.v1_6_R2.PathfinderGoalTempt;
 import net.minecraft.server.v1_6_R2.PathfinderGoalTradeWithPlayer;
 
@@ -94,6 +95,7 @@ public enum AIType {
 	ACTION_PLAYERTRADINGLOOK(PathfinderGoalLookAtTradingPlayer.class),
 	ACTION_RANDOMLOOK(PathfinderGoalRandomLookaround.class),
 	ACTION_SIT(PathfinderGoalSit.class),
+	ACTION_TAME(PathfinderGoalTame.class),
 	ACTION_TEMPT(PathfinderGoalTempt.class),
 	TARGET_HURTBY(PathfinderGoalHurtByTarget.class),
 	TARGET_NEAREST(PathfinderGoalNearestAttackableTarget.class),
