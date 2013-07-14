@@ -7,7 +7,6 @@ import org.bukkit.entity.LivingEntity;
  * 
  * @author Cybran
  * @version 23
- * @param <E>
  *
  */
 public abstract class AITargetBehavior<E extends LivingEntity> extends AIBehavior<E> {

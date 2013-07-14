@@ -13,6 +13,8 @@ import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllable
  * 
  * @author Cybran
  * @version v4
+ * 
+ * @param <E> a required entity supertype. For example, {@link AIAttackMelee} requires the entity to be a {@link org.bukkit.entity.Creature}.
  *
  */
 public abstract class AIBehavior<E extends LivingEntity> {
@@ -26,6 +28,9 @@ public abstract class AIBehavior<E extends LivingEntity> {
 		return this.priority<=0 ? lastBehaviorPriority+1 : this.priority;
 	}
 	
+	/**
+	 * @return the type of this behavior
+	 */
 	public abstract AIType getType();
 
 	public abstract PathfinderGoal createPathfinderGoal(CraftControllableMob<? extends E> mob);

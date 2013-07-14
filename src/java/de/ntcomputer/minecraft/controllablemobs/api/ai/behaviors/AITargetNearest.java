@@ -25,7 +25,7 @@ public class AITargetNearest extends AITargetBehaviorEx {
 	/**
 	 * Create with an automatically given priority.
 	 * 
-	 * @see AITargetNearest#AITargetNearest(int, float, boolean, int, EntityFilter, Class...)
+	 * @see AITargetNearest#AITargetNearest(int, double, boolean, int, EntityFilter, Class...)
 	 */
 	public AITargetNearest() {
 		this(0);
@@ -34,7 +34,7 @@ public class AITargetNearest extends AITargetBehaviorEx {
 	/**
 	 * Create with a custom priority.
 	 * 
-	 * @see AITargetNearest#AITargetNearest(int, float, boolean, int, EntityFilter, Class...)
+	 * @see AITargetNearest#AITargetNearest(int, double, boolean, int, EntityFilter, Class...)
 	 * @param priority the priority of this behavior. Specify 0 to auto-generate it
 	 */
 	public AITargetNearest(int priority) {
@@ -44,7 +44,7 @@ public class AITargetNearest extends AITargetBehaviorEx {
 	/**
 	 * Create with a custom priority and max range.
 	 * 
-	 * @see AITargetNearest#AITargetNearest(int, float, boolean, int, EntityFilter, Class...)
+	 * @see AITargetNearest#AITargetNearest(int, double, boolean, int, EntityFilter, Class...)
 	 * @param priority the priority of this behavior. Specify 0 to auto-generate it
 	 * @param maximumDistance the maximum distance to search for enemies, in blocks. Default value is 16.0 blocks. If 0 is specified, the range is unlimited
 	 */
@@ -55,7 +55,7 @@ public class AITargetNearest extends AITargetBehaviorEx {
 	/**
 	 * Create with a custom priority and max range, specify invulnerability setting.
 	 * 
-	 * @see AITargetNearest#AITargetNearest(int, float, boolean, int, EntityFilter, Class...)
+	 * @see AITargetNearest#AITargetNearest(int, double, boolean, int, EntityFilter, Class...)
 	 * @param priority the priority of this behavior. Specify 0 to auto-generate it
 	 * @param maximumDistance the maximum distance to search for enemies, in blocks. Default value is 16.0 blocks. If 0 is specified, the range is unlimited
 	 * @param ignoreInvulnerability if set to false, the entity will only attack vulnerable and visible targets. Default is false
@@ -67,7 +67,7 @@ public class AITargetNearest extends AITargetBehaviorEx {
 	/**
 	 * Create with a custom priority and max range, specify more preconditions.
 	 * 
-	 * @see AITargetNearest#AITargetNearest(int, float, boolean, int, EntityFilter, Class...)
+	 * @see AITargetNearest#AITargetNearest(int, double, boolean, int, EntityFilter, Class...)
 	 * @param priority the priority of this behavior. Specify 0 to auto-generate it
 	 * @param maximumDistance the maximum distance to search for enemies, in blocks. Default value is 16.0 blocks. If 0 is specified, the range is unlimited
 	 * @param ignoreInvulnerability if set to false, the entity will only attack vulnerable and visible targets. Default is false
@@ -80,7 +80,7 @@ public class AITargetNearest extends AITargetBehaviorEx {
 	/**
 	 * Create with a custom priority and max range, specify more preconditions and provide entity filtering.
 	 * 
-	 * @see AITargetNearest#AITargetNearest(int, float, boolean, int, EntityFilter, Class...)
+	 * @see AITargetNearest#AITargetNearest(int, double, boolean, int, EntityFilter, Class...)
 	 * @param priority the priority of this behavior. Specify 0 to auto-generate it
 	 * @param maximumDistance the maximum distance to search for enemies, in blocks. Default value is 16.0 blocks. If 0 is specified, the range is unlimited
 	 * @param ignoreInvulnerability if set to false, the entity will only attack vulnerable and visible targets. Default is false
