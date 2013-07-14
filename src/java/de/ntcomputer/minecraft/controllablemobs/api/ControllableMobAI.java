@@ -72,7 +72,7 @@ public interface ControllableMobAI<E extends LivingEntity> {
 	 * @param behavior the AI behavior to remove. Be sure, that the instance was previously added by {@link ControllableMobAI#addAIBehavior(AIBehavior)}
 	 * @throws IllegalArgumentException when behavior is null
 	 * 
-	 * @deprecated removing parts of the AI by passing the behavior is deprecated. You should switch to {@link de.ntcomputer.minecraft.controllablemobs.api.ai.AIPart#remove()}. Method will be removed in v5 or v6.
+	 * @deprecated removing parts of the AI by passing the behavior is deprecated. You should switch to {@link de.ntcomputer.minecraft.controllablemobs.api.ai.AIPart#unattach()}. Method will be removed in v5 or v6.
 	 */
 	@SuppressWarnings("rawtypes")
 	@Deprecated
@@ -133,7 +133,7 @@ public interface ControllableMobAI<E extends LivingEntity> {
 	 * 
 	 * @return an array of all custom AI behaviors (default AI behaviors are NOT included)
 	 * 
-	 * @deprecated retrieving the AI by returning the behaviors is deprecated. You should switch to {@link ControllableMobAI#getAIParts()}. Method will be removed in v5 or v6.
+	 * @deprecated retrieving the AI by returning the behaviors is deprecated. You should switch to {@link ControllableMobAI#getParts()}. Method will be removed in v5 or v6.
 	 */
 	@SuppressWarnings("rawtypes")
 	@Deprecated

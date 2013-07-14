@@ -144,7 +144,7 @@ public final class ControllableMobs {
 	/**
 	 * Puts the entity under your control and sets its new movement speed, optionally clearing its AI.
 	 * If you decide to clear its AI, the entity will stop moving and attacking and stand still until you order it to execute any actions.
-	 * See {@link ControllableMobAttributes#setMovementSpeed(float)} for critical information.
+	 * See {@link ControllableMobAttributes#setMovementSpeed(double)} for critical information.
 	 * 
 	 * @param entity entity an instance of a subclass of LivingEntity - the entity you want to control.
 	 * @param clearAI a boolean indicating whether default behaviors should be removed (true) or not (false)
@@ -184,7 +184,7 @@ public final class ControllableMobs {
 	 * Puts the entity under your control and sets its new movement speed, optionally clearing its AI and adding custom AI behaviors.
 	 * If you decide to clear its AI, the entity will stop moving and attacking like it would normally do.
 	 * Instead, it will act corresponding to the new AI behaviors you provide.
-	 * See {@link ControllableMobAttributes#setMovementSpeed(float)} for critical information.
+	 * See {@link ControllableMobAttributes#getMovementSpeedAttribute()} for critical information.
 	 * 
 	 * @param entity entity an instance of a subclass of LivingEntity - the entity you want to control.
 	 * @param clearAI a boolean indicating whether default behaviors should be removed (true) or not (false)
@@ -218,7 +218,7 @@ public final class ControllableMobs {
 	 * All actions will be stopped immediately, all custom AI behaviors will be removed and default attributes and behaviors will be restored. Frees memory.
 	 * After having this method called, nothing will show that the entity was once controlled.
 	 * 
-	 * @see {@link ControllableMobs#unassign(ControllableMob, boolean)}
+	 * @see ControllableMobs#unassign(ControllableMob, boolean)
 	 * @param controllableMob the controller which should be unassigned
 	 * @throws IllegalStateException when the controllableMob is already unassigned
 	 */
