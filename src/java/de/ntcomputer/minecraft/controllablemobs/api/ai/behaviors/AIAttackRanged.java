@@ -37,7 +37,7 @@ public class AIAttackRanged extends AIMoving<Creature> {
 	 * @see AIAttackRanged#AIAttackRanged(int, double, float, int)
 	 * @param priority the priority of this behavior. Specify 0 to auto-generate it
 	 */
-	public AIAttackRanged(final int priority) {
+	public AIAttackRanged(int priority) {
 		this(priority, 1.0);
 	}
 	
@@ -47,7 +47,6 @@ public class AIAttackRanged extends AIMoving<Creature> {
 	 * @see AIAttackRanged#AIAttackRanged(int, double float, int)
 	 * @param priority the priority of this behavior. Specify 0 to auto-generate it
 	 * @param movementSpeedMultiplicator the entity's movement speed is multiplied with this multiplicator when moving to the target
-	 * @param maximumRange the maximum range a projectile can be shot at, in blocks. The default range is 16.0 blocks
 	 */
 	public AIAttackRanged(int priority, double movementSpeedMultiplicator) {
 		this(priority, movementSpeedMultiplicator, 16.0f);
@@ -61,7 +60,7 @@ public class AIAttackRanged extends AIMoving<Creature> {
 	 * @param movementSpeedMultiplicator the entity's movement speed is multiplied with this multiplicator when moving to the target
 	 * @param maximumRange the maximum range a projectile can be shot at, in blocks. The default range is 16.0 blocks
 	 */
-	public AIAttackRanged(final int priority, double movementSpeedMultiplicator, final float maximumRange) {
+	public AIAttackRanged(int priority, double movementSpeedMultiplicator, float maximumRange) {
 		this(priority, movementSpeedMultiplicator, maximumRange, 60);
 	}
 
@@ -73,7 +72,7 @@ public class AIAttackRanged extends AIMoving<Creature> {
 	 * @param maximumRange the maximum range a projectile can be shot at, in blocks. The default range is 16.0 blocks
 	 * @param attackTicks the amount of server ticks that are passed between two attacks. the default value is 60 = one attack every 3 seconds
 	 */
-	public AIAttackRanged(final int priority, double movementSpeedMultiplicator, final float maximumRange, final int attackTicks) {
+	public AIAttackRanged(int priority, double movementSpeedMultiplicator, float maximumRange, int attackTicks) {
 		super(priority,movementSpeedMultiplicator);
 		this.attackTicks = attackTicks;
 		this.maximumRange = maximumRange;
