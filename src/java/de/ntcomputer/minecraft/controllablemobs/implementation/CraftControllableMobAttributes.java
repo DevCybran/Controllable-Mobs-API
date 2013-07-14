@@ -54,12 +54,13 @@ public final class CraftControllableMobAttributes implements ControllableMobAttr
 	}
 
 	@Override
-	public void setMaximumNavigationDistance(double distance) throws IllegalArgumentException {
-		if(distance!=0 && distance<16) throw new IllegalArgumentException("distance has to be greater than or equal to 16 blocks");
+	public boolean setMaximumNavigationDistance(double distance) throws IllegalArgumentException {
+		if(distance!=0 && (distance<16 || distance>2048)) return false;
 		this.maximumNavigationDistance = distance;
 		if(distance!=0 && this.followRange.getBasisValue() > distance) {
 			this.followRange.setBasisValue(distance);
 		}
+		return true;
 	}
 
 	@Override

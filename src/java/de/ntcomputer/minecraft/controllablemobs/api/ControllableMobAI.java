@@ -146,8 +146,19 @@ public interface ControllableMobAI<E extends LivingEntity> {
 	 */
 	public AIPart<E,?>[] getParts();
 	
+	/**
+	 * Retrieves all AI parts, including custom behaviors and default behaviors of a specific type.
+	 * 
+	 * @param types the filter types
+	 * @return an array of all AI parts that have one of the types you specified.
+	 */
 	public AIPart<E,?>[] getPartsOf(AIType... types);
 	
+	/**
+	 * Checks whether a behavior of the given type exists.
+	 * @param type the type to check for
+	 * @return true, if this mob has an AI behavior of the specified type, and false otherwise
+	 */
 	public boolean hasBehavior(AIType type);
 	
 }

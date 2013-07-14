@@ -11,9 +11,21 @@ import de.ntcomputer.minecraft.controllablemobs.api.attributes.Attribute;
  */
 public interface ControllableMobAttributes {
 	
+	/**
+	 * @return the movement speed attribute
+	 */
 	public Attribute getMovementSpeedAttribute();
+	/**
+	 * @return the attack damage attribute. Caution: Will return null if the entity is not an attacking entity
+	 */
 	public Attribute getAttackDamageAttribute();
+	/**
+	 * @return the maximum health attribute. Caution: When changing the maximum health, the entity's current health is not scaled or updated
+	 */
 	public Attribute getMaxHealthAttribute();
+	/**
+	 * @return a knockback resistance attribute. Ranged from 0.0 to 1.0, where 1.0 is full resistance (entity will be never knocked back when attacked)
+	 */
 	public Attribute getKnockbackResistanceAttribute();
 	
 	/**
@@ -21,10 +33,10 @@ public interface ControllableMobAttributes {
 	 * Impacts all aspects of entity movement, whether invoked by {@link ControllableMobActions#moveTo(org.bukkit.Location)}, {@link ControllableMobActions#follow(org.bukkit.entity.LivingEntity)} or {@link de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors.AIAttackMelee} (etc.) is not important.
 	 * <b>Warning: High values or infinite can be very costly (severe CPU load)! To reduce this effect, limit the distance.</b>
 	 * 
-	 * @param distance the new maximum distance for entity navigation (in blocks). The default value is 200 blocks.
-	 * @throws IllegalArgumentException when distance is negative or less than 16 blocks.
+	 * @param distance the new maximum distance for entity navigation (in blocks). The default value is 200 blocks. Ranged from 16 to 2048. Specify 0 to set unlimited.
+	 * @return true, if the distance was in a valid range.
 	 */
-	public void setMaximumNavigationDistance(double distance) throws IllegalArgumentException;
+	public boolean setMaximumNavigationDistance(double distance);
 	
 	/**
 	 * Gets the maximum distance for entity navigation.
