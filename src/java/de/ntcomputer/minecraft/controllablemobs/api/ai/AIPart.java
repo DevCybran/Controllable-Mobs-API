@@ -6,7 +6,7 @@ import de.ntcomputer.minecraft.controllablemobs.api.ControllableMob;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors.AIBehavior;
 
 /**
- * An interface representing one part of the entities AI.<br>
+ * An interface representing one part of the entity's AI.<br>
  * It can be used to examine and control this part.<br>
  * You can obtain an instance by calling {@link de.ntcomputer.minecraft.controllablemobs.api.ControllableMobAI#addBehavior(AIBehavior)}.
  * 
