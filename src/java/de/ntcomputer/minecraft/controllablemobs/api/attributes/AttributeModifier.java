@@ -1,11 +1,13 @@
 package de.ntcomputer.minecraft.controllablemobs.api.attributes;
 
-public interface AttributeModifier<T> {
+
+public interface AttributeModifier {
 
 	public String getName();
 	public ModifyOperation getOperation();
-	public T getModifierValue();
-	
-	public net.minecraft.server.v1_6_R2.AttributeModifier getNativeAttributeModifier();
-	
+	public double getModifierValue();
+
+	public Attribute[] getAttachedAttributes();
+	public void unattachAttributes();
+
 }

@@ -23,7 +23,7 @@ import de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors.AIBehavior;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
 import de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors.PathfinderGoalAIMonitor;
 import de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors.PathfinderGoalWrapper;
-import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NmsInterfaces;
+import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.primitives.NativeFieldObject;
 
 public abstract class AIController<E extends LivingEntity> implements Comparator<Object> {
@@ -47,11 +47,11 @@ public abstract class AIController<E extends LivingEntity> implements Comparator
 		// copy default items
 		this.defaultParts = new ArrayList<CraftAIPart<E,?>>();
 		HashSet<PathfinderGoal> activeDefaultGoals = new HashSet<PathfinderGoal>();
-		List<Object> defaultItems = NmsInterfaces.PATHFINDERGOALSELECTOR.FIELD_GOALITEMS.get(this.selector);
+		List<Object> defaultItems = NativeInterfaces.PATHFINDERGOALSELECTOR.FIELD_GOALITEMS.get(this.selector);
 		CraftAIPart<E,?> part;
 		for(Object item: defaultItems) {
-			part = new CraftAIPart<E,AIBehavior<? super E>>(this, NmsInterfaces.PATHFINDERGOALSELECTORITEM.FIELD_PRIORITY.get(item), NmsInterfaces.PATHFINDERGOALSELECTORITEM.FIELD_GOAL.get(item));
-			if(NmsInterfaces.PATHFINDERGOALSELECTOR.FIELD_ACTIVEGOALITEMS.get(selector).contains(item)) {
+			part = new CraftAIPart<E,AIBehavior<? super E>>(this, NativeInterfaces.PATHFINDERGOALSELECTORITEM.FIELD_PRIORITY.get(item), NativeInterfaces.PATHFINDERGOALSELECTORITEM.FIELD_GOAL.get(item));
+			if(NativeInterfaces.PATHFINDERGOALSELECTOR.FIELD_ACTIVEGOALITEMS.get(selector).contains(item)) {
 				part.setState(AIState.ACTIVE);
 				activeDefaultGoals.add(part.goal);
 			}
@@ -82,18 +82,18 @@ public abstract class AIController<E extends LivingEntity> implements Comparator
 	// internal goal modifications
 	
 	private void addGoal(int priority, PathfinderGoal goal) {
-		NmsInterfaces.PATHFINDERGOALSELECTOR.METHOD_ADDPATHFINDERGOAL.invoke(this.selector, priority, goal);
+		NativeInterfaces.PATHFINDERGOALSELECTOR.METHOD_ADDPATHFINDERGOAL.invoke(this.selector, priority, goal);
 	}
 	
 	private void removeGoal(PathfinderGoal goal) {
 		PathfinderGoal searchGoal;
 		
 		// shutdown and remove active item
-		Iterator<Object> iterator = NmsInterfaces.PATHFINDERGOALSELECTOR.FIELD_ACTIVEGOALITEMS.get(this.selector).iterator();
+		Iterator<Object> iterator = NativeInterfaces.PATHFINDERGOALSELECTOR.FIELD_ACTIVEGOALITEMS.get(this.selector).iterator();
 		while(iterator.hasNext()) {
-			searchGoal = NmsInterfaces.PATHFINDERGOALSELECTORITEM.FIELD_GOAL.get(iterator.next());
+			searchGoal = NativeInterfaces.PATHFINDERGOALSELECTORITEM.FIELD_GOAL.get(iterator.next());
 			if(searchGoal==goal) {
-				NmsInterfaces.PATHFINDERGOAL.METHOD_ONEND.invoke(searchGoal);
+				NativeInterfaces.PATHFINDERGOAL.METHOD_ONEND.invoke(searchGoal);
 				iterator.remove();
 				break;
 			}
@@ -101,9 +101,9 @@ public abstract class AIController<E extends LivingEntity> implements Comparator
 		((UnsafeList<Object>.Itr) iterator).valid = false;
 		
 		// remove item
-		iterator = NmsInterfaces.PATHFINDERGOALSELECTOR.FIELD_GOALITEMS.get(this.selector).iterator();
+		iterator = NativeInterfaces.PATHFINDERGOALSELECTOR.FIELD_GOALITEMS.get(this.selector).iterator();
 		while(iterator.hasNext()) {
-			searchGoal = NmsInterfaces.PATHFINDERGOALSELECTORITEM.FIELD_GOAL.get(iterator.next());
+			searchGoal = NativeInterfaces.PATHFINDERGOALSELECTORITEM.FIELD_GOAL.get(iterator.next());
 			if(searchGoal==goal) {
 				iterator.remove();
 				break;
@@ -116,32 +116,32 @@ public abstract class AIController<E extends LivingEntity> implements Comparator
 		PathfinderGoal searchGoal;
 		
 		// shutdown and remove active non-action items
-		Iterator<Object> iterator = NmsInterfaces.PATHFINDERGOALSELECTOR.FIELD_ACTIVEGOALITEMS.get(this.selector).iterator();
+		Iterator<Object> iterator = NativeInterfaces.PATHFINDERGOALSELECTOR.FIELD_ACTIVEGOALITEMS.get(this.selector).iterator();
 		while(iterator.hasNext()) {
-			searchGoal = NmsInterfaces.PATHFINDERGOALSELECTORITEM.FIELD_GOAL.get(iterator.next());
+			searchGoal = NativeInterfaces.PATHFINDERGOALSELECTORITEM.FIELD_GOAL.get(iterator.next());
 			if(!this.actionGoals.contains(searchGoal)) {
-				NmsInterfaces.PATHFINDERGOAL.METHOD_ONEND.invoke(searchGoal);
+				NativeInterfaces.PATHFINDERGOAL.METHOD_ONEND.invoke(searchGoal);
 				iterator.remove();
 			}
 		}
 		((UnsafeList<Object>.Itr) iterator).valid = false;
 		
 		// remove all non-action items
-		iterator = NmsInterfaces.PATHFINDERGOALSELECTOR.FIELD_GOALITEMS.get(this.selector).iterator();
+		iterator = NativeInterfaces.PATHFINDERGOALSELECTOR.FIELD_GOALITEMS.get(this.selector).iterator();
 		while(iterator.hasNext()) {
-			searchGoal = NmsInterfaces.PATHFINDERGOALSELECTORITEM.FIELD_GOAL.get(iterator.next());
+			searchGoal = NativeInterfaces.PATHFINDERGOALSELECTORITEM.FIELD_GOAL.get(iterator.next());
 			if(!this.actionGoals.contains(searchGoal) ) iterator.remove();
 		}
 		((UnsafeList<Object>.Itr) iterator).valid = false;
 	}
 	
 	private void sortGoals() {
-		Collections.sort(NmsInterfaces.PATHFINDERGOALSELECTOR.FIELD_GOALITEMS.get(this.selector), this);
+		Collections.sort(NativeInterfaces.PATHFINDERGOALSELECTOR.FIELD_GOALITEMS.get(this.selector), this);
 	}
 	
 	@Override
 	public int compare(Object goalitem1, Object goalitem2) {
-		return NmsInterfaces.PATHFINDERGOALSELECTORITEM.FIELD_PRIORITY.get(goalitem1) <= NmsInterfaces.PATHFINDERGOALSELECTORITEM.FIELD_PRIORITY.get(goalitem2) ? -1 : 1;
+		return NativeInterfaces.PATHFINDERGOALSELECTORITEM.FIELD_PRIORITY.get(goalitem1) <= NativeInterfaces.PATHFINDERGOALSELECTORITEM.FIELD_PRIORITY.get(goalitem2) ? -1 : 1;
 	}
 	
 	
@@ -235,14 +235,14 @@ public abstract class AIController<E extends LivingEntity> implements Comparator
 	
 	void dispose() {
 		// shutdown and remove active items
-		final List<Object> activeItems = NmsInterfaces.PATHFINDERGOALSELECTOR.FIELD_ACTIVEGOALITEMS.get(this.selector);
+		final List<Object> activeItems = NativeInterfaces.PATHFINDERGOALSELECTOR.FIELD_ACTIVEGOALITEMS.get(this.selector);
 		for(Object item: activeItems) {
-			NmsInterfaces.PATHFINDERGOAL.METHOD_ONEND.invoke(NmsInterfaces.PATHFINDERGOALSELECTORITEM.FIELD_GOAL.get(item));
+			NativeInterfaces.PATHFINDERGOAL.METHOD_ONEND.invoke(NativeInterfaces.PATHFINDERGOALSELECTORITEM.FIELD_GOAL.get(item));
 		}
 		activeItems.clear();
 		
 		// remove all items
-		NmsInterfaces.PATHFINDERGOALSELECTOR.FIELD_GOALITEMS.get(this.selector).clear();
+		NativeInterfaces.PATHFINDERGOALSELECTOR.FIELD_GOALITEMS.get(this.selector).clear();
 		
 		// restore default items
 		for(CraftAIPart<E,?> defaultPart: this.defaultParts) {

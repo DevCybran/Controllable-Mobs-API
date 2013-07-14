@@ -2,8 +2,6 @@ package de.ntcomputer.minecraft.controllablemobs.api;
 
 import org.bukkit.entity.LivingEntity;
 
-import de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors.AIBehavior;
-
 /**
  * The "main" interface to control a mob.
  * This interface will return objects to control the properties and AI of the underlying entity or assign actions.

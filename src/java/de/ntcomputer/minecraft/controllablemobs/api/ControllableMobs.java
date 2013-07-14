@@ -13,7 +13,7 @@ import org.bukkit.plugin.java.PluginClassLoader;
 
 import de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors.AIBehavior;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
-import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NmsInterfaces;
+import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;
 
 /**
  * This is a static class which lets you retrieve instances of {@link ControllableMob}.
@@ -32,7 +32,7 @@ public final class ControllableMobs {
 	private static void onLoad() {
 		try {
 			PluginClassLoader cl = (PluginClassLoader) ControllableMobs.class.getClassLoader();
-			Plugin[] plugins = NmsInterfaces.JAVAPLUGINLOADER.FIELD_SERVER.get(NmsInterfaces.PLUGINCLASSLOADER.FIELD_LOADER.get(cl)).getPluginManager().getPlugins();
+			Plugin[] plugins = NativeInterfaces.JAVAPLUGINLOADER.FIELD_SERVER.get(NativeInterfaces.PLUGINCLASSLOADER.FIELD_LOADER.get(cl)).getPluginManager().getPlugins();
 			for(Plugin plugin: plugins) {
 				if(plugin.getClass().getClassLoader()==cl) {
 					if(plugin.getName().equals("ControllableMobsAPI")) {
@@ -215,16 +215,30 @@ public final class ControllableMobs {
 	
 	/**
 	 * Releases the entity from control and restores default behaviors.
-	 * All actions will be stopped immediately, all custom AI behaviors will be removed and default properties and behaviors will be restored. Frees memory.
+	 * All actions will be stopped immediately, all custom AI behaviors will be removed and default attributes and behaviors will be restored. Frees memory.
 	 * After having this method called, nothing will show that the entity was once controlled.
 	 * 
+	 * @see {@link ControllableMobs#unassign(ControllableMob, boolean)}
 	 * @param controllableMob the controller which should be unassigned
 	 * @throws IllegalStateException when the controllableMob is already unassigned
 	 */
 	public static void unassign(ControllableMob<?> controllableMob) throws IllegalStateException {
+		unassign(controllableMob, true);
+	}
+	
+	/**
+	 * Releases the entity from control and restores default behaviors.
+	 * All actions will be stopped immediately, all custom AI behaviors will be removed and default behaviors (and attributes, if specified) will be restored. Frees memory.
+	 * After having this method called, nothing will show that the entity was once controlled.
+	 * 
+	 * @param controllableMob the controller which should be unassigned
+	 * @param resetAttributes whether to also reset attributes (movement speed, attack damage, etc.) to their default values. Removes custom modifiers. Default ist true.
+	 * @throws IllegalStateException when the controllableMob is already unassigned
+	 */
+	public static void unassign(ControllableMob<?> controllableMob, boolean resetAttributes) throws IllegalStateException {
 		if(!entities.containsKey(controllableMob.getEntity())) throw new IllegalStateException("entity "+controllableMob.toString()+" is already unassigned");
 		entities.remove(controllableMob.getEntity());
-		((CraftControllableMob<?>) controllableMob).unassign();
+		((CraftControllableMob<?>) controllableMob).unassign(resetAttributes);
 	}
 
 }

@@ -11,7 +11,7 @@ import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
-import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NmsInterfaces;
+import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;
 
 
 public abstract class PathfinderGoalTargetEx extends PathfinderGoalWrapper {
@@ -54,7 +54,7 @@ public abstract class PathfinderGoalTargetEx extends PathfinderGoalWrapper {
 		if((!this.ignoreInvulnerability) && (target instanceof EntityHuman) && (((EntityHuman) target).abilities.isInvulnerable || ((EntityHuman) target).isInvisible())) return false;
 		
 		// range check
-		if(this.maximumDistanceSquared>0 && NmsInterfaces.ENTITY.METHOD_GETDISTANCETOENTITYSQUARED.invoke(this.entity,target)>this.maximumDistanceSquared) return false;
+		if(this.maximumDistanceSquared>0 && NativeInterfaces.ENTITY.METHOD_GETDISTANCETOENTITYSQUARED.invoke(this.entity,target)>this.maximumDistanceSquared) return false;
 		
 		// eye contact check
 		if(this.maximumNoEyeContactTicks>0 && !this.entity.getEntitySenses().canSee(target)) return false;
@@ -67,7 +67,7 @@ public abstract class PathfinderGoalTargetEx extends PathfinderGoalWrapper {
 		target = ((CraftLivingEntity) event.getTarget()).getHandle();
 		this.entity.setGoalTarget(target);
 		if(this.entity instanceof EntityCreature) ((EntityCreature) this.entity).target = target;
-		this.mob.adjustMaximumNavigationDistance((float) Math.sqrt(NmsInterfaces.ENTITY.METHOD_GETDISTANCETOENTITYSQUARED.invoke(this.entity, target) * 2));
+		this.mob.adjustMaximumNavigationDistance((float) Math.sqrt(NativeInterfaces.ENTITY.METHOD_GETDISTANCETOENTITYSQUARED.invoke(this.entity, target) * 2));
 		
 		return true;
 	}
@@ -81,7 +81,7 @@ public abstract class PathfinderGoalTargetEx extends PathfinderGoalWrapper {
 		if(!target.isAlive()) return false;
 		
 		// range check
-		if(this.maximumDistanceSquared>0 && NmsInterfaces.ENTITY.METHOD_GETDISTANCETOENTITYSQUARED.invoke(this.entity,target)>this.maximumDistanceSquared) return false;
+		if(this.maximumDistanceSquared>0 && NativeInterfaces.ENTITY.METHOD_GETDISTANCETOENTITYSQUARED.invoke(this.entity,target)>this.maximumDistanceSquared) return false;
 		
 		// eye contact check
 		if(this.maximumNoEyeContactTicks>0) {

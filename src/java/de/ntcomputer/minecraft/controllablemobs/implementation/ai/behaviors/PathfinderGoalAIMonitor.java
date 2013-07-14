@@ -7,7 +7,7 @@ import net.minecraft.server.v1_6_R2.PathfinderGoal;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIState;
 import de.ntcomputer.minecraft.controllablemobs.implementation.ai.AIController;
 import de.ntcomputer.minecraft.controllablemobs.implementation.ai.CraftAIPart;
-import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NmsInterfaces;
+import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;
 
 public class PathfinderGoalAIMonitor extends PathfinderGoalWrapper {
 	private final AIController<?> controller;
@@ -25,10 +25,10 @@ public class PathfinderGoalAIMonitor extends PathfinderGoalWrapper {
 	@Override
 	protected boolean canStart() {
 		HashSet<PathfinderGoal> deactivate = new HashSet<PathfinderGoal>(this.lastActive);
-		final List<Object> activeItems = NmsInterfaces.PATHFINDERGOALSELECTOR.FIELD_ACTIVEGOALITEMS.get(this.controller.selector);
+		final List<Object> activeItems = NativeInterfaces.PATHFINDERGOALSELECTOR.FIELD_ACTIVEGOALITEMS.get(this.controller.selector);
 		PathfinderGoal goal;
 		for(Object item: activeItems) {
-			goal = NmsInterfaces.PATHFINDERGOALSELECTORITEM.FIELD_GOAL.get(item);
+			goal = NativeInterfaces.PATHFINDERGOALSELECTORITEM.FIELD_GOAL.get(item);
 			if(goal instanceof PathfinderGoalActionBase) continue;
 			if(!deactivate.remove(goal)) {
 				this.controller.goalPartMap.get(goal).setState(AIState.ACTIVE);

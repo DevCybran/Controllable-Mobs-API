@@ -3,7 +3,7 @@ package de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors;
 import de.ntcomputer.minecraft.controllablemobs.api.actions.ActionType;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
 import de.ntcomputer.minecraft.controllablemobs.implementation.actions.ControllableMobActionLook;
-import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NmsInterfaces;
+import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;
 
 public class PathfinderGoalActionLook extends PathfinderGoalActionBase<ControllableMobActionLook> {
 
@@ -24,7 +24,7 @@ public class PathfinderGoalActionLook extends PathfinderGoalActionBase<Controlla
 
 	@Override
 	protected void onTickAction() {
-		NmsInterfaces.CONTROLLERLOOK.METHOD_LOOKATCOORDINATES.invoke(this.mob.notchEntity.getControllerLook(), this.action.getX(), this.action.getY(), this.action.getZ(), 10.0F, NmsInterfaces.ENTITYLIVING.METHOD_GETVERTICALHEADSPEED.invoke(this.mob.notchEntity));
+		NativeInterfaces.CONTROLLERLOOK.METHOD_LOOKATCOORDINATES.invoke(this.mob.notchEntity.getControllerLook(), this.action.getX(), this.action.getY(), this.action.getZ(), 10.0F, NativeInterfaces.ENTITYLIVING.METHOD_GETVERTICALHEADSPEED.invoke(this.mob.notchEntity));
 	}
 
 	
