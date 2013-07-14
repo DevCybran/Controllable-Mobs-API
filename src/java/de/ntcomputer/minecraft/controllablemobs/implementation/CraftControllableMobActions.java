@@ -178,34 +178,4 @@ public class CraftControllableMobActions implements ControllableMobActions {
 		this.defaultQueue = defaultQueue;
 	}
 
-	@Override
-	public ControllableMobAction teleport(Entity entity) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ControllableMobAction teleport(Entity entity, boolean queue) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ControllableMobAction teleport(Entity entity, boolean queue, float targetDistance) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ControllableMobAction teleport(Location loc) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ControllableMobAction teleport(Location loc, boolean queue) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

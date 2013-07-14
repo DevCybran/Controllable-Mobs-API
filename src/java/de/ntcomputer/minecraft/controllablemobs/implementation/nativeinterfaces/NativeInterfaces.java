@@ -5,12 +5,12 @@ import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.classes.NmsAttributeModifiable;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.classes.NmsAttributeModifier;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.classes.NmsAttributeRanged;
+import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.classes.NmsEntityInsentient;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.classes.NmsGenericAttributes;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.classes.NmsIAttribute;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.classes.NotchInterfaceControllerJump;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.classes.NotchInterfaceControllerLook;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.classes.NotchInterfaceEntity;
-import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.classes.NotchInterfaceEntityLiving;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.classes.NotchInterfaceNavigation;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.classes.NotchInterfacePathfinderGoal;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.classes.NotchInterfacePathfinderGoalSelector;
@@ -21,7 +21,6 @@ public final class NativeInterfaces {
 	public static final NotchInterfaceControllerJump CONTROLLERJUMP = new NotchInterfaceControllerJump();
 	public static final NotchInterfaceControllerLook CONTROLLERLOOK = new NotchInterfaceControllerLook();
 	public static final NotchInterfaceEntity ENTITY = new NotchInterfaceEntity();
-	public static final NotchInterfaceEntityLiving ENTITYLIVING = new NotchInterfaceEntityLiving();
 	public static final CBInterfaceJavaPluginLoader JAVAPLUGINLOADER = new CBInterfaceJavaPluginLoader();
 	public static final NotchInterfaceNavigation NAVIGATION = new NotchInterfaceNavigation();
 	public static final NotchInterfacePathfinderGoal PATHFINDERGOAL = new NotchInterfacePathfinderGoal();
@@ -34,6 +33,7 @@ public final class NativeInterfaces {
 	public static final NmsAttributeModifiable ATTRIBUTEMODIFIABLE = new NmsAttributeModifiable();
 	public static final NmsAttributeModifier ATTRIBUTEMODIFIER = new NmsAttributeModifier();
 	public static final NmsGenericAttributes GENERICATTRIBUTES = new NmsGenericAttributes();
+	public static final NmsEntityInsentient ENTITYINSENTIENT = new NmsEntityInsentient();
 	
 	private NativeInterfaces() {
 		throw new AssertionError();

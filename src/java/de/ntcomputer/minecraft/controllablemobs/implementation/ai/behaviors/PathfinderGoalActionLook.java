@@ -24,7 +24,7 @@ public class PathfinderGoalActionLook extends PathfinderGoalActionBase<Controlla
 
 	@Override
 	protected void onTickAction() {
-		NativeInterfaces.CONTROLLERLOOK.METHOD_LOOKATCOORDINATES.invoke(this.mob.notchEntity.getControllerLook(), this.action.getX(), this.action.getY(), this.action.getZ(), 10.0F, NativeInterfaces.ENTITYLIVING.METHOD_GETVERTICALHEADSPEED.invoke(this.mob.notchEntity));
+		NativeInterfaces.CONTROLLERLOOK.METHOD_LOOKATCOORDINATES.invoke(this.mob.notchEntity.getControllerLook(), this.action.getX(), this.action.getY(), this.action.getZ(), 10.0F, NativeInterfaces.ENTITYINSENTIENT.METHOD_GETVERTICALHEADSPEED.invoke(this.mob.notchEntity));
 	}
 
 	

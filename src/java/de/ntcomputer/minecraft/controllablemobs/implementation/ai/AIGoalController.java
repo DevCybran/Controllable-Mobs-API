@@ -13,7 +13,7 @@ import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.
 class AIGoalController<E extends LivingEntity> extends AIController<E> {
 
 	public AIGoalController(CraftControllableMob<E> mob) {
-		super(mob, NativeInterfaces.ENTITYLIVING.FIELD_GOALSELECTOR);
+		super(mob, NativeInterfaces.ENTITYINSENTIENT.FIELD_GOALSELECTOR);
 	}
 
 	@Override

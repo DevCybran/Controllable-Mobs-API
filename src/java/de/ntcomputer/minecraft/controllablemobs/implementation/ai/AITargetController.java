@@ -9,7 +9,7 @@ import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.
 class AITargetController<E extends LivingEntity> extends AIController<E> {
 
 	public AITargetController(CraftControllableMob<E> mob) {
-		super(mob, NativeInterfaces.ENTITYLIVING.FIELD_TARGETSELECTOR);
+		super(mob, NativeInterfaces.ENTITYINSENTIENT.FIELD_TARGETSELECTOR);
 	}
 
 	@Override

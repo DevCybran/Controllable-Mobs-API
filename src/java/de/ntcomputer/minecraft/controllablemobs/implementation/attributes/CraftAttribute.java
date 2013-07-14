@@ -3,6 +3,7 @@ package de.ntcomputer.minecraft.controllablemobs.implementation.attributes;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import net.minecraft.server.v1_6_R2.AttributeModifiable;
 import net.minecraft.server.v1_6_R2.AttributeRanged;
@@ -12,13 +13,19 @@ import de.ntcomputer.minecraft.controllablemobs.api.attributes.ModifyOperation;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;
 
 public final class CraftAttribute implements Attribute {
-	private static final Map<net.minecraft.server.v1_6_R2.AttributeModifier,CraftAttributeModifier> nativeModifierMap = new HashMap<net.minecraft.server.v1_6_R2.AttributeModifier,CraftAttributeModifier>();
-	private final AttributeModifiable nativeAttribute;
-	private final AttributeRanged nativeAttributeTemplate;
+	private static final Map<UUID,CraftAttributeModifier> modifierMap = new HashMap<UUID,CraftAttributeModifier>();
+	private AttributeModifiable nativeAttribute;
+	private AttributeRanged nativeAttributeTemplate;
+	private final double defaultBasisValue;
+	
+	public static void registerCustomModifier(CraftAttributeModifier modifier) {
+		modifierMap.put(modifier.getUniqueID(), modifier);
+	}
 
 	public CraftAttribute(AttributeModifiable nativeAttribute) {
 		this.nativeAttribute = nativeAttribute;
 		this.nativeAttributeTemplate = (AttributeRanged) NativeInterfaces.ATTRIBUTEMODIFIABLE.METHOD_GETATTRIBUTETEMPLATE.invoke(nativeAttribute);
+		this.defaultBasisValue = this.getBasisValue();
 	}
 
 	@Override
@@ -30,10 +37,11 @@ public final class CraftAttribute implements Attribute {
 		CraftAttributeModifier[] result = new CraftAttributeModifier[nativeModifiers.size()];
 		int i = 0;
 		for(net.minecraft.server.v1_6_R2.AttributeModifier nativeModifier: nativeModifiers) {
-			CraftAttributeModifier modifier = nativeModifierMap.get(nativeModifier);
+			UUID uuid = NativeInterfaces.ATTRIBUTEMODIFIER.METHOD_GETUUID.invoke(nativeModifier);
+			CraftAttributeModifier modifier = modifierMap.get(uuid);
 			if(modifier==null) {
-				modifier = new CraftAttributeModifier(nativeModifier);
-				nativeModifierMap.put(nativeModifier, modifier);
+				modifier = new CraftAttributeModifier(uuid, nativeModifier);
+				modifierMap.put(uuid, modifier);
 			}
 			result[i] = modifier;
 			i++;
@@ -107,29 +115,34 @@ public final class CraftAttribute implements Attribute {
 
 	@Override
 	public double resetBasisValue() {
-		// TODO Auto-generated method stub
-		return 0;
+		this.setBasisValue(defaultBasisValue);
+		return this.defaultBasisValue;
 	}
 
 	@Override
 	public void unattachCustomModifiers() {
-		// TODO Auto-generated method stub
-		
+		CraftAttributeModifier[] modifiers = this.getAttachedModifiers();
+		for(CraftAttributeModifier modifier: modifiers) {
+			if(modifier.isCustomModifier()) this.unattachModifier(modifier);
+		}
 	}
 
 	@Override
 	public void unattachNativeModifiers() {
-		// TODO Auto-generated method stub
-		
+		CraftAttributeModifier[] modifiers = this.getAttachedModifiers();
+		for(CraftAttributeModifier modifier: modifiers) {
+			if(!modifier.isCustomModifier()) this.unattachModifier(modifier);
+		}
 	}
 
 	@Override
 	public void resetAttribute() {
-		// TODO Auto-generated method stub
-		
+		this.unattachCustomModifiers();
+		this.resetBasisValue();		
 	}
 	
 	public void dispose(boolean reset) {
+		if(reset) this.resetAttribute();
 		
 	}
 

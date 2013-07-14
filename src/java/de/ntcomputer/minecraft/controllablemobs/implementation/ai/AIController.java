@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import net.minecraft.server.v1_6_R2.EntityLiving;
+import net.minecraft.server.v1_6_R2.EntityInsentient;
 import net.minecraft.server.v1_6_R2.PathfinderGoal;
 import net.minecraft.server.v1_6_R2.PathfinderGoalSelector;
 
@@ -36,7 +36,7 @@ public abstract class AIController<E extends LivingEntity> implements Comparator
 	public PathfinderGoalSelector selector;
 	public HashMap<PathfinderGoal,CraftAIPart<E,?>> goalPartMap;
 	
-	public AIController(CraftControllableMob<E> mob, NativeFieldObject<EntityLiving,PathfinderGoalSelector> selectorField) {
+	public AIController(CraftControllableMob<E> mob, NativeFieldObject<EntityInsentient,PathfinderGoalSelector> selectorField) {
 		this.mob = mob;
 		this.selector = selectorField.get(mob.notchEntity);
 		

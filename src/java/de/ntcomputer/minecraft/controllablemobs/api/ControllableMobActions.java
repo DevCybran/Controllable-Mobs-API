@@ -235,11 +235,11 @@ public interface ControllableMobActions {
 	 */
 	public ControllableMobAction callback(Runnable runnable);
 	
-	public ControllableMobAction teleport(Entity entity);
+	/*public ControllableMobAction teleport(Entity entity);
 	public ControllableMobAction teleport(Entity entity, boolean queue);
 	public ControllableMobAction teleport(Entity entity, boolean queue, float targetDistance);
 	public ControllableMobAction teleport(Location loc);
-	public ControllableMobAction teleport(Location loc, boolean queue);
+	public ControllableMobAction teleport(Location loc, boolean queue);*/
 	
 	
 	/**

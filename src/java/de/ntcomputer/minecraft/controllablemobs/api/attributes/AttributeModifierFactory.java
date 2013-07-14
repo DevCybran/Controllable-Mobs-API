@@ -1,5 +1,8 @@
 package de.ntcomputer.minecraft.controllablemobs.api.attributes;
 
+import java.util.UUID;
+
+import de.ntcomputer.minecraft.controllablemobs.implementation.attributes.CraftAttribute;
 import de.ntcomputer.minecraft.controllablemobs.implementation.attributes.CraftAttributeModifier;
 
 public final class AttributeModifierFactory {
@@ -9,8 +12,10 @@ public final class AttributeModifierFactory {
 	}
 	
 	
-	public static final AttributeModifier create(String name, double modifierValue, ModifyOperation operation) {
-		return new CraftAttributeModifier(name, modifierValue, operation);
+	public static final AttributeModifier create(UUID uniqueID, String name, double modifierValue, ModifyOperation operation) {
+		CraftAttributeModifier modifier = new CraftAttributeModifier(uniqueID, name, modifierValue, operation);
+		CraftAttribute.registerCustomModifier(modifier);
+		return modifier;
 	}
 
 }
