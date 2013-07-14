@@ -144,7 +144,7 @@ public final class ControllableMobs {
 	/**
 	 * Puts the entity under your control and sets its new movement speed, optionally clearing its AI.
 	 * If you decide to clear its AI, the entity will stop moving and attacking and stand still until you order it to execute any actions.
-	 * See {@link ControllableMobAttributes#setMovementSpeed(double)} for critical information.
+	 * See {@link ControllableMobAttributes#getMovementSpeedAttribute()} for critical information.
 	 * 
 	 * @param entity entity an instance of a subclass of LivingEntity - the entity you want to control.
 	 * @param clearAI a boolean indicating whether default behaviors should be removed (true) or not (false)
