@@ -2,6 +2,7 @@ package de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.UUID;
 
 import net.minecraft.server.v1_6_R2.AttributeModifiable;
 import net.minecraft.server.v1_6_R2.AttributeModifier;
@@ -15,6 +16,7 @@ public final class NmsAttributeModifiable {
 	public final GetModifiersByType METHOD_GETMODIFIERSBYTYPE = new GetModifiersByType();
 	public final AddModifier METHOD_ADDMODIFIER = new AddModifier();
 	public final RemoveModifier METHOD_REMOVEMODIFIER = new RemoveModifier();
+	public final GetModifierByUUID METHOD_GETMODIFIERBYUUID = new GetModifierByUUID();
 	
 	public final class GetTemplate extends NativeMethodPublic {
 		public IAttribute invoke(AttributeModifiable attribute) {
@@ -35,7 +37,6 @@ public final class NmsAttributeModifiable {
 				this.handleException(t);
 				return 0;
 			}
-			
 		}
 	}
 	
@@ -48,7 +49,6 @@ public final class NmsAttributeModifiable {
 				this.handleException(t);
 				return Collections.EMPTY_SET;
 			}
-			
 		}
 	}
 	
@@ -61,7 +61,6 @@ public final class NmsAttributeModifiable {
 				this.handleException(t);
 				return Collections.EMPTY_SET;
 			}
-			
 		}
 	}
 	
@@ -74,7 +73,6 @@ public final class NmsAttributeModifiable {
 			} catch(Throwable t) {
 				this.handleException(t);
 			}
-			
 		}
 	}
 	
@@ -87,7 +85,17 @@ public final class NmsAttributeModifiable {
 			} catch(Throwable t) {
 				this.handleException(t);
 			}
-			
+		}
+	}
+	
+	public final class GetModifierByUUID extends NativeMethodPublic {
+		public AttributeModifier invoke(AttributeModifiable attribute, UUID uuid) throws IllegalArgumentException {
+			try {
+				return attribute.a(uuid);
+			} catch(Throwable t) {
+				this.handleException(t);
+				return null;
+			}
 		}
 	}
 

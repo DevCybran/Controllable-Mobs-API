@@ -13,6 +13,7 @@ public interface Attribute {
 	public double getMinimum();
 	public double getMaximum();
 	
+	public boolean hasModifierAttached(AttributeModifier modifier);
 	public boolean attachModifier(AttributeModifier modifier);
 	public void unattachModifier(AttributeModifier modifier);
 	public AttributeModifier[] getAttachedModifiers();

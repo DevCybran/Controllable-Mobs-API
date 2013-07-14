@@ -2,7 +2,9 @@ package de.ntcomputer.minecraft.controllablemobs.implementation.attributes;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import net.minecraft.server.v1_6_R2.AttributeModifiable;
@@ -13,6 +15,7 @@ import de.ntcomputer.minecraft.controllablemobs.api.attributes.ModifyOperation;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;
 
 public final class CraftAttribute implements Attribute {
+	private static final Set<CraftAttribute> attributes = new HashSet<CraftAttribute>();
 	private static final Map<UUID,CraftAttributeModifier> modifierMap = new HashMap<UUID,CraftAttributeModifier>();
 	private AttributeModifiable nativeAttribute;
 	private AttributeRanged nativeAttributeTemplate;
@@ -20,12 +23,22 @@ public final class CraftAttribute implements Attribute {
 	
 	public static void registerCustomModifier(CraftAttributeModifier modifier) {
 		modifierMap.put(modifier.getUniqueID(), modifier);
+		for(CraftAttribute attribute: attributes) {
+			if(attribute.hasModifierAttached(modifier)) {
+				modifier.setAttributeAttached(attribute);
+			}
+		}
 	}
-
+	
 	public CraftAttribute(AttributeModifiable nativeAttribute) {
 		this.nativeAttribute = nativeAttribute;
 		this.nativeAttributeTemplate = (AttributeRanged) NativeInterfaces.ATTRIBUTEMODIFIABLE.METHOD_GETATTRIBUTETEMPLATE.invoke(nativeAttribute);
 		this.defaultBasisValue = this.getBasisValue();
+		CraftAttributeModifier[] modifiers = this.getAttachedModifiers();
+		for(CraftAttributeModifier modifier: modifiers) {
+			modifier.setAttributeAttached(this);
+		}
+		attributes.add(this);
 	}
 
 	@Override
@@ -143,7 +156,18 @@ public final class CraftAttribute implements Attribute {
 	
 	public void dispose(boolean reset) {
 		if(reset) this.resetAttribute();
-		
+		CraftAttributeModifier[] modifiers = this.getAttachedModifiers();
+		for(CraftAttributeModifier modifier: modifiers) {
+			modifier.setAttributeUnattached(this);
+		}
+		this.nativeAttribute = null;
+		this.nativeAttributeTemplate = null;
+		attributes.remove(this);
+	}
+
+	@Override
+	public boolean hasModifierAttached(AttributeModifier modifier) {
+		return NativeInterfaces.ATTRIBUTEMODIFIABLE.METHOD_GETMODIFIERBYUUID.invoke(nativeAttribute, modifier.getUniqueID()) != null;
 	}
 
 }
