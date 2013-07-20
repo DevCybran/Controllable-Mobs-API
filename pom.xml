@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>graindcafe</groupId>
+	<groupId>Cybran</groupId>
 	<artifactId>Controllable-Mobs-API</artifactId>
 	<version>4.0-SNAPSHOT</version>
 	<properties>
@@ -17,9 +17,9 @@
 		</repository>
 	</repositories>
 	<scm>
-		<url>https://github.com/graindcafe/Controllable-Mobs-API</url>
-		<connection>scm:git:ssh://git@github.com/graindcafe/Controllable-Mobs-API.git</connection>
-		<developerConnection>scm:git:ssh://git@github.com/graindcafe/Controllable-Mobs-API.git</developerConnection>
+		<url>https://github.com/Cybran/Controllable-Mobs-API</url>
+		<connection>scm:git:ssh://git@github.com/Cybran/Controllable-Mobs-API.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/Cybran/Controllable-Mobs-API.git</developerConnection>
 	</scm>
 	<pluginRepositories>
 		<pluginRepository>
@@ -49,7 +49,7 @@
 		<repository>
 			<id>github</id>
 			<name>GitHub ${project.artifactId} Repository</name>
-			<url>https://raw.github.com/graindcafe/${project.artifactId}/mvn-repo</url>
+			<url>https://raw.github.com/Cybran/${project.artifactId}/mvn-repo</url>
 		</repository>
 	</distributionManagement>
 	<build>
@@ -64,7 +64,7 @@
 						<manifestEntries>
 							<Implementation-Title>Controllable-Mobs-API</Implementation-Title>
 							<Implementation-Version>${describe}</Implementation-Version>
-							<Implementation-Vendor>Graindcafe</Implementation-Vendor>
+							<Implementation-Vendor>Cybran</Implementation-Vendor>
 							<Sealed>false</Sealed>
 						</manifestEntries>
 					</archive>
@@ -83,7 +83,7 @@
 						<include>**/*</include>
 					</includes>
 					<repositoryName>Controllable-Mobs-API</repositoryName>      <!-- github repo name -->
-					<repositoryOwner>graindcafe</repositoryOwner>    <!-- github username -->
+					<repositoryOwner>Cybran</repositoryOwner>    <!-- github username -->
 				</configuration>
 				<executions>
 					<execution>
