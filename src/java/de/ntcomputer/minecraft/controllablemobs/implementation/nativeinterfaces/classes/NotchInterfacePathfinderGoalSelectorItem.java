@@ -1,6 +1,6 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.classes;
 
-import net.minecraft.server.v1_6_R2.PathfinderGoal;
+import net.minecraft.server.v1_6_R3.PathfinderGoal;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.primitives.NativeFieldInt;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.primitives.NativeFieldObject;
 

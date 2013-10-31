@@ -10,11 +10,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import net.minecraft.server.v1_6_R2.EntityInsentient;
-import net.minecraft.server.v1_6_R2.PathfinderGoal;
-import net.minecraft.server.v1_6_R2.PathfinderGoalSelector;
+import net.minecraft.server.v1_6_R3.EntityInsentient;
+import net.minecraft.server.v1_6_R3.PathfinderGoal;
+import net.minecraft.server.v1_6_R3.PathfinderGoalSelector;
 
-import org.bukkit.craftbukkit.v1_6_R2.util.UnsafeList;
+import org.bukkit.craftbukkit.v1_6_R3.util.UnsafeList;
 import org.bukkit.entity.LivingEntity;
 
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIState;

@@ -1,8 +1,8 @@
 package de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors;
 
-import net.minecraft.server.v1_6_R2.IRangedEntity;
-import net.minecraft.server.v1_6_R2.PathfinderGoal;
-import net.minecraft.server.v1_6_R2.PathfinderGoalArrowAttack;
+import net.minecraft.server.v1_6_R3.IRangedEntity;
+import net.minecraft.server.v1_6_R3.PathfinderGoal;
+import net.minecraft.server.v1_6_R3.PathfinderGoalArrowAttack;
 
 import org.bukkit.entity.Creature;
 

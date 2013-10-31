@@ -1,6 +1,6 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors;
 
-import net.minecraft.server.v1_6_R2.PathfinderGoal;
+import net.minecraft.server.v1_6_R3.PathfinderGoal;
 
 public abstract class PathfinderGoalWrapper extends PathfinderGoal {
 

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import net.minecraft.server.v1_6_R2.DistanceComparator;
-import net.minecraft.server.v1_6_R2.EntityHuman;
-import net.minecraft.server.v1_6_R2.EntityLiving;
+import net.minecraft.server.v1_6_R3.DistanceComparator;
+import net.minecraft.server.v1_6_R3.EntityHuman;
+import net.minecraft.server.v1_6_R3.EntityLiving;
 
 import org.bukkit.event.entity.EntityTargetEvent.TargetReason;
 

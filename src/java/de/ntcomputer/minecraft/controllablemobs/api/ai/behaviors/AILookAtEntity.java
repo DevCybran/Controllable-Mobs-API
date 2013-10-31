@@ -1,9 +1,9 @@
 package de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors;
 
-import net.minecraft.server.v1_6_R2.Entity;
-import net.minecraft.server.v1_6_R2.EntityHuman;
-import net.minecraft.server.v1_6_R2.PathfinderGoal;
-import net.minecraft.server.v1_6_R2.PathfinderGoalLookAtPlayer;
+import net.minecraft.server.v1_6_R3.Entity;
+import net.minecraft.server.v1_6_R3.EntityHuman;
+import net.minecraft.server.v1_6_R3.PathfinderGoal;
+import net.minecraft.server.v1_6_R3.PathfinderGoalLookAtPlayer;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;

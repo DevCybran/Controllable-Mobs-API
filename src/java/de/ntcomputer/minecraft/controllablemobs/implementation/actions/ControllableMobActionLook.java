@@ -1,6 +1,6 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation.actions;
 
-import net.minecraft.server.v1_6_R2.World;
+import net.minecraft.server.v1_6_R3.World;
 import de.ntcomputer.minecraft.controllablemobs.api.actions.ActionType;
 
 public abstract class ControllableMobActionLook extends ControllableMobActionBase {
