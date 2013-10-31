@@ -4,9 +4,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.UUID;
 
-import net.minecraft.server.v1_6_R2.AttributeModifiable;
-import net.minecraft.server.v1_6_R2.AttributeModifier;
-import net.minecraft.server.v1_6_R2.IAttribute;
+import net.minecraft.server.v1_6_R3.AttributeModifiable;
+import net.minecraft.server.v1_6_R3.AttributeModifier;
+import net.minecraft.server.v1_6_R3.IAttribute;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.system.NativeMethodPublic;
 
 public final class NmsAttributeModifiable {

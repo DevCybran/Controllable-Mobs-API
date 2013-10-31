@@ -1,8 +1,8 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.classes;
 
-import net.minecraft.server.v1_6_R2.EntityLiving;
-import net.minecraft.server.v1_6_R2.Navigation;
-import net.minecraft.server.v1_6_R2.PathEntity;
+import net.minecraft.server.v1_6_R3.EntityLiving;
+import net.minecraft.server.v1_6_R3.Navigation;
+import net.minecraft.server.v1_6_R3.PathEntity;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.system.NativeMethodPublic;
 
 public class NotchInterfaceNavigation {

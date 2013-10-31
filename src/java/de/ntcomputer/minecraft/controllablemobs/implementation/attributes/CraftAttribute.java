@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-import net.minecraft.server.v1_6_R2.AttributeModifiable;
-import net.minecraft.server.v1_6_R2.AttributeRanged;
+import net.minecraft.server.v1_6_R3.AttributeModifiable;
+import net.minecraft.server.v1_6_R3.AttributeRanged;
 import de.ntcomputer.minecraft.controllablemobs.api.attributes.Attribute;
 import de.ntcomputer.minecraft.controllablemobs.api.attributes.AttributeModifier;
 import de.ntcomputer.minecraft.controllablemobs.api.attributes.ModifyOperation;
@@ -35,8 +35,8 @@ public final class CraftAttribute implements Attribute {
 		this.nativeAttributeTemplate = (AttributeRanged) NativeInterfaces.ATTRIBUTEMODIFIABLE.METHOD_GETATTRIBUTETEMPLATE.invoke(nativeAttribute);
 		this.defaultBasisValue = this.getBasisValue();
 		
-		Collection<net.minecraft.server.v1_6_R2.AttributeModifier> nativeModifiers = NativeInterfaces.ATTRIBUTEMODIFIABLE.METHOD_GETMODIFIERS.invoke(nativeAttribute);
-		for(net.minecraft.server.v1_6_R2.AttributeModifier nativeModifier: nativeModifiers) {
+		Collection<net.minecraft.server.v1_6_R3.AttributeModifier> nativeModifiers = NativeInterfaces.ATTRIBUTEMODIFIABLE.METHOD_GETMODIFIERS.invoke(nativeAttribute);
+		for(net.minecraft.server.v1_6_R3.AttributeModifier nativeModifier: nativeModifiers) {
 			UUID uuid = NativeInterfaces.ATTRIBUTEMODIFIER.METHOD_GETUUID.invoke(nativeModifier);
 			CraftAttributeModifier modifier = modifierMap.get(uuid);
 			if(modifier!=null) modifier.setAttributeAttached(this);
@@ -50,10 +50,10 @@ public final class CraftAttribute implements Attribute {
 		return nativeAttribute.getValue();
 	}
 	
-	private CraftAttributeModifier[] resolveNativeModifiers(Collection<net.minecraft.server.v1_6_R2.AttributeModifier> nativeModifiers) {
+	private CraftAttributeModifier[] resolveNativeModifiers(Collection<net.minecraft.server.v1_6_R3.AttributeModifier> nativeModifiers) {
 		CraftAttributeModifier[] result = new CraftAttributeModifier[nativeModifiers.size()];
 		int i = 0;
-		for(net.minecraft.server.v1_6_R2.AttributeModifier nativeModifier: nativeModifiers) {
+		for(net.minecraft.server.v1_6_R3.AttributeModifier nativeModifier: nativeModifiers) {
 			UUID uuid = NativeInterfaces.ATTRIBUTEMODIFIER.METHOD_GETUUID.invoke(nativeModifier);
 			CraftAttributeModifier modifier = modifierMap.get(uuid);
 			if(modifier==null) {

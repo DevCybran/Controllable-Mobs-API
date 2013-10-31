@@ -3,7 +3,7 @@ package de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors;
 import java.util.HashSet;
 import java.util.List;
 
-import net.minecraft.server.v1_6_R2.PathfinderGoal;
+import net.minecraft.server.v1_6_R3.PathfinderGoal;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIState;
 import de.ntcomputer.minecraft.controllablemobs.implementation.ai.AIController;
 import de.ntcomputer.minecraft.controllablemobs.implementation.ai.CraftAIPart;

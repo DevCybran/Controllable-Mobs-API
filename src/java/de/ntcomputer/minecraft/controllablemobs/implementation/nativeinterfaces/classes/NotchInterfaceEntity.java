@@ -1,6 +1,6 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.classes;
 
-import net.minecraft.server.v1_6_R2.Entity;
+import net.minecraft.server.v1_6_R3.Entity;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.system.NativeMethodPublic;
 
 public class NotchInterfaceEntity {

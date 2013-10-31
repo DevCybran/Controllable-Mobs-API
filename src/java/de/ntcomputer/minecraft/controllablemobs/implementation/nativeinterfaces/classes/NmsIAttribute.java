@@ -1,6 +1,6 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.classes;
 
-import net.minecraft.server.v1_6_R2.IAttribute;
+import net.minecraft.server.v1_6_R3.IAttribute;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.system.NativeMethodPublic;
 
 public final class NmsIAttribute {
