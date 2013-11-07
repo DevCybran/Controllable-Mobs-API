@@ -9,7 +9,7 @@ public final class NmsInterfacePathfinderGoal {
 	public class OnEnd extends NativeMethodPublic {
 		public void invoke(PathfinderGoal goal) {
 			try {
-				// siehe zb PathfinderGoalMeleeAttack
+				// for instance PathfinderGoalMeleeAttack (this.b.getNavigation().h();)
 				goal.d();
 			} catch(Throwable e) {
 				this.handleException(e);
