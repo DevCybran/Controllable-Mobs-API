@@ -6,6 +6,7 @@ import java.util.List;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.server.PluginEnableEvent;
+import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class ControllableMobsAPIPlugin extends JavaPlugin implements Listener, Runnable {
@@ -26,27 +27,38 @@ public class ControllableMobsAPIPlugin extends JavaPlugin implements Listener, R
 			if(this.usedBy.size()==1) {
 				this.getLogger().info(" is used by the plugin ["+this.usedBy.get(0)+"]");
 			} else {
-				String plugins = "["+usedBy.get(0)+"]";
-				for(int i=1; i<usedBy.size(); i++) {
-					plugins+= ", ["+this.usedBy.get(i)+"]";
+				StringBuilder sb = new StringBuilder();
+				sb.append(" is used by the plugins [").append(usedBy.get(0)).append("]");
+				int size = this.usedBy.size();
+				for(int i=1; i<size; i++) {
+					sb.append(", [").append(this.usedBy.get(i)).append("]");
 				}
-				this.getLogger().info(" is used by the plugins "+plugins);
+				this.getLogger().info(sb.toString());
 			}
 		}
+	}
+	
+	private boolean containsIgnoreCase(List<String> list, String object) {
+		if(list==null) return false;
+		object = object.trim();
+		for(String str: list) {
+			if(str.trim().equalsIgnoreCase(object)) return true;
+		}
+		return false;
 	}
 	
 	@EventHandler
 	public void onPluginEnabled(PluginEnableEvent event) {
 		if(event.getPlugin()==this) return;
-		final List<String> depend = event.getPlugin().getDescription().getDepend();
-		if(depend!=null && depend.contains(this.getName())) {
-			this.usedBy.add(event.getPlugin().getDescription().getFullName());
+		PluginDescriptionFile desc = event.getPlugin().getDescription();
+		String name = this.getName();
+		if( this.containsIgnoreCase(desc.getDepend(), name) || this.containsIgnoreCase(desc.getSoftDepend(), name)) {
+			this.usedBy.add(desc.getFullName());
 		}
 	}
 
 	@Override
 	public void onDisable() {
-		this.usedBy.clear();
 		this.usedBy = null;
 	}
 

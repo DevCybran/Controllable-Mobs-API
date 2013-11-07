@@ -1,6 +1,7 @@
 package de.ntcomputer.minecraft.controllablemobs.api;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import net.minecraft.server.v1_6_R3.EntityInsentient;
@@ -22,7 +23,7 @@ import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.
  * 
  */
 public final class ControllableMobs {
-	private static final HashMap<LivingEntity,ControllableMob<?>> entities = new HashMap<LivingEntity,ControllableMob<?>>();
+	private static final Map<LivingEntity,ControllableMob<?>> entities = new HashMap<LivingEntity,ControllableMob<?>>();
 	
 	static {
 		onLoad();
@@ -42,7 +43,7 @@ public final class ControllableMobs {
 					return;
 				}
 			}
-		} catch(Exception e) {}
+		} catch(Throwable t) {}
 		Logger.getLogger("Minecraft").info("[ControllableMobsAPI] initialized by an unknown component");
 	}
 	
