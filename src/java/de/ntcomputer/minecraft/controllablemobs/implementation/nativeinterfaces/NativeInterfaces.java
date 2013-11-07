@@ -5,14 +5,15 @@ import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server.NmsAttributeModifiable;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server.NmsAttributeModifier;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server.NmsAttributeRanged;
-import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server.NmsEntityInsentient;
-import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server.NmsGenericAttributes;
-import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server.NmsIAttribute;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server.NmsControllerJump;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server.NmsControllerLook;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server.NmsEntity;
-import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server.NmsNavigation;
+import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server.NmsEntityInsentient;
+import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server.NmsEntityTypes;
+import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server.NmsGenericAttributes;
+import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server.NmsIAttribute;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server.NmsInterfacePathfinderGoal;
+import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server.NmsNavigation;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server.NmsPathfinderGoalSelector;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server.NmsPathfinderGoalSelectorItem;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server.NmsWorld;
@@ -34,6 +35,7 @@ public final class NativeInterfaces {
 	public static final NmsAttributeModifier ATTRIBUTEMODIFIER = new NmsAttributeModifier();
 	public static final NmsGenericAttributes GENERICATTRIBUTES = new NmsGenericAttributes();
 	public static final NmsEntityInsentient ENTITYINSENTIENT = new NmsEntityInsentient();
+	public static final NmsEntityTypes ENTITYTYPES = new NmsEntityTypes();
 	
 	private NativeInterfaces() {
 		throw new AssertionError();

@@ -108,7 +108,7 @@ public class AILookAtEntity extends AIBehavior<LivingEntity> {
 	 * @throws IllegalArgumentException when the entityType is null or not pointing at a valid entity class
 	 */
 	public AILookAtEntity(final int priority, final EntityType entityType, final float maxDistance) throws IllegalArgumentException {
-		this(priority, ControllableMobHelper.getNotchEntityClass(entityType), maxDistance);
+		this(priority, ControllableMobHelper.getNmsEntityClass(entityType), maxDistance);
 	}
 	
 	private AILookAtEntity(final int priority, final Class<? extends Entity> entityClass, final float maxDistance) {

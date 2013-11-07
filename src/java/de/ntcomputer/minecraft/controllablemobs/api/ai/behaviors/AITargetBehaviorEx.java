@@ -30,7 +30,7 @@ public abstract class AITargetBehaviorEx extends AITargetBehavior<LivingEntity> 
 		this.maximumDistance = maximumDistance;
 		this.targetClasses = new Class[targetClasses.length];
 		for(int i=0; i<targetClasses.length; i++) {
-			this.targetClasses[i] = (Class<? extends EntityLiving>) ControllableMobHelper.getNotchEntityClass(targetClasses[i]);
+			this.targetClasses[i] = (Class<? extends EntityLiving>) ControllableMobHelper.getNmsEntityClass(targetClasses[i]);
 		}
 	}
 
