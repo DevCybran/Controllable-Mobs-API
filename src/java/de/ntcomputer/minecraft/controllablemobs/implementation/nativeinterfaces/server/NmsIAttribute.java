@@ -1,4 +1,4 @@
-package de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.classes;
+package de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server;
 
 import net.minecraft.server.v1_6_R3.IAttribute;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.system.NativeMethodPublic;

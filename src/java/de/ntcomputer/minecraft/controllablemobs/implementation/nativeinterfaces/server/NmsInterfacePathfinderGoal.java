@@ -1,9 +1,9 @@
-package de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.classes;
+package de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server;
 
 import net.minecraft.server.v1_6_R3.PathfinderGoal;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.system.NativeMethodPublic;
 
-public final class NotchInterfacePathfinderGoal {
+public final class NmsInterfacePathfinderGoal {
 	public final OnEnd METHOD_ONEND = new OnEnd();
 	
 	public class OnEnd extends NativeMethodPublic {

@@ -1,9 +1,9 @@
-package de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.classes;
+package de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server;
 
 import net.minecraft.server.v1_6_R3.ControllerLook;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.system.NativeMethodPublic;
 
-public class NotchInterfaceControllerLook {
+public class NmsControllerLook {
 	public final Look METHOD_LOOKATCOORDINATES = new Look();
 	
 	public class Look extends NativeMethodPublic {

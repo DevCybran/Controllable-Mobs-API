@@ -1,4 +1,4 @@
-package de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.classes;
+package de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server;
 
 import java.util.Collections;
 import java.util.List;
@@ -9,7 +9,7 @@ import net.minecraft.server.v1_6_R3.IEntitySelector;
 import net.minecraft.server.v1_6_R3.World;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.system.NativeMethodPublic;
 
-public class NotchInterfaceWorld {
+public class NmsWorld {
 	public final SearchEntities METHOD_SEARCHENTITIES = new SearchEntities();
 	
 	public class SearchEntities extends NativeMethodPublic {

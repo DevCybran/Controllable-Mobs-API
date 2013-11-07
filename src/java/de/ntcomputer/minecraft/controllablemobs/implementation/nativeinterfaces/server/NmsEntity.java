@@ -1,9 +1,9 @@
-package de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.classes;
+package de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server;
 
 import net.minecraft.server.v1_6_R3.Entity;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.system.NativeMethodPublic;
 
-public class NotchInterfaceEntity {
+public class NmsEntity {
 	public final GetEntityDistanceSquared METHOD_GETDISTANCETOENTITYSQUARED = new GetEntityDistanceSquared();
 	public final GetLocationDistance METHOD_GETDISTANCETOLOCATION = new GetLocationDistance();
 	
