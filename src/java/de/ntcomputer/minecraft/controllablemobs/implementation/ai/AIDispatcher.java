@@ -27,13 +27,6 @@ public class AIDispatcher<E extends LivingEntity> {
 		else return this.goalController.add(behavior);
 	}
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@Deprecated
-	public void remove(AIBehavior behavior) throws IllegalArgumentException {
-		if(isTarget(behavior)) this.targetController.remove(behavior);
-		else this.goalController.remove(behavior);
-	}
-	
 	public void remove(AIType[] types, boolean remove) {
 		Set<AIType> typeSet = new HashSet<AIType>();
 		Collections.addAll(typeSet, types);
@@ -45,13 +38,6 @@ public class AIDispatcher<E extends LivingEntity> {
 		if(this.goalController.contains(type)) return true;
 		if(this.targetController.contains(type)) return true;
 		return false;
-	}
-	
-	@SuppressWarnings("rawtypes")
-	@Deprecated
-	public void getBehaviors(List<AIBehavior> list) {
-		this.goalController.getBehaviors(list);
-		this.targetController.getBehaviors(list);
 	}
 	
 	public void get(List<AIPart<E,?>> list, AIType[] types) {

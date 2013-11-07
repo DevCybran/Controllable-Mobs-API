@@ -13,7 +13,7 @@ import de.ntcomputer.minecraft.controllablemobs.api.actions.ControllableMobActio
  * You can retrieve an instance by using {@link ControllableMob#getActions()}
  * 
  * @author Cybran
- * @version v3
+ * @version v5
  */
 public interface ControllableMobActions {
 	/**
@@ -234,12 +234,6 @@ public interface ControllableMobActions {
 	 * @return {@link ControllableMobAction}
 	 */
 	public ControllableMobAction callback(Runnable runnable);
-	
-	/*public ControllableMobAction teleport(Entity entity);
-	public ControllableMobAction teleport(Entity entity, boolean queue);
-	public ControllableMobAction teleport(Entity entity, boolean queue, float targetDistance);
-	public ControllableMobAction teleport(Location loc);
-	public ControllableMobAction teleport(Location loc, boolean queue);*/
 	
 	
 	/**

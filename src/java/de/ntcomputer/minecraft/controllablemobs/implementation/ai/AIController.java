@@ -173,19 +173,6 @@ public abstract class AIController<E extends LivingEntity> implements Comparator
 		part.setState(AIState.UNATTACHED);
 	}
 	
-	@SuppressWarnings("rawtypes")
-	@Deprecated
-	void remove(AIBehavior behavior) {
-		CraftAIPart<E,?> part = null;
-		for(CraftAIPart<E,?> searchPart: this.attachedParts) {
-			if(searchPart.getBehavior()==behavior) {
-				part = searchPart;
-				break;
-			}
-		}
-		if(part!=null) this.unattach(part);
-	}
-	
 	void remove(Set<AIType> typeSet, boolean remove) {
 		List<CraftAIPart<E,?>> toRemove = new LinkedList<CraftAIPart<E,?>>();
 		for(CraftAIPart<E,?> searchPart: this.attachedParts) {
@@ -202,14 +189,6 @@ public abstract class AIController<E extends LivingEntity> implements Comparator
 			if(searchPart.getType()==type) return true;
 		}
 		return false;
-	}
-	
-	@SuppressWarnings("rawtypes")
-	@Deprecated
-	void getBehaviors(List<AIBehavior> list) {
-		for(CraftAIPart part: this.attachedParts) {
-			list.add(part.getBehavior());
-		}
 	}
 	
 	void get(List<? super CraftAIPart<E,?>> list, Set<AIType> types) {

@@ -22,49 +22,6 @@ public class CraftControllableMobAI<E extends LivingEntity> implements Controlla
 		this.dispatcher = null;
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@Deprecated
-	@Override
-	public void addAIBehavior(AIBehavior behavior) throws IllegalArgumentException {
-		this.addBehavior(behavior);
-	}
-
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	@Deprecated
-	@Override
-	public void addAIBehaviors(AIBehavior[] behaviors) throws IllegalArgumentException {
-		this.addBehaviors(behaviors);
-	}
-
-	@SuppressWarnings("rawtypes")
-	@Deprecated
-	@Override
-	public void removeAIBehavior(AIBehavior behavior) throws IllegalArgumentException {
-		if(behavior==null) throw new IllegalArgumentException("the AIBehavior must not be null");
-		this.dispatcher.remove(behavior);
-	}
-
-	@Deprecated
-	@Override
-	public void clearAIBehaviors() {
-		this.clear();
-	}
-
-	@Deprecated
-	@Override
-	public void restoreAIBehaviors() {
-		this.reset();
-	}
-
-	@SuppressWarnings({ "rawtypes" })
-	@Deprecated
-	@Override
-	public AIBehavior[] getAIBehaviors() {
-		ArrayList<AIBehavior> behaviors = new ArrayList<AIBehavior>();
-		this.dispatcher.getBehaviors(behaviors);
-		return behaviors.toArray(new AIBehavior[0]);
-	}
-
 	@Override
 	public <B extends AIBehavior<? super E>> AIPart<E,B> addBehavior(B behavior) throws IllegalArgumentException {
 		if(behavior==null) throw new IllegalArgumentException("the AIBehavior must not be null");

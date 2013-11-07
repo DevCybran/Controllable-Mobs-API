@@ -11,25 +11,9 @@ import de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors.AIBehavior;
  * You can retrieve an instance by using {@link ControllableMob#getAI()}
  * 
  * @author Cybran
- * @version v4
+ * @version v5
  */
 public interface ControllableMobAI<E extends LivingEntity> {
-	
-	/**
-	 * Adds a given AI behavior - the entity will act corresponding to this behavior.
-	 * AI behaviors are persistent, if you add them one time, they will stay active until you remove them.
-	 * AI behaviors start certain actions automatically, defined by the behavior you add.
-	 * You can retrieve an AI behavior instance by creating a subclass of {@link AIBehavior}.
-	 * You must not add a behavior more than one time.
-	 * 
-	 * @param behavior the new AI behavior
-	 * @throws IllegalArgumentException when behavior is null or has already been added
-	 * 
-	 * @deprecated changed to {@link ControllableMobAI#addBehavior(AIBehavior)}. Method will be removed in v5.
-	 */
-	@SuppressWarnings("rawtypes")
-	@Deprecated
-	public void addAIBehavior(AIBehavior behavior) throws IllegalArgumentException;
 	
 	/**
 	 * Adds a given AI behavior - the entity will act corresponding to this behavior.<br>
@@ -46,37 +30,12 @@ public interface ControllableMobAI<E extends LivingEntity> {
 	/**
 	 * Adds the given AI behaviors.
 	 * 
-	 * @see ControllableMobAI#addAIBehavior(AIBehavior)
-	 * @param behaviors an array of new AI behaviors
-	 * @throws IllegalArgumentException when behaviors is null or contains null
-	 * 
-	 * @deprecated changed to {@link ControllableMobAI#addBehaviors(AIBehavior...)}. Method will be removed in v5.
-	 */
-	@SuppressWarnings("rawtypes")
-	public void addAIBehaviors(AIBehavior[] behaviors) throws IllegalArgumentException;
-	
-	/**
-	 * Adds the given AI behaviors.
-	 * 
 	 * @see ControllableMobAI#addBehavior(AIBehavior)
 	 * @param behaviors multiple new AI behaviors
 	 * @return an array of AI parts. The parts are ordered similar to the behavior order in the behaviors array.
 	 * @throws IllegalArgumentException when behaviors is null or contains null
 	 */
 	public AIPart<E,?>[] addBehaviors(AIBehavior<? super E>... behaviors) throws IllegalArgumentException;
-	
-	/**
-	 * Removes the given AI behavior.<br>
-	 * The behavior must have been added manually before.
-	 * 
-	 * @param behavior the AI behavior to remove. Be sure, that the instance was previously added by {@link ControllableMobAI#addAIBehavior(AIBehavior)}
-	 * @throws IllegalArgumentException when behavior is null
-	 * 
-	 * @deprecated removing parts of the AI by passing the behavior is deprecated. You should switch to {@link de.ntcomputer.minecraft.controllablemobs.api.ai.AIPart#unattach()}. Method will be removed in v5 or v6.
-	 */
-	@SuppressWarnings("rawtypes")
-	@Deprecated
-	public void removeAIBehavior(AIBehavior behavior) throws IllegalArgumentException;
 	
 	/**
 	 * Unattaches all AI parts of the specified types.<br>
@@ -98,28 +57,8 @@ public interface ControllableMobAI<E extends LivingEntity> {
 	 * Removes all AI behaviors.<br>
 	 * Removes custom, manually added behaviors as well as default behaviors.<br>
 	 * The result: the entity will not move nor attack automatically.
-	 * 
-	 * @deprecated renamed to {@link ControllableMobAI#clear()}. Method will be removed in v5.
-	 */
-	@Deprecated
-	public void clearAIBehaviors();
-	
-	/**
-	 * Removes all AI behaviors.<br>
-	 * Removes custom, manually added behaviors as well as default behaviors.<br>
-	 * The result: the entity will not move nor attack automatically.
 	 */
 	public void clear();
-	
-	/**
-	 * Restores all default AI behaviors.
-	 * Removes custom, manually added behaviors and restores the default behaviors for this entity.
-	 * The result: the entity will act normal.
-	 * 
-	 * @deprecated renamed to {@link ControllableMobAI#reset()}. Method will be removed in v5.
-	 */
-	@Deprecated
-	public void restoreAIBehaviors();
 	
 	/**
 	 * Resets to default AI behaviors.<br>
@@ -127,17 +66,6 @@ public interface ControllableMobAI<E extends LivingEntity> {
 	 * The result: the entity will act normal.
 	 */
 	public void reset();
-	
-	/**
-	 * Retrieves all custom AI behaviors.
-	 * 
-	 * @return an array of all custom AI behaviors (default AI behaviors are NOT included)
-	 * 
-	 * @deprecated retrieving the AI by returning the behaviors is deprecated. You should switch to {@link ControllableMobAI#getParts()}. Method will be removed in v5 or v6.
-	 */
-	@SuppressWarnings("rawtypes")
-	@Deprecated
-	public AIBehavior[] getAIBehaviors();
 	
 	/**
 	 * Retrieves all AI parts, including custom behaviors and default behaviors.

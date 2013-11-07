@@ -8,15 +8,11 @@ import de.ntcomputer.minecraft.controllablemobs.api.ControllableMob;
 import de.ntcomputer.minecraft.controllablemobs.api.ControllableMobAI;
 import de.ntcomputer.minecraft.controllablemobs.api.ControllableMobActions;
 import de.ntcomputer.minecraft.controllablemobs.api.ControllableMobAttributes;
-import de.ntcomputer.minecraft.controllablemobs.api.ControllableMobProperties;
 import de.ntcomputer.minecraft.controllablemobs.implementation.actions.ControllableMobActionManager;
 
-@SuppressWarnings("deprecation")
 public class CraftControllableMob<E extends LivingEntity> implements ControllableMob<E> {
 	private E entity;
 	private CraftControllableMobAttributes attributes;
-	@Deprecated
-	private CraftControllableMobProperties properties;
 	private CraftControllableMobAI<E> ai;
 	private CraftControllableMobActions actions;
 	public EntityInsentient notchEntity;
@@ -25,7 +21,6 @@ public class CraftControllableMob<E extends LivingEntity> implements Controllabl
 		this.entity = entity;
 		this.notchEntity = notchEntity;
 		this.attributes = new CraftControllableMobAttributes(this);
-		this.properties = new CraftControllableMobProperties(this.attributes);
 		this.actions = new CraftControllableMobActions(this);
 		this.ai = new CraftControllableMobAI<E>(this);
 	}
@@ -40,13 +35,11 @@ public class CraftControllableMob<E extends LivingEntity> implements Controllabl
 		// component dispose
 		this.actions.dispose();
 		this.ai.dispose();
-		this.properties.dispose();
 		this.attributes.dispose(resetAttributes);
 		
 		// component disposal
 		this.actions = null;
 		this.ai = null;
-		this.properties = null;
 		this.attributes = null;
 		
 		// entity unassign
@@ -66,13 +59,6 @@ public class CraftControllableMob<E extends LivingEntity> implements Controllabl
 	@Override
 	public E getEntity() {
 		return entity;
-	}
-
-	@Override
-	@Deprecated
-	public ControllableMobProperties getProperties() throws IllegalStateException {
-		if(this.properties==null) this.disposedCall();
-		return this.properties;
 	}
 
 	@Override

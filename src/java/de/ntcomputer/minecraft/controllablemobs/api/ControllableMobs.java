@@ -11,7 +11,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.PluginClassLoader;
 
-import de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors.AIBehavior;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;
 
@@ -19,7 +18,7 @@ import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.
  * This is a static class which lets you retrieve instances of {@link ControllableMob}.
  * 
  * @author Cybran
- * @version v4
+ * @version v5
  * 
  */
 public final class ControllableMobs {
@@ -136,78 +135,6 @@ public final class ControllableMobs {
 		
 		ControllableMob<E> controllableMob = new CraftControllableMob<E>(entity, (EntityInsentient) notchEntity);
 		if(clearAI) controllableMob.getAI().clear();
-		
-		entities.put(entity,controllableMob);
-		return controllableMob;
-	}
-	
-	/**
-	 * Puts the entity under your control and sets its new movement speed, optionally clearing its AI.
-	 * If you decide to clear its AI, the entity will stop moving and attacking and stand still until you order it to execute any actions.
-	 * See {@link ControllableMobAttributes#getMovementSpeedAttribute()} for critical information.
-	 * 
-	 * @param entity entity an instance of a subclass of LivingEntity - the entity you want to control.
-	 * @param clearAI a boolean indicating whether default behaviors should be removed (true) or not (false)
-	 * @param newMovementSpeed This float value has to be in a range between 0.01 and 2.0, or it will be ignored. The default value is 0.25 for monsters
-	 * @return the {@link ControllableMob} you can use to control the entity
-	 * @throws InvalidEntityException when the entity is null or can't be controlled
-	 * @throws IllegalStateException when the entity is already being controlled
-	 * 
-	 * @deprecated contains parameters that should be set elsewhere. Will be removed in v5 or v6.
-	 */
-	@Deprecated
-	public static <E extends LivingEntity> ControllableMob<E> assign(E entity, boolean clearAI, float newMovementSpeed) throws IllegalStateException, InvalidEntityException {
-		return assign(entity, clearAI, newMovementSpeed, null);
-	}
-	
-	/**
-	 * Puts the entity under your control, optionally clearing its AI and adding custom AI behaviors.
-	 * If you decide to clear its AI, the entity will stop moving and attacking like it would normally do.
-	 * Instead, it will act corresponding to the new AI behaviors you provide.
-	 * 
-	 * @param entity entity an instance of a subclass of LivingEntity - the entity you want to control.
-	 * @param clearAI a boolean indicating whether default behaviors should be removed (true) or not (false)
-	 * @param additionalAIBehaviors an array of new AI behaviors. See {@link ControllableMobAI#addAIBehaviors(AIBehavior[])}
-	 * @return the {@link ControllableMob} you can use to control the entity
-	 * @throws InvalidEntityException when the entity is null or can't be controlled
-	 * @throws IllegalStateException when the entity is already being controlled
-	 * 
-	 * @deprecated contains parameters that should be set elsewhere. Will be removed in v5 or v6.
-	 */
-	@SuppressWarnings("rawtypes")
-	@Deprecated
-	public static <E extends LivingEntity> ControllableMob<E> assign(E entity, boolean clearAI, AIBehavior[] additionalAIBehaviors) throws IllegalStateException, InvalidEntityException {
-		return assign(entity, clearAI, 0, additionalAIBehaviors);
-	}
-	
-	/**
-	 * Puts the entity under your control and sets its new movement speed, optionally clearing its AI and adding custom AI behaviors.
-	 * If you decide to clear its AI, the entity will stop moving and attacking like it would normally do.
-	 * Instead, it will act corresponding to the new AI behaviors you provide.
-	 * See {@link ControllableMobAttributes#getMovementSpeedAttribute()} for critical information.
-	 * 
-	 * @param entity entity an instance of a subclass of LivingEntity - the entity you want to control.
-	 * @param clearAI a boolean indicating whether default behaviors should be removed (true) or not (false)
-	 * @param newMovementSpeed This float value has to be in a range between 0.01 and 2.0, or it will be ignored. The default value is 0.25 for monsters
-	 * @param additionalAIBehaviors an array of new AI behaviors. See {@link ControllableMobAI#addAIBehaviors(AIBehavior[])}
-	 * @return the {@link ControllableMob} you can use to control the entity
-	 * @throws InvalidEntityException when the entity is null or can't be controlled
-	 * @throws IllegalStateException when the entity is already being controlled
-	 * 
-	 * @deprecated contains parameters that should be set elsewhere. Will be removed in v5 or v6.
-	 */
-	@SuppressWarnings("rawtypes")
-	@Deprecated
-	public static <E extends LivingEntity> ControllableMob<E> assign(E entity, boolean clearAI, float newMovementSpeed, AIBehavior[] additionalAIBehaviors) throws IllegalStateException, InvalidEntityException {
-		if(entity==null) throw new InvalidEntityException("entity must not be null", entity);
-		EntityLiving notchEntity = ((CraftLivingEntity) entity).getHandle();
-		if(!(notchEntity instanceof EntityInsentient)) throw new InvalidEntityException("the entity "+entity.toString()+" can't be controlled",entity);
-		if(entities.containsKey(entity)) throw new IllegalStateException("entity "+entity.toString()+" is already a controlled entity");
-		
-		ControllableMob<E> controllableMob = new CraftControllableMob<E>(entity, (EntityInsentient) notchEntity);
-		if(clearAI) controllableMob.getAI().clearAIBehaviors();
-		controllableMob.getProperties().setMovementSpeed(newMovementSpeed);
-		if(additionalAIBehaviors!=null) controllableMob.getAI().addAIBehaviors(additionalAIBehaviors);
 		
 		entities.put(entity,controllableMob);
 		return controllableMob;

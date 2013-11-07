@@ -8,7 +8,7 @@ import org.bukkit.entity.LivingEntity;
  * You can retrieve an instance of ControllableMob by using the {@link ControllableMobs} class.
  * 
  * @author Cybran
- * @version v4
+ * @version v5
  *
  * @param <E> the bukkit entity class of the entity which is being controlled.
  */
@@ -20,13 +20,6 @@ public interface ControllableMob<E extends LivingEntity> {
 	 * @return the LivingEntity which is being controlled.
 	 */
 	public E getEntity();
-	
-	/**
-	 * @return the property management object for this ControllableMob.
-	 * @deprecated use {@link ControllableMob#getAttributes()} instead. 
-	 */
-	@Deprecated
-	public ControllableMobProperties getProperties();
 	
 	/**
 	 * @return the attribute management object for this ControllableMob.
