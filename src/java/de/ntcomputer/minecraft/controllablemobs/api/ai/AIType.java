@@ -9,7 +9,6 @@ import net.minecraft.server.v1_6_R3.PathfinderGoalBeg;
 import net.minecraft.server.v1_6_R3.PathfinderGoalBreakDoor;
 import net.minecraft.server.v1_6_R3.PathfinderGoalBreed;
 import net.minecraft.server.v1_6_R3.PathfinderGoalDefendVillage;
-import net.minecraft.server.v1_6_R3.PathfinderGoalDoorInteract;
 import net.minecraft.server.v1_6_R3.PathfinderGoalEatTile;
 import net.minecraft.server.v1_6_R3.PathfinderGoalFleeSun;
 import net.minecraft.server.v1_6_R3.PathfinderGoalFloat;
@@ -64,7 +63,6 @@ public enum AIType {
 	ACTION_DOORBREAK(PathfinderGoalBreakDoor.class),
 	ACTION_BREED(PathfinderGoalBreed.class),
 	ACTION_DEFENDVILLAGE(PathfinderGoalDefendVillage.class),
-	ACTION_DOORINTERACT(PathfinderGoalDoorInteract.class),
 	ACTION_EATTILE(PathfinderGoalEatTile.class),
 	MOVE_FLEESUN(PathfinderGoalFleeSun.class),
 	MOVE_FLOAT(PathfinderGoalFloat.class),
