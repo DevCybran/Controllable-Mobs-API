@@ -154,6 +154,7 @@ public abstract class AIController<E extends LivingEntity> implements Comparator
 	}
 	
 	private void attach(CraftAIPart<E,?> part) {
+		AIComponentHandlers.handleAdd(mob, part.goal);
 		this.addGoal(part.priority, part.goal);
 		this.attachedParts.add(part);
 		this.goalPartMap.put(part.goal, part);
@@ -171,6 +172,7 @@ public abstract class AIController<E extends LivingEntity> implements Comparator
 		this.attachedParts.remove(part);
 		this.goalPartMap.remove(part.goal);
 		part.setState(AIState.UNATTACHED);
+		AIComponentHandlers.handleRemoved(mob, part.goal);
 	}
 	
 	void remove(Set<AIType> typeSet, boolean remove) {
