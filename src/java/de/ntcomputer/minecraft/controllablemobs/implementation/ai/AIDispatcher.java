@@ -40,6 +40,14 @@ public class AIDispatcher<E extends LivingEntity> {
 		return false;
 	}
 	
+	public boolean contains(AIType... types) {
+		for(AIType type: types) {
+			if(this.goalController.contains(type)) return true;
+			if(this.targetController.contains(type)) return true;
+		}
+		return false;
+	}
+	
 	public void get(List<AIPart<E,?>> list, AIType[] types) {
 		Set<AIType> typeSet = null;
 		if(types!=null) {

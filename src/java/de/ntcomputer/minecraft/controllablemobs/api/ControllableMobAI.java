@@ -89,4 +89,12 @@ public interface ControllableMobAI<E extends LivingEntity> {
 	 */
 	public boolean hasBehavior(AIType type);
 	
+	 /**
+	 * Checks whether the entity has a behavior of at least one of the given type.
+	 * @param types the types to check for
+	 * @return true, if this mob has an AI behavior of at least one of the specified types, and false otherwise
+	 * @throws IllegalArgumentException when types is null or empty
+	 */
+	public boolean hasBehavior(AIType... types) throws IllegalArgumentException;
+	
 }

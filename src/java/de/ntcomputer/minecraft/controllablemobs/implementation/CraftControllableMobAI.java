@@ -83,4 +83,10 @@ public class CraftControllableMobAI<E extends LivingEntity> implements Controlla
 		return parts.toArray(new AIPart[0]);
 	}
 
+	@Override
+	public boolean hasBehavior(AIType... types) throws IllegalArgumentException {
+		if(types==null || types.length==0) throw new IllegalArgumentException("types must not be null or empty");
+		return this.dispatcher.contains(types);
+	}
+
 }
