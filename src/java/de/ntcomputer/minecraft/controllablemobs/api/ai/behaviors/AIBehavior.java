@@ -20,7 +20,7 @@ import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllable
 public abstract class AIBehavior<E extends LivingEntity> {
 	private final int priority;
 	
-	protected AIBehavior(int priority) {
+	public AIBehavior(int priority) {
 		this.priority = priority;
 	}
 	
