@@ -11,7 +11,7 @@ import de.ntcomputer.minecraft.controllablemobs.api.ai.AIType;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors.AIBehavior;
 
 public class CraftAIPart<E extends LivingEntity, B extends AIBehavior<? super E>> implements AIPart<E,B> {
-	final B behavior;
+	private final B behavior;
 	final int priority;
 	private final AIType type;
 	private final AIController<E> controller;

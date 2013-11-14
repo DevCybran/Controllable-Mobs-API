@@ -35,10 +35,4 @@ public abstract class AIBehavior<E extends LivingEntity> {
 
 	public abstract PathfinderGoal createPathfinderGoal(CraftControllableMob<? extends E> mob);
 	
-	public void onAdd(CraftControllableMob<? extends E> mob) {
-	}
-	
-	public void onRemoved(CraftControllableMob<? extends E> mob) {
-	}
-	
 }
