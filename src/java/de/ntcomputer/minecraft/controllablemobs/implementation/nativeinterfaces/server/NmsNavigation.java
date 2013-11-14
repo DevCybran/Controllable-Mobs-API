@@ -3,6 +3,7 @@ package de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces
 import net.minecraft.server.v1_6_R3.EntityLiving;
 import net.minecraft.server.v1_6_R3.Navigation;
 import net.minecraft.server.v1_6_R3.PathEntity;
+import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.primitives.NativeFieldBoolean;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.system.NativeMethodPublic;
 
 public class NmsNavigation {
@@ -14,6 +15,14 @@ public class NmsNavigation {
 	public final MoveAlongPath METHOD_MOVEALONGPATH = new MoveAlongPath();
 	public final CreatePathToEntity METHOD_CREATEPATHTOENTITY = new CreatePathToEntity();
 	public final CreatePathToLocation METHOD_CREATEPATHTOLOCATION = new CreatePathToLocation();
+	// first of 4 booleans
+	public final NativeFieldBoolean<Navigation> FIELD_USEOPENDOOR = new NativeFieldBoolean<Navigation>(Navigation.class, "j");
+	// second of 4 booleans
+	public final NativeFieldBoolean<Navigation> FIELD_USECLOSEDDOOR = new NativeFieldBoolean<Navigation>(Navigation.class, "k");
+	// third of 4 booleans
+	public final NativeFieldBoolean<Navigation> FIELD_AVOIDWATER = new NativeFieldBoolean<Navigation>(Navigation.class, "l");
+	// last of 4 booleans
+	public final NativeFieldBoolean<Navigation> FIELD_CANSWIM = new NativeFieldBoolean<Navigation>(Navigation.class, "m");
 
 	public class IsMoveFinished extends NativeMethodPublic {
 		public boolean invoke(final Navigation navigation) {
@@ -78,5 +87,6 @@ public class NmsNavigation {
 				return null;
 			}
 		}
-	}
+	}	
+	
 }
