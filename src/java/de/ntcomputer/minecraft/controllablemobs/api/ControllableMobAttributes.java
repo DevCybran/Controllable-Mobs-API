@@ -45,4 +45,46 @@ public interface ControllableMobAttributes {
 	 */
 	public double getMaximumNavigationDistance();
 	
+	
+	/**
+	 * Determines whether the entity can swim. To change this value, add or remove {@link de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors.AISwim} to {@link ControllableMobAI}
+	 * @return whether the entity can swim.
+	 */
+	public boolean canSwim();
+	
+	/**
+	 * @return whether the entity avoids moving through water (regardless of whether it can swim).
+	 */
+	public boolean getAvoidWater();
+	
+	/**
+	 * Set whether the entity avoids moving through water (regardless of whether it can swim).
+	 * @param avoid true, if the entity should not move through water
+	 */
+	public void setAvoidWater(boolean avoid);
+	
+	
+	/**
+	 * Get whether the entity will move through doors to reach its destination.
+	 * This only shows whether the entity will move through opened doors.
+	 * It does not show whether the entity will move through closed doors. Use {@link #canMoveThroughClosedDoors()} for this case.
+	 * @return whether the entity will move through doors to reach its destination.
+	 */
+	public boolean getMoveThroughDoors();
+	
+	/**
+	 * Set whether the entity will move through doors to reach its destination.
+	 * If set to true, the entity will move through opened doors. For closed doors, see {@link #canMoveThroughClosedDoors()}
+	 * If set to false, the entity will not move through any closed or opened door, regardless of AI behaviors.
+	 * @param moveThroughDoors whether the entity should move through doors to reach its destination.
+	 */
+	public void setMoveThroughDoors(boolean moveThroughDoors);
+	
+	/**
+	 * Get whether the entity can move through closed doors to reach its destination.
+	 * To adjust this behavior, add or remove either {@link de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors.AIDoorOpen} or {@link de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors.AIDoorBreak} to {@link ControllableMobAI}.
+	 * @return whether the entity can somehow move through closed doors to reach its destination.
+	 */
+	public boolean canMoveThroughClosedDoors();
+	
 }
