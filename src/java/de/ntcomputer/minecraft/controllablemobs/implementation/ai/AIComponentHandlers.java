@@ -6,6 +6,7 @@ import java.util.Map;
 import net.minecraft.server.v1_6_R3.PathfinderGoal;
 import net.minecraft.server.v1_6_R3.PathfinderGoalBreakDoor;
 import net.minecraft.server.v1_6_R3.PathfinderGoalDoorInteract;
+import net.minecraft.server.v1_6_R3.PathfinderGoalFloat;
 import net.minecraft.server.v1_6_R3.PathfinderGoalOpenDoor;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIType;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
@@ -37,6 +38,19 @@ public final class AIComponentHandlers {
 		};
 		add(PathfinderGoalOpenDoor.class, closedDoorListener);
 		add(PathfinderGoalBreakDoor.class, closedDoorListener);
+		
+		add(PathfinderGoalFloat.class, new AIComponentListener<PathfinderGoalFloat>() {
+			@Override
+			public void onAdd(CraftControllableMob<?> mob, PathfinderGoalFloat goal) {
+				NativeInterfaces.NAVIGATION.FIELD_CANSWIM.set(mob.nmsEntity.getNavigation(), true);
+			}
+			@Override
+			public void onRemoved(CraftControllableMob<?> mob, PathfinderGoalFloat goal) {
+				if(!mob.getAI().hasBehavior(AIType.MOVE_SWIM)) {
+					NativeInterfaces.NAVIGATION.FIELD_CANSWIM.set(mob.nmsEntity.getNavigation(), false);
+				}
+			}
+		});
 	}
 	
 	@SuppressWarnings("unchecked")
