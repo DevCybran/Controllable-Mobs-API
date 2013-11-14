@@ -16,12 +16,12 @@ import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllable
  * @version v4
  *
  */
-public class AIFloat extends AIBehavior<LivingEntity> {
+public class AISwim extends AIBehavior<LivingEntity> {
 	
 	/**
 	 * Create with an automatically given priority.
 	 */
-	public AIFloat() {
+	public AISwim() {
 		this(0);
 	}
 
@@ -30,7 +30,7 @@ public class AIFloat extends AIBehavior<LivingEntity> {
 	 * 
 	 * @param priority the priority of this behavior. Specify 0 to auto-generate it
 	 */
-	public AIFloat(final int priority) {
+	public AISwim(final int priority) {
 		super(priority);
 	}
 
@@ -41,7 +41,7 @@ public class AIFloat extends AIBehavior<LivingEntity> {
 
 	@Override
 	public AIType getType() {
-		return AIType.MOVE_FLOAT;
+		return AIType.MOVE_SWIM;
 	}
 
 }

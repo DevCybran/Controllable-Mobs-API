@@ -65,7 +65,7 @@ public enum AIType {
 	ACTION_DEFENDVILLAGE(PathfinderGoalDefendVillage.class),
 	ACTION_EATTILE(PathfinderGoalEatTile.class),
 	MOVE_FLEESUN(PathfinderGoalFleeSun.class),
-	MOVE_FLOAT(PathfinderGoalFloat.class),
+	MOVE_SWIM(PathfinderGoalFloat.class),
 	MOVE_FOLLOWONWNER(PathfinderGoalFollowOwner.class),
 	MOVE_FOLLOWPARENT(PathfinderGoalFollowParent.class),
 	TARGET_HURTBY(PathfinderGoalHurtByTarget.class),
