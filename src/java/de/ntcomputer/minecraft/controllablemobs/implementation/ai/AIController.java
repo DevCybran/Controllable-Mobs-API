@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import net.minecraft.server.v1_6_R3.EntityInsentient;
@@ -27,14 +28,14 @@ import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.primitives.NativeFieldObject;
 
 public abstract class AIController<E extends LivingEntity> implements Comparator<Object> {
-	private ArrayList<PathfinderGoalWrapper> actionGoals;
-	private ArrayList<CraftAIPart<E,?>> attachedParts;
-	private ArrayList<CraftAIPart<E,?>> defaultParts;
+	private List<PathfinderGoalWrapper> actionGoals;
+	private List<CraftAIPart<E,?>> attachedParts;
+	private List<CraftAIPart<E,?>> defaultParts;
 	private PathfinderGoalAIMonitor monitor;
 	CraftControllableMob<E> mob;
 	int lastBehaviorPriority = 1;
 	public PathfinderGoalSelector selector;
-	public HashMap<PathfinderGoal,CraftAIPart<E,?>> goalPartMap;
+	public Map<PathfinderGoal,CraftAIPart<E,?>> goalPartMap;
 	
 	public AIController(CraftControllableMob<E> mob, NativeFieldObject<EntityInsentient,PathfinderGoalSelector> selectorField) {
 		this.mob = mob;
@@ -205,12 +206,19 @@ public abstract class AIController<E extends LivingEntity> implements Comparator
 	
 	void clear() {
 		this.clearGoals();
+		PathfinderGoal[] goals = new PathfinderGoal[this.attachedParts.size()];
+		int i = 0;
 		for(CraftAIPart<E,?> part: this.attachedParts) {
+			goals[i++] = part.goal;
 			part.setState(AIState.UNATTACHED);
 		}
 		this.attachedParts.clear();
 		this.goalPartMap.clear();
 		this.monitor.reset();
+		
+		for(PathfinderGoal goal: goals) {
+			AIComponentHandlers.handleRemoved(mob, goal);
+		}
 	}
 	
 	void reset() {
@@ -224,7 +232,7 @@ public abstract class AIController<E extends LivingEntity> implements Comparator
 	// disposing
 	
 	private void disposedCall() throws IllegalStateException {
-		if(this.selector==null) throw new IllegalStateException("[ControllableMobsAPI] you must not modify AI parts after the ControllableMob has been unassigned");
+		if(this.selector==null) throw new IllegalStateException("[ControllableMobsAPI] you must not modify AI parts after the ControllableMob has been released");
 	}
 	
 	void dispose() {
