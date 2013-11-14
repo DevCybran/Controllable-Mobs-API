@@ -15,16 +15,16 @@ public class PathfinderGoalActionTarget extends PathfinderGoalActionDelayed<Cont
 	
 	@Override
 	protected boolean isActionBlocked() {
-		return action.target.world!=this.mob.notchEntity.world;
+		return action.target.world!=this.mob.nmsEntity.world;
 	}
 
 	@Override
 	protected void onStartAction() {
-		if(this.action.target!=null) this.mob.adjustMaximumNavigationDistance((float) Math.sqrt(NativeInterfaces.ENTITY.METHOD_GETDISTANCETOENTITYSQUARED.invoke(this.mob.notchEntity, this.action.target) * 2));
+		if(this.action.target!=null) this.mob.adjustMaximumNavigationDistance((float) Math.sqrt(NativeInterfaces.ENTITY.METHOD_GETDISTANCETOENTITYSQUARED.invoke(this.mob.nmsEntity, this.action.target) * 2));
 		// set target for AI goals
-		this.mob.notchEntity.setGoalTarget(this.action.target);
+		this.mob.nmsEntity.setGoalTarget(this.action.target);
 		// set target for old AI & bukkit interface (so "getTarget" on Creature will return the correct entity)
-		if(this.mob.notchEntity instanceof EntityCreature) ((EntityCreature) this.mob.notchEntity).target = this.action.target;
+		if(this.mob.nmsEntity instanceof EntityCreature) ((EntityCreature) this.mob.nmsEntity).target = this.action.target;
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class PathfinderGoalActionTarget extends PathfinderGoalActionDelayed<Cont
 
 	@Override
 	protected void onEndAction() {
-		this.mob.notchEntity.setGoalTarget(null);
+		this.mob.nmsEntity.setGoalTarget(null);
 	}
 
 	@Override

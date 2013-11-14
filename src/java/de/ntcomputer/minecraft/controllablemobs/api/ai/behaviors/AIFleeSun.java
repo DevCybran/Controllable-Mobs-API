@@ -45,7 +45,7 @@ public class AIFleeSun extends AIMoving<Creature> {
 
 	@Override
 	public PathfinderGoal createPathfinderGoal(CraftControllableMob<? extends Creature> mob) {
-		return new PathfinderGoalFleeSun((EntityCreature) mob.notchEntity, this.movementSpeedMultiplicator);
+		return new PathfinderGoalFleeSun((EntityCreature) mob.nmsEntity, this.movementSpeedMultiplicator);
 	}
 
 	@Override

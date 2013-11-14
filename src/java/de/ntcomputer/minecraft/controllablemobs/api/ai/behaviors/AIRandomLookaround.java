@@ -35,7 +35,7 @@ public class AIRandomLookaround extends AIBehavior<LivingEntity> {
 
 	@Override
 	public PathfinderGoal createPathfinderGoal(final CraftControllableMob<?> mob) {
-		return new PathfinderGoalRandomLookaround(mob.notchEntity);
+		return new PathfinderGoalRandomLookaround(mob.nmsEntity);
 	}
 
 	@Override

@@ -35,7 +35,7 @@ public class AIRestrictSun extends AIBehavior<Creature> {
 
 	@Override
 	public PathfinderGoal createPathfinderGoal(final CraftControllableMob<? extends Creature> mob) {
-		return new PathfinderGoalRestrictSun((EntityCreature) mob.notchEntity);
+		return new PathfinderGoalRestrictSun((EntityCreature) mob.nmsEntity);
 	}
 
 	@Override

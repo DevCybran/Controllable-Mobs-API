@@ -58,7 +58,7 @@ public class AITargetHurtBy extends AITargetBehavior<Creature> {
 
 	@Override
 	public PathfinderGoal createPathfinderGoal(CraftControllableMob<? extends Creature> mob) {
-		return new PathfinderGoalHurtByTarget((EntityCreature) mob.notchEntity, this.crowdAttack);
+		return new PathfinderGoalHurtByTarget((EntityCreature) mob.nmsEntity, this.crowdAttack);
 	}
 
 	@Override

@@ -10,7 +10,7 @@ public class ControllableMobActionDie extends ControllableMobActionBase {
 
 	public ControllableMobActionDie(final CraftControllableMob<?> mob) {
 		super(mob.getActionManager(), ActionType.DIE);
-		this.entity = mob.notchEntity;
+		this.entity = mob.nmsEntity;
 	}
 
 	@Override

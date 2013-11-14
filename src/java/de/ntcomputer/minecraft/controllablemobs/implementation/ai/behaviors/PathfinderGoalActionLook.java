@@ -14,7 +14,7 @@ public class PathfinderGoalActionLook extends PathfinderGoalActionBase<Controlla
 	
 	@Override
 	protected boolean isActionBlocked() {
-		return action.getWorld()!=this.mob.notchEntity.world;
+		return action.getWorld()!=this.mob.nmsEntity.world;
 	}
 
 	@Override
@@ -24,7 +24,7 @@ public class PathfinderGoalActionLook extends PathfinderGoalActionBase<Controlla
 
 	@Override
 	protected void onTickAction() {
-		NativeInterfaces.CONTROLLERLOOK.METHOD_LOOKATCOORDINATES.invoke(this.mob.notchEntity.getControllerLook(), this.action.getX(), this.action.getY(), this.action.getZ(), 10.0F, NativeInterfaces.ENTITYINSENTIENT.METHOD_GETVERTICALHEADSPEED.invoke(this.mob.notchEntity));
+		NativeInterfaces.CONTROLLERLOOK.METHOD_LOOKATCOORDINATES.invoke(this.mob.nmsEntity.getControllerLook(), this.action.getX(), this.action.getY(), this.action.getZ(), 10.0F, NativeInterfaces.ENTITYINSENTIENT.METHOD_GETVERTICALHEADSPEED.invoke(this.mob.nmsEntity));
 	}
 
 	

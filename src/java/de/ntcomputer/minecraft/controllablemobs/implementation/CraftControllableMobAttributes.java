@@ -19,7 +19,7 @@ public final class CraftControllableMobAttributes implements ControllableMobAttr
 	private double maximumNavigationDistance = 200.0D;
 
 	public CraftControllableMobAttributes(CraftControllableMob<?> mob) {
-		this.nmsEntity = mob.notchEntity;
+		this.nmsEntity = mob.nmsEntity;
 		this.movementSpeed = this.getAttributeInstance(NativeInterfaces.GENERICATTRIBUTES.STATIC_FIELD_MOVEMENTSPEED.get());
 		this.attackDamage = this.getAttributeInstance(NativeInterfaces.GENERICATTRIBUTES.STATIC_FIELD_ATTACKDAMAGE.get());
 		this.maxHealth = this.getAttributeInstance(NativeInterfaces.GENERICATTRIBUTES.STATIC_FIELD_MAXHEALTH.get());

@@ -46,7 +46,7 @@ public class AIRandomStroll extends AIMoving<Creature> {
 
 	@Override
 	public PathfinderGoal createPathfinderGoal(final CraftControllableMob<? extends Creature> mob) {
-		return new PathfinderGoalRandomStroll((EntityCreature) mob.notchEntity, this.movementSpeedMultiplicator);
+		return new PathfinderGoalRandomStroll((EntityCreature) mob.nmsEntity, this.movementSpeedMultiplicator);
 	}
 
 	@Override

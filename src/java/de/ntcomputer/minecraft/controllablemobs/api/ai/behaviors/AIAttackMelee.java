@@ -47,7 +47,7 @@ public class AIAttackMelee extends AIMoving<Creature> {
 
 	@Override
 	public PathfinderGoal createPathfinderGoal(CraftControllableMob<? extends Creature> mob) {
-		return new PathfinderGoalMeleeAttack((EntityCreature) mob.notchEntity, this.movementSpeedMultiplicator, false);
+		return new PathfinderGoalMeleeAttack((EntityCreature) mob.nmsEntity, this.movementSpeedMultiplicator, false);
 	}
 
 	@Override

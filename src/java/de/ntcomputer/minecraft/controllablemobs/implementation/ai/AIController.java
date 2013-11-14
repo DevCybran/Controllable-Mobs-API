@@ -38,7 +38,7 @@ public abstract class AIController<E extends LivingEntity> implements Comparator
 	
 	public AIController(CraftControllableMob<E> mob, NativeFieldObject<EntityInsentient,PathfinderGoalSelector> selectorField) {
 		this.mob = mob;
-		this.selector = selectorField.get(mob.notchEntity);
+		this.selector = selectorField.get(mob.nmsEntity);
 		
 		// create custom parts list
 		this.attachedParts = new ArrayList<CraftAIPart<E,?>>();

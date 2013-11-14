@@ -119,7 +119,7 @@ public class AILookAtEntity extends AIBehavior<LivingEntity> {
 
 	@Override
 	public PathfinderGoal createPathfinderGoal(final CraftControllableMob<?> mob) {
-		return new PathfinderGoalLookAtPlayer(mob.notchEntity, this.entityClass, this.maxDistance);
+		return new PathfinderGoalLookAtPlayer(mob.nmsEntity, this.entityClass, this.maxDistance);
 	}
 
 	@Override

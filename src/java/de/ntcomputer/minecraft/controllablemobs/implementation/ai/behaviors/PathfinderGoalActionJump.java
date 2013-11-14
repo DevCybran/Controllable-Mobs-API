@@ -13,12 +13,12 @@ public class PathfinderGoalActionJump extends PathfinderGoalActionBase<Controlla
 
 	@Override
 	protected void onStartAction() {
-		NativeInterfaces.CONTROLLERJUMP.METHOD_JUMP.invoke(this.mob.notchEntity.getControllerJump());
+		NativeInterfaces.CONTROLLERJUMP.METHOD_JUMP.invoke(this.mob.nmsEntity.getControllerJump());
 	}
 
 	@Override
 	protected boolean canContinueAction() {
-		return !this.mob.notchEntity.onGround;
+		return !this.mob.nmsEntity.onGround;
 	}
 
 	@Override

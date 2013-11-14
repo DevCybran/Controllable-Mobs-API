@@ -16,9 +16,9 @@ public class PathfinderGoalActionMove extends PathfinderGoalActionDelayed<Contro
 	
 	@Override
 	protected boolean canStartAction() {
-		if(action.world!=this.mob.notchEntity.world) return false;
-		this.mob.adjustMaximumNavigationDistance((float) NativeInterfaces.ENTITY.METHOD_GETDISTANCETOLOCATION.invoke(this.mob.notchEntity, action.x, action.y, action.z));
-		final PathEntity path = NativeInterfaces.NAVIGATION.METHOD_CREATEPATHTOLOCATION.invoke(this.mob.notchEntity.getNavigation(), action.x, action.y, action.z);
+		if(action.world!=this.mob.nmsEntity.world) return false;
+		this.mob.adjustMaximumNavigationDistance((float) NativeInterfaces.ENTITY.METHOD_GETDISTANCETOLOCATION.invoke(this.mob.nmsEntity, action.x, action.y, action.z));
+		final PathEntity path = NativeInterfaces.NAVIGATION.METHOD_CREATEPATHTOLOCATION.invoke(this.mob.nmsEntity.getNavigation(), action.x, action.y, action.z);
 		//final PathEntity path = NativeInterfaces.WORLD.METHOD_GENERATEPATHTOCOORDS.invoke(this.mob.notchEntity.world, this.mob.notchEntity, action.x, action.y, action.z, 100F, true, false, false, true);
 		if(path==null) return false;
 		this.path = path;
@@ -27,17 +27,17 @@ public class PathfinderGoalActionMove extends PathfinderGoalActionDelayed<Contro
 
 	@Override
 	protected void onStartAction() {
-		NativeInterfaces.NAVIGATION.METHOD_MOVEALONGPATH.invoke(this.mob.notchEntity.getNavigation(), this.path, 1.0);
+		NativeInterfaces.NAVIGATION.METHOD_MOVEALONGPATH.invoke(this.mob.nmsEntity.getNavigation(), this.path, 1.0);
 	}
 
 	@Override
 	protected boolean canContinueAction() {
-		return !NativeInterfaces.NAVIGATION.METHOD_ISNOTMOVING.invoke(this.mob.notchEntity.getNavigation());
+		return !NativeInterfaces.NAVIGATION.METHOD_ISNOTMOVING.invoke(this.mob.nmsEntity.getNavigation());
 	}
 
 	@Override
 	protected void onEndAction() {
-		NativeInterfaces.NAVIGATION.METHOD_STOP.invoke(this.mob.notchEntity.getNavigation());
+		NativeInterfaces.NAVIGATION.METHOD_STOP.invoke(this.mob.nmsEntity.getNavigation());
 	}
 
 	@Override

@@ -80,7 +80,7 @@ public class AIAttackRanged extends AIMoving<Creature> {
 
 	@Override
 	public PathfinderGoal createPathfinderGoal(CraftControllableMob<? extends Creature> mob) {
-		return new PathfinderGoalArrowAttack((IRangedEntity) mob.notchEntity, this.movementSpeedMultiplicator, this.attackTicks, this.maximumRange);
+		return new PathfinderGoalArrowAttack((IRangedEntity) mob.nmsEntity, this.movementSpeedMultiplicator, this.attackTicks, this.maximumRange);
 	}
 
 	@Override

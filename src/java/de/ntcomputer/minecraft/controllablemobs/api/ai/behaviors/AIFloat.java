@@ -36,7 +36,7 @@ public class AIFloat extends AIBehavior<LivingEntity> {
 
 	@Override
 	public PathfinderGoal createPathfinderGoal(CraftControllableMob<?> mob) {
-		return new PathfinderGoalFloat(mob.notchEntity);
+		return new PathfinderGoalFloat(mob.nmsEntity);
 	}
 
 	@Override

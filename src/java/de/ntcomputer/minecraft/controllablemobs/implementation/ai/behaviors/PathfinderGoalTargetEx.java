@@ -26,7 +26,7 @@ public abstract class PathfinderGoalTargetEx extends PathfinderGoalWrapper {
 
 	public PathfinderGoalTargetEx(CraftControllableMob<?> mob, int maximumNoEyeContactTicks, boolean ignoreInvulnerability, double maximumDistance, Class<? extends EntityLiving>[] targetClasses) {
 		this.mob = mob;
-		this.entity = mob.notchEntity;
+		this.entity = mob.nmsEntity;
 		this.maximumNoEyeContactTicks = maximumNoEyeContactTicks;
 		this.ignoreInvulnerability = ignoreInvulnerability;
 		this.maximumDistanceSquared = maximumDistance<=0 ? 0 : maximumDistance*maximumDistance;

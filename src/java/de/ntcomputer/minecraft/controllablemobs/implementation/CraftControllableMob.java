@@ -15,11 +15,11 @@ public class CraftControllableMob<E extends LivingEntity> implements Controllabl
 	private CraftControllableMobAttributes attributes;
 	private CraftControllableMobAI<E> ai;
 	private CraftControllableMobActions actions;
-	public EntityInsentient notchEntity;
+	public EntityInsentient nmsEntity;
 
 	public CraftControllableMob(E entity, EntityInsentient notchEntity) {
 		this.entity = entity;
-		this.notchEntity = notchEntity;
+		this.nmsEntity = notchEntity;
 		this.attributes = new CraftControllableMobAttributes(this);
 		this.actions = new CraftControllableMobActions(this);
 		this.ai = new CraftControllableMobAI<E>(this);
@@ -43,7 +43,7 @@ public class CraftControllableMob<E extends LivingEntity> implements Controllabl
 		this.attributes = null;
 		
 		// entity unassign
-		this.notchEntity = null;
+		this.nmsEntity = null;
 		this.entity = null;
 	}
 	

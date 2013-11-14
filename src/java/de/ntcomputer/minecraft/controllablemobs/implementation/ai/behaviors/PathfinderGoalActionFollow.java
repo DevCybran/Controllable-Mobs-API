@@ -16,18 +16,18 @@ public class PathfinderGoalActionFollow extends PathfinderGoalActionDelayed<Cont
 	
 	@Override
 	protected boolean isActionRequired() {
-		return NativeInterfaces.ENTITY.METHOD_GETDISTANCETOENTITYSQUARED.invoke(this.mob.notchEntity, action.target) > action.maximumDistanceSquared;
+		return NativeInterfaces.ENTITY.METHOD_GETDISTANCETOENTITYSQUARED.invoke(this.mob.nmsEntity, action.target) > action.maximumDistanceSquared;
 	}
 	
 	@Override
 	protected boolean isActionBlocked() {
-		return mob.notchEntity.world!=action.target.world;
+		return mob.nmsEntity.world!=action.target.world;
 	}
 	
 	@Override
 	protected boolean canStartAction() {
-		this.mob.adjustMaximumNavigationDistance((float) Math.sqrt(NativeInterfaces.ENTITY.METHOD_GETDISTANCETOENTITYSQUARED.invoke(this.mob.notchEntity, action.target)));
-		final PathEntity path = NativeInterfaces.NAVIGATION.METHOD_CREATEPATHTOENTITY.invoke(this.mob.notchEntity.getNavigation(), this.action.target);
+		this.mob.adjustMaximumNavigationDistance((float) Math.sqrt(NativeInterfaces.ENTITY.METHOD_GETDISTANCETOENTITYSQUARED.invoke(this.mob.nmsEntity, action.target)));
+		final PathEntity path = NativeInterfaces.NAVIGATION.METHOD_CREATEPATHTOENTITY.invoke(this.mob.nmsEntity.getNavigation(), this.action.target);
 		if(path==null) return false;
 		this.path = path;
 		return true;
@@ -35,17 +35,17 @@ public class PathfinderGoalActionFollow extends PathfinderGoalActionDelayed<Cont
 
 	@Override
 	protected void onStartAction() {
-		NativeInterfaces.NAVIGATION.METHOD_MOVEALONGPATH.invoke(this.mob.notchEntity.getNavigation(), this.path, 1.0);
+		NativeInterfaces.NAVIGATION.METHOD_MOVEALONGPATH.invoke(this.mob.nmsEntity.getNavigation(), this.path, 1.0);
 	}
 
 	@Override
 	protected boolean canContinueAction() {
-		return !NativeInterfaces.NAVIGATION.METHOD_ISNOTMOVING.invoke(this.mob.notchEntity.getNavigation()) && (NativeInterfaces.ENTITY.METHOD_GETDISTANCETOENTITYSQUARED.invoke(this.mob.notchEntity, this.action.target)>this.action.minimumDistanceSquared);
+		return !NativeInterfaces.NAVIGATION.METHOD_ISNOTMOVING.invoke(this.mob.nmsEntity.getNavigation()) && (NativeInterfaces.ENTITY.METHOD_GETDISTANCETOENTITYSQUARED.invoke(this.mob.nmsEntity, this.action.target)>this.action.minimumDistanceSquared);
 	}
 
 	@Override
 	protected void onEndAction() {
-		NativeInterfaces.NAVIGATION.METHOD_STOP.invoke(this.mob.notchEntity.getNavigation());
+		NativeInterfaces.NAVIGATION.METHOD_STOP.invoke(this.mob.nmsEntity.getNavigation());
 	}
 
 	@Override
