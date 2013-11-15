@@ -26,7 +26,7 @@ public class PathfinderGoalActionMoveAbstract<A extends ControllableMobActionMov
 
 	@Override
 	protected void onStartAction() {
-		NativeInterfaces.NAVIGATION.METHOD_MOVEALONGPATH.invoke(this.mob.nmsEntity.getNavigation(), this.path, 1.0);
+		NativeInterfaces.NAVIGATION.METHOD_MOVEALONGPATH.invoke(this.mob.nmsEntity.getNavigation(), this.path, this.action.movementSpeedMultiplicator);
 	}
 
 	@Override
