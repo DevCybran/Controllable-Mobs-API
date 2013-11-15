@@ -50,8 +50,15 @@ public class CraftControllableMobActions implements ControllableMobActions {
 
 	@Override
 	public ControllableMobAction moveTo(Location loc, boolean queue) {
-		return this.addAction(new ControllableMobActionMove(this.actionManager, loc, 1.0D), queue);
+		return this.moveTo(loc, queue, 1.0D);
 	}
+	
+	@Override
+	public ControllableMobAction moveTo(Location loc, boolean queue, double movementSpeedMultiplicator) {
+		if(movementSpeedMultiplicator <= 0) throw new IllegalArgumentException("movementSpeedMultiplicator must be greater than 0.0");
+		return this.addAction(new ControllableMobActionMove(this.actionManager, loc, movementSpeedMultiplicator), queue);
+	}
+
 
 	@Override
 	public ControllableMobAction lookAt(Location loc) {

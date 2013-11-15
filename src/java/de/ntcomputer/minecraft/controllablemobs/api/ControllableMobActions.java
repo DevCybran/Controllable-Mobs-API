@@ -20,11 +20,25 @@ public interface ControllableMobActions {
 	 * Orders the entity to move to the given location.
 	 * Uses the {@link ControllableMobActions#getDefaultQueuingFlag() default queuing flag}.
 	 * 
-	 * @see ControllableMobActions#moveTo(Location, boolean)
+	 * @see #moveTo(Location, boolean, double)
 	 * @param loc the location the entity will move to.
 	 * @return {@link ControllableMobAction}
 	 */
 	public ControllableMobAction moveTo(Location loc);
+	
+	/**
+	 * Orders the entity to move to the given location, optionally adding the action to the queue.
+	 * This action is block accurate, meaning, that the entity will stop once it reached the block the given location is pointing at.
+	 * When the action's execution is started, all other movements or attacks caused by the AI are stopped and overridden.
+	 * If a target is assigned to the entity, it will not be lost and dealing with it will be resumed when this movement is finished. 
+	 * 
+	 * @see #moveTo(Location, boolean, double)
+	 * @param loc the location the entity will move to.
+	 * @param queue whether this action should be added to the queue (true) or executed directly (false).
+	 * @return {@link ControllableMobAction}
+	 */
+	public ControllableMobAction moveTo(Location loc, boolean queue);
+	
 	/**
 	 * Orders the entity to move to the given location, optionally adding the action to the queue.
 	 * This action is block accurate, meaning, that the entity will stop once it reached the block the given location is pointing at.
@@ -33,9 +47,11 @@ public interface ControllableMobActions {
 	 * 
 	 * @param loc the location the entity will move to.
 	 * @param queue whether this action should be added to the queue (true) or executed directly (false).
+	 * @param movementSpeedMultiplicator 1.0 for default speed, 2.0 for doubling the movement speed, and so on. Default is 1.0
 	 * @return {@link ControllableMobAction}
+	 * @throws IllegalArgumentException when movementSpeedMultiplicator is zero or negative
 	 */
-	public ControllableMobAction moveTo(Location loc, boolean queue);
+	public ControllableMobAction moveTo(Location loc, boolean queue, double movementSpeedMultiplicator) throws IllegalArgumentException;
 	
 	/**
 	 * Orders the entity to move to the given location. Uses the {@link ControllableMobActions#getDefaultQueuingFlag() default queuing flag}.
