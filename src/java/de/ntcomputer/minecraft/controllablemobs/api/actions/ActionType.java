@@ -24,7 +24,7 @@ public enum ActionType {
 	/**
 	 * @see de.ntcomputer.minecraft.controllablemobs.api.ControllableMobActions#attackMoveTo(org.bukkit.Location, boolean, double, double)
 	 */
-	ATTACKMOVE(false, false),
+	MOVEATTACKING(false, false),
 	
 	/**
 	 * @see de.ntcomputer.minecraft.controllablemobs.api.ControllableMobActions#target(org.bukkit.entity.LivingEntity, boolean)

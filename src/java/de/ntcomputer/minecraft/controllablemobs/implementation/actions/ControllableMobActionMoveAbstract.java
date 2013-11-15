@@ -7,7 +7,7 @@ import org.bukkit.craftbukkit.v1_6_R3.CraftWorld;
 
 import de.ntcomputer.minecraft.controllablemobs.api.actions.ActionType;
 
-public class ControllableMobActionAbstractMove extends ControllableMobActionBase {
+public class ControllableMobActionMoveAbstract extends ControllableMobActionBase {
 	public final int x;
 	public final int y;
 	public final int z;
@@ -15,7 +15,7 @@ public class ControllableMobActionAbstractMove extends ControllableMobActionBase
 	public final double movementSpeedMultiplicator;
 	private final boolean isValid;
 	
-	public ControllableMobActionAbstractMove(ControllableMobActionManager manager, ActionType type, Location to, double movementSpeedMultiplicator) {
+	public ControllableMobActionMoveAbstract(ControllableMobActionManager manager, ActionType type, Location to, double movementSpeedMultiplicator) {
 		super(manager, type);
 		if(to==null) {
 			this.x = 0;

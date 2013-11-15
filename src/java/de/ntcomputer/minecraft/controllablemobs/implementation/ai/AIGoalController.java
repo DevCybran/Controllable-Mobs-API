@@ -3,7 +3,7 @@ package de.ntcomputer.minecraft.controllablemobs.implementation.ai;
 import org.bukkit.entity.LivingEntity;
 
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
-import de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors.PathfinderGoalActionAttackMove;
+import de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors.PathfinderGoalActionMoveAttacking;
 import de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors.PathfinderGoalActionFollow;
 import de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors.PathfinderGoalActionJump;
 import de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors.PathfinderGoalActionLook;
@@ -20,7 +20,7 @@ class AIGoalController<E extends LivingEntity> extends AIController<E> {
 	@Override
 	protected void createActionGoals() {
 		this.addActionGoal(-3, new PathfinderGoalActionMove(mob));
-		this.addActionGoal(-2, new PathfinderGoalActionAttackMove(mob));
+		this.addActionGoal(-2, new PathfinderGoalActionMoveAttacking(mob));
 		this.addActionGoal(-1, new PathfinderGoalActionFollow(mob));
 		this.addActionGoal(0, new PathfinderGoalActionWait(mob));
 		this.addActionGoal(Integer.MAX_VALUE, new PathfinderGoalActionJump(mob));

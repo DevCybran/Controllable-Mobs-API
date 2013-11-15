@@ -7,7 +7,7 @@ import org.bukkit.entity.LivingEntity;
 import de.ntcomputer.minecraft.controllablemobs.api.ControllableMobActions;
 import de.ntcomputer.minecraft.controllablemobs.api.actions.ActionType;
 import de.ntcomputer.minecraft.controllablemobs.api.actions.ControllableMobAction;
-import de.ntcomputer.minecraft.controllablemobs.implementation.actions.ControllableMobActionAttackMove;
+import de.ntcomputer.minecraft.controllablemobs.implementation.actions.ControllableMobActionMoveAttacking;
 import de.ntcomputer.minecraft.controllablemobs.implementation.actions.ControllableMobActionBase;
 import de.ntcomputer.minecraft.controllablemobs.implementation.actions.ControllableMobActionCallback;
 import de.ntcomputer.minecraft.controllablemobs.implementation.actions.ControllableMobActionDie;
@@ -180,25 +180,25 @@ public class CraftControllableMobActions implements ControllableMobActions {
 	}
 
 	@Override
-	public ControllableMobAction attackMoveTo(Location loc) {
-		return this.attackMoveTo(loc, defaultQueue);
+	public ControllableMobAction moveToAttacking(Location loc) {
+		return this.moveToAttacking(loc, defaultQueue);
 	}
 
 	@Override
-	public ControllableMobAction attackMoveTo(Location loc, boolean queue) {
-		return this.attackMoveTo(loc, queue, 16.0D);
+	public ControllableMobAction moveToAttacking(Location loc, boolean queue) {
+		return this.moveToAttacking(loc, queue, 16.0D);
 	}
 
 	@Override
-	public ControllableMobAction attackMoveTo(Location loc, boolean queue, double maximumDistractionDistance) throws IllegalArgumentException {
-		return this.attackMoveTo(loc, queue, maximumDistractionDistance, 1.0D);
+	public ControllableMobAction moveToAttacking(Location loc, boolean queue, double maximumDistractionDistance) throws IllegalArgumentException {
+		return this.moveToAttacking(loc, queue, maximumDistractionDistance, 1.0D);
 	}
 
 	@Override
-	public ControllableMobAction attackMoveTo(Location loc, boolean queue, double maximumDistractionDistance, double movementSpeedMultiplicator) throws IllegalArgumentException {
+	public ControllableMobAction moveToAttacking(Location loc, boolean queue, double maximumDistractionDistance, double movementSpeedMultiplicator) throws IllegalArgumentException {
 		if(maximumDistractionDistance <= 0) throw new IllegalArgumentException("maximumDistractionDistance must be greater than 0.0");
 		if(movementSpeedMultiplicator <= 0) throw new IllegalArgumentException("movementSpeedMultiplicator must be greater than 0.0");
-		return this.addAction(new ControllableMobActionAttackMove(this.actionManager, loc, movementSpeedMultiplicator, maximumDistractionDistance), queue);
+		return this.addAction(new ControllableMobActionMoveAttacking(this.actionManager, loc, movementSpeedMultiplicator, maximumDistractionDistance), queue);
 	}
 
 }

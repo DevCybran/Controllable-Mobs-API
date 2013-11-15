@@ -43,11 +43,11 @@ public interface ControllableMobActions {
 	 * When the action's execution is started, all other movements caused by the AI are stopped and overridden.
 	 * If the entity has a target locked on, it will interrupt the movement, deal with this target, and then continue moving to the destination.
 	 * 
-	 * @see #attackMoveTo(Location, boolean, double, double)
+	 * @see #moveToAttacking(Location, boolean, double, double)
 	 * @param loc the location the entity will move to.
 	 * @return {@link ControllableMobAction}
 	 */
-	public ControllableMobAction attackMoveTo(Location loc);
+	public ControllableMobAction moveToAttacking(Location loc);
 	
 	/**
 	 * Orders the entity to move to the given location, optionally adding the action to the queue.
@@ -55,12 +55,12 @@ public interface ControllableMobActions {
 	 * When the action's execution is started, all other movements caused by the AI are stopped and overridden.
 	 * If the entity has a target locked on, it will interrupt the movement, deal with this target, and then continue moving to the destination.
 	 * 
-	 * @see #attackMoveTo(Location, boolean, double, double)
+	 * @see #moveToAttacking(Location, boolean, double, double)
 	 * @param loc the location the entity will move to.
 	 * @param queue whether this action should be added to the queue (true) or executed directly (false).
 	 * @return {@link ControllableMobAction}
 	 */
-	public ControllableMobAction attackMoveTo(Location loc, boolean queue);
+	public ControllableMobAction moveToAttacking(Location loc, boolean queue);
 	
 	/**
 	 * Orders the entity to move to the given location, optionally adding the action to the queue.
@@ -68,14 +68,14 @@ public interface ControllableMobActions {
 	 * When the action's execution is started, all other movements caused by the AI are stopped and overridden.
 	 * If the entity has a target locked on, it will interrupt the movement, deal with this target, and then continue moving to the destination.
 	 * 
-	 * @see #attackMoveTo(Location, boolean, double, double)
+	 * @see #moveToAttacking(Location, boolean, double, double)
 	 * @param loc the location the entity will move to.
 	 * @param queue whether this action should be added to the queue (true) or executed directly (false).
 	 * @param maximumDistractionDistance the maximum distance this entity will try to follow targets in order to attack them. If reached, the entity will turn back and continue moving to the destination. Default is 16.0 blocks.
 	 * @return {@link ControllableMobAction}
 	 * @throws IllegalArgumentException when maximumDistractionDistance is zero or negative
 	 */
-	public ControllableMobAction attackMoveTo(Location loc, boolean queue, double maximumDistractionDistance) throws IllegalArgumentException;
+	public ControllableMobAction moveToAttacking(Location loc, boolean queue, double maximumDistractionDistance) throws IllegalArgumentException;
 	
 	/**
 	 * Orders the entity to move to the given location, optionally adding the action to the queue.
@@ -90,7 +90,7 @@ public interface ControllableMobActions {
 	 * @return {@link ControllableMobAction}
 	 * @throws IllegalArgumentException when maximumDistractionDistance or movementSpeedMultiplicator is zero or negative
 	 */
-	public ControllableMobAction attackMoveTo(Location loc, boolean queue, double maximumDistractionDistance, double movementSpeedMultiplicator) throws IllegalArgumentException;
+	public ControllableMobAction moveToAttacking(Location loc, boolean queue, double maximumDistractionDistance, double movementSpeedMultiplicator) throws IllegalArgumentException;
 	
 	/**
 	 * Orders the entity to look at the given location.

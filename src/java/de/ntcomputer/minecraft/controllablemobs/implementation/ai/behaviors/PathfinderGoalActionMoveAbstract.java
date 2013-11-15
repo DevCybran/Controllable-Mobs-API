@@ -3,13 +3,13 @@ package de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors;
 import net.minecraft.server.v1_6_R3.PathEntity;
 import de.ntcomputer.minecraft.controllablemobs.api.actions.ActionType;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
-import de.ntcomputer.minecraft.controllablemobs.implementation.actions.ControllableMobActionAbstractMove;
+import de.ntcomputer.minecraft.controllablemobs.implementation.actions.ControllableMobActionMoveAbstract;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;
 
-public class PathfinderGoalActionAbstractMove<A extends ControllableMobActionAbstractMove> extends PathfinderGoalActionDelayed<A> {
+public class PathfinderGoalActionMoveAbstract<A extends ControllableMobActionMoveAbstract> extends PathfinderGoalActionDelayed<A> {
 	private PathEntity path;
 
-	public PathfinderGoalActionAbstractMove(CraftControllableMob<?> mob, ActionType type) {
+	public PathfinderGoalActionMoveAbstract(CraftControllableMob<?> mob, ActionType type) {
 		super(mob, type);
 		this.setMutexBits(3);
 	}

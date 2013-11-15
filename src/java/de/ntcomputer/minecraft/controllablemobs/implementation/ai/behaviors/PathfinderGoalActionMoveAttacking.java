@@ -2,13 +2,13 @@ package de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors;
 
 import de.ntcomputer.minecraft.controllablemobs.api.actions.ActionType;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
-import de.ntcomputer.minecraft.controllablemobs.implementation.actions.ControllableMobActionAttackMove;
+import de.ntcomputer.minecraft.controllablemobs.implementation.actions.ControllableMobActionMoveAttacking;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;
 
-public class PathfinderGoalActionAttackMove extends PathfinderGoalActionAbstractMove<ControllableMobActionAttackMove> {
+public class PathfinderGoalActionMoveAttacking extends PathfinderGoalActionMoveAbstract<ControllableMobActionMoveAttacking> {
 
-	public PathfinderGoalActionAttackMove(CraftControllableMob<?> mob) {
-		super(mob, ActionType.ATTACKMOVE);
+	public PathfinderGoalActionMoveAttacking(CraftControllableMob<?> mob) {
+		super(mob, ActionType.MOVEATTACKING);
 	}
 	
 	@Override
