@@ -1,6 +1,7 @@
 package de.ntcomputer.minecraft.controllablemobs.api.ai;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import net.minecraft.server.v1_6_R3.PathfinderGoal;
 import net.minecraft.server.v1_6_R3.PathfinderGoalArrowAttack;
@@ -102,19 +103,19 @@ public enum AIType {
 	ACTION_PLAYERTRADE(PathfinderGoalTradeWithPlayer.class),
 	UNKNOWN(null);
 	
-	private final Class<? extends PathfinderGoal> notchAIClass;
+	private final Class<? extends PathfinderGoal> nmsPathfinderClass;
 	
 	private AIType(Class<? extends PathfinderGoal> pfgClass) {
-		this.notchAIClass = pfgClass;
+		this.nmsPathfinderClass = pfgClass;
 	}
 	
 	
-	private static final HashMap<Class<? extends PathfinderGoal>,AIType> classTypeMap;
+	private static final Map<Class<? extends PathfinderGoal>,AIType> classTypeMap;
 	
 	static {
 		classTypeMap = new HashMap<Class<? extends PathfinderGoal>,AIType>();
 		for(AIType type: AIType.values()) {
-			if(type!=AIType.UNKNOWN) classTypeMap.put(type.notchAIClass, type);
+			if(type!=AIType.UNKNOWN) classTypeMap.put(type.nmsPathfinderClass, type);
 		}
 	}
 	
