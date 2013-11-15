@@ -13,7 +13,7 @@ import de.ntcomputer.minecraft.controllablemobs.api.actions.ControllableMobActio
  * You can retrieve an instance by using {@link ControllableMob#getActions()}
  * 
  * @author Cybran
- * @version v5
+ * @version v6
  */
 public interface ControllableMobActions {
 	/**
@@ -28,7 +28,7 @@ public interface ControllableMobActions {
 	/**
 	 * Orders the entity to move to the given location, optionally adding the action to the queue.
 	 * This action is block accurate, meaning, that the entity will stop once it reached the block the given location is pointing at.
-	 * When the actions execution is started, all other movements or attacks caused by the AI are stopped and overridden.
+	 * When the action's execution is started, all other movements or attacks caused by the AI are stopped and overridden.
 	 * If a target is assigned to the entity, it will not be lost and dealing with it will be resumed when this movement is finished. 
 	 * 
 	 * @param loc the location the entity will move to.
@@ -36,6 +36,61 @@ public interface ControllableMobActions {
 	 * @return {@link ControllableMobAction}
 	 */
 	public ControllableMobAction moveTo(Location loc, boolean queue);
+	
+	/**
+	 * Orders the entity to move to the given location. Uses the {@link ControllableMobActions#getDefaultQueuingFlag() default queuing flag}.
+	 * This action is block accurate, meaning, that the entity will stop once it reached the block the given location is pointing at.
+	 * When the action's execution is started, all other movements caused by the AI are stopped and overridden.
+	 * If the entity has a target locked on, it will interrupt the movement, deal with this target, and then continue moving to the destination.
+	 * 
+	 * @see #attackMoveTo(Location, boolean, double, double)
+	 * @param loc the location the entity will move to.
+	 * @return {@link ControllableMobAction}
+	 */
+	public ControllableMobAction attackMoveTo(Location loc);
+	
+	/**
+	 * Orders the entity to move to the given location, optionally adding the action to the queue.
+	 * This action is block accurate, meaning, that the entity will stop once it reached the block the given location is pointing at.
+	 * When the action's execution is started, all other movements caused by the AI are stopped and overridden.
+	 * If the entity has a target locked on, it will interrupt the movement, deal with this target, and then continue moving to the destination.
+	 * 
+	 * @see #attackMoveTo(Location, boolean, double, double)
+	 * @param loc the location the entity will move to.
+	 * @param queue whether this action should be added to the queue (true) or executed directly (false).
+	 * @return {@link ControllableMobAction}
+	 */
+	public ControllableMobAction attackMoveTo(Location loc, boolean queue);
+	
+	/**
+	 * Orders the entity to move to the given location, optionally adding the action to the queue.
+	 * This action is block accurate, meaning, that the entity will stop once it reached the block the given location is pointing at.
+	 * When the action's execution is started, all other movements caused by the AI are stopped and overridden.
+	 * If the entity has a target locked on, it will interrupt the movement, deal with this target, and then continue moving to the destination.
+	 * 
+	 * @see #attackMoveTo(Location, boolean, double, double)
+	 * @param loc the location the entity will move to.
+	 * @param queue whether this action should be added to the queue (true) or executed directly (false).
+	 * @param maximumDistractionDistance the maximum distance this entity will try to follow targets in order to attack them. If reached, the entity will turn back and continue moving to the destination. Default is 16.0 blocks.
+	 * @return {@link ControllableMobAction}
+	 * @throws IllegalArgumentException when maximumDistractionDistance is zero or negative
+	 */
+	public ControllableMobAction attackMoveTo(Location loc, boolean queue, double maximumDistractionDistance) throws IllegalArgumentException;
+	
+	/**
+	 * Orders the entity to move to the given location, optionally adding the action to the queue.
+	 * This action is block accurate, meaning, that the entity will stop once it reached the block the given location is pointing at.
+	 * When the action's execution is started, all other movements caused by the AI are stopped and overridden.
+	 * If the entity has a target locked on, it will interrupt the movement, deal with this target, and then continue moving to the destination.
+	 * 
+	 * @param loc the location the entity will move to.
+	 * @param queue whether this action should be added to the queue (true) or executed directly (false).
+	 * @param maximumDistractionDistance the maximum distance this entity will try to follow targets in order to attack them. If reached, the entity will turn back and continue moving to the destination. Default is 16.0 blocks.
+	 * @param movementSpeedMultiplicator 1.0 for default speed, 2.0 for doubling the movement speed, and so on. Default is 1.0
+	 * @return {@link ControllableMobAction}
+	 * @throws IllegalArgumentException when maximumDistractionDistance or movementSpeedMultiplicator is zero or negative
+	 */
+	public ControllableMobAction attackMoveTo(Location loc, boolean queue, double maximumDistractionDistance, double movementSpeedMultiplicator) throws IllegalArgumentException;
 	
 	/**
 	 * Orders the entity to look at the given location.

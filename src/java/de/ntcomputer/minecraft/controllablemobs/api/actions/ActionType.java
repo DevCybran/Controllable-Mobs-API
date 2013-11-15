@@ -5,7 +5,7 @@ package de.ntcomputer.minecraft.controllablemobs.api.actions;
  * Can be obtained by calling {@link ControllableMobAction#getType()} 
  *  
  * @author Cybran
- * @version v2
+ * @version v6
  *
  */
 public enum ActionType {
@@ -20,6 +20,11 @@ public enum ActionType {
 	 * @see de.ntcomputer.minecraft.controllablemobs.api.ControllableMobActions#moveTo(org.bukkit.Location, boolean)
 	 */
 	MOVE(false, false),
+	
+	/**
+	 * @see de.ntcomputer.minecraft.controllablemobs.api.ControllableMobActions#attackMoveTo(org.bukkit.Location, boolean, double, double)
+	 */
+	ATTACKMOVE(false, false),
 	
 	/**
 	 * @see de.ntcomputer.minecraft.controllablemobs.api.ControllableMobActions#target(org.bukkit.entity.LivingEntity, boolean)
