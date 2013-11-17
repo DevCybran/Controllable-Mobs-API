@@ -12,6 +12,7 @@ import de.ntcomputer.minecraft.controllablemobs.api.ai.AIType;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;
 
+@SuppressWarnings("unchecked")
 public final class AIComponentHandlers {
 	private static final Map<Class<? extends PathfinderGoal>, AIComponentListener<?>> handlerMap = new HashMap<Class<? extends PathfinderGoal>, AIComponentListener<?>>();
 
@@ -19,7 +20,13 @@ public final class AIComponentHandlers {
 		throw new AssertionError();
 	}
 	
-	private static <T extends PathfinderGoal> void add(Class<T> goalClass, AIComponentListener<? super T> listener) {
+	private static <T extends PathfinderGoal> void add(AIComponentListener<T> listener, Class<? extends T>... goalClasses) {
+		for(Class<? extends T> goalClass: goalClasses) {
+			handlerMap.put(goalClass, listener);
+		}
+	}
+	
+	private static <T extends PathfinderGoal> void add(Class<? extends T> goalClass, AIComponentListener<T> listener) {
 		handlerMap.put(goalClass, listener);
 	}
 	
@@ -36,8 +43,7 @@ public final class AIComponentHandlers {
 				}
 			}
 		};
-		add(PathfinderGoalOpenDoor.class, closedDoorListener);
-		add(PathfinderGoalBreakDoor.class, closedDoorListener);
+		add(closedDoorListener, PathfinderGoalOpenDoor.class, PathfinderGoalBreakDoor.class);
 		
 		add(PathfinderGoalFloat.class, new AIComponentListener<PathfinderGoalFloat>() {
 			@Override
@@ -53,7 +59,6 @@ public final class AIComponentHandlers {
 		});
 	}
 	
-	@SuppressWarnings("unchecked")
 	static <T extends PathfinderGoal> void handleAdd(CraftControllableMob<?> mob, T goal) {
 		AIComponentListener<T> listener = (AIComponentListener<T>) handlerMap.get(goal.getClass());
 		if(listener!=null) {
@@ -61,7 +66,6 @@ public final class AIComponentHandlers {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	static <T extends PathfinderGoal> void handleRemoved(CraftControllableMob<?> mob, T goal) {
 		AIComponentListener<T> listener = (AIComponentListener<T>) handlerMap.get(goal.getClass());
 		if(listener!=null) {
