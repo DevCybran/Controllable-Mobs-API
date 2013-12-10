@@ -22,7 +22,7 @@ public enum ActionType {
 	MOVE(false, false),
 	
 	/**
-	 * @see de.ntcomputer.minecraft.controllablemobs.api.ControllableMobActions#attackMoveTo(org.bukkit.Location, boolean, double, double)
+	 * @see de.ntcomputer.minecraft.controllablemobs.api.ControllableMobActions#moveToAttacking(org.bukkit.Location, boolean, double, double)
 	 */
 	MOVEATTACKING(false, false),
 	
