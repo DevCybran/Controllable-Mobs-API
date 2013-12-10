@@ -3,11 +3,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.ntcomputer</groupId>
 	<artifactId>controllable-mobs-api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.6.4.6-SNAPSHOT</version>
 	<name>Controllable Mobs API</name>
 	<url>http://dev.bukkit.org/bukkit-plugins/controllable-mobs-api/</url>
 
 	<properties>
+		<maven.compiler.source>1.6</maven.compiler.source>
+		<maven.compiler.target>1.6</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<minecraft.version>1.6.4</minecraft.version>
 		<minecraft_version>1_6_R3</minecraft_version>
@@ -32,7 +34,7 @@
 
 	<build>
 		<plugins>
-		
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -48,7 +50,7 @@
 					</archive>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>com.github.github</groupId>
 				<artifactId>site-maven-plugin</artifactId>
@@ -73,7 +75,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+
 			<plugin>
 				<artifactId>maven-deploy-plugin</artifactId>
 				<version>2.7</version>
@@ -81,7 +83,7 @@
 					<altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.0</version>
@@ -90,7 +92,24 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
-			
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9.1</version>
+				<configuration>
+					<excludePackageNames>de.ntcomputer.minecraft.controllablemobs.implementation;de.ntcomputer.minecraft.controllablemobs.plugin</excludePackageNames>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
 		</plugins>
 	</build>
 
