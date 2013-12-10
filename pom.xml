@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.ntcomputer</groupId>
 	<artifactId>controllable-mobs-api</artifactId>
-	<version>1.6.4.6-alpha1</version>
+	<version>1.6.4.6-SNAPSHOT</version>
 	<name>Controllable Mobs API</name>
 	<url>http://dev.bukkit.org/bukkit-plugins/controllable-mobs-api/</url>
 
@@ -122,5 +122,13 @@
 
 		</plugins>
 	</build>
+
+	<distributionManagement>
+		<repository>
+			<id>internal.repo</id>
+			<name>Temporary Staging Repository</name>
+			<url>file://${project.build.directory}/mvn-repo</url>
+		</repository>
+	</distributionManagement>
 
 </project>
