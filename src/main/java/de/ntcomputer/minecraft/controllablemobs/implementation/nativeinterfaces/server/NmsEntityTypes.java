@@ -1,7 +1,7 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server;
 
-import net.minecraft.server.v1_6_R3.Entity;
-import net.minecraft.server.v1_6_R3.EntityTypes;
+import net.minecraft.server.v1_7_R1.Entity;
+import net.minecraft.server.v1_7_R1.EntityTypes;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.system.NativeMethodPublic;
 
 public final class NmsEntityTypes {

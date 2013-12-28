@@ -1,7 +1,7 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server;
 
-import net.minecraft.server.v1_6_R3.EntityInsentient;
-import net.minecraft.server.v1_6_R3.PathfinderGoalSelector;
+import net.minecraft.server.v1_7_R1.EntityInsentient;
+import net.minecraft.server.v1_7_R1.PathfinderGoalSelector;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.primitives.NativeFieldObject;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.system.NativeMethodPublic;
 
@@ -13,7 +13,7 @@ public final class NmsEntityInsentient {
 	public final class GetVerticalHeadSpeed extends NativeMethodPublic {
 		public int invoke(EntityInsentient entity) {
 			try {
-				return entity.bp();
+				return entity.x();
 			} catch(Throwable e) {
 				this.handleException(e);
 				return 40;
