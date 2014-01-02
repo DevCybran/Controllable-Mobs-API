@@ -1,17 +1,16 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation.ai;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import org.bukkit.entity.LivingEntity;
-
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIPart;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIType;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors.AIBehavior;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors.AITargetBehavior;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
+import org.bukkit.entity.LivingEntity;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class AIDispatcher<E extends LivingEntity> {
 	private AIController<E> goalController;
@@ -35,10 +34,8 @@ public class AIDispatcher<E extends LivingEntity> {
 	}
 	
 	public boolean contains(AIType type) {
-		if(this.goalController.contains(type)) return true;
-		if(this.targetController.contains(type)) return true;
-		return false;
-	}
+        return this.goalController.contains(type) || this.targetController.contains(type);
+    }
 	
 	public boolean contains(AIType... types) {
 		for(AIType type: types) {

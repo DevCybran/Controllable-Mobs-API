@@ -2,7 +2,7 @@ package de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces
 
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.system.NativeFieldPrivate;
 
-public class NativeFieldDouble<C extends Object> extends NativeFieldPrivate<C> {
+public class NativeFieldDouble<C> extends NativeFieldPrivate<C> {
 	
 	public NativeFieldDouble(final String fieldName) {
 		super(fieldName);

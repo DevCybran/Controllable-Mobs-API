@@ -1,14 +1,13 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation;
 
-import java.util.ArrayList;
-
-import org.bukkit.entity.LivingEntity;
-
 import de.ntcomputer.minecraft.controllablemobs.api.ControllableMobAI;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIPart;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIType;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors.AIBehavior;
 import de.ntcomputer.minecraft.controllablemobs.implementation.ai.AIDispatcher;
+import org.bukkit.entity.LivingEntity;
+
+import java.util.ArrayList;
 
 public class CraftControllableMobAI<E extends LivingEntity> implements ControllableMobAI<E> {
 	private AIDispatcher<E> dispatcher;
@@ -67,7 +66,7 @@ public class CraftControllableMobAI<E extends LivingEntity> implements Controlla
 	public AIPart<E,?>[] getParts() {
 		ArrayList<AIPart<E,?>> parts = new ArrayList<AIPart<E,?>>();
 		this.dispatcher.get(parts,null);
-		return parts.toArray(new AIPart[0]);
+		return parts.toArray(new AIPart[parts.size()]);
 	}
 
 	@Override
@@ -80,7 +79,7 @@ public class CraftControllableMobAI<E extends LivingEntity> implements Controlla
 	public AIPart<E, ?>[] getPartsOf(AIType... types) {
 		ArrayList<AIPart<E,?>> parts = new ArrayList<AIPart<E,?>>();
 		this.dispatcher.get(parts,types);
-		return parts.toArray(new AIPart[0]);
+		return parts.toArray(new AIPart[parts.size()]);
 	}
 
 	@Override
