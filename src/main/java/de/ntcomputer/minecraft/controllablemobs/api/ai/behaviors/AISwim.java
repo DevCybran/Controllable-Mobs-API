@@ -1,12 +1,10 @@
 package de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors;
 
-import net.minecraft.server.v1_7_R1.PathfinderGoal;
-import net.minecraft.server.v1_7_R1.PathfinderGoalFloat;
-
-import org.bukkit.entity.LivingEntity;
-
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIType;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
+import net.minecraft.server.v1_7_R1.PathfinderGoal;
+import net.minecraft.server.v1_7_R1.PathfinderGoalFloat;
+import org.bukkit.entity.LivingEntity;
 
 /**
  * Very important AIBehavior that lets the entity swim.
@@ -35,13 +33,12 @@ public class AISwim extends AIBehavior<LivingEntity> {
 	}
 
 	@Override
-	public PathfinderGoal createPathfinderGoal(CraftControllableMob<?> mob) {
-		return new PathfinderGoalFloat(mob.nmsEntity);
-	}
-
-	@Override
 	public AIType getType() {
 		return AIType.MOVE_SWIM;
 	}
 
+    @Override
+    public PathfinderGoal createPathfinderGoal(CraftControllableMob<? extends LivingEntity> mob) {
+        return new PathfinderGoalFloat(mob.nmsEntity);
+    }
 }

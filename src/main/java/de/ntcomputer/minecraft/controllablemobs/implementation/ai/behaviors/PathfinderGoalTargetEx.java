@@ -51,7 +51,7 @@ public abstract class PathfinderGoalTargetEx extends PathfinderGoalWrapper {
 		if(!assignable) return false;
 		
 		// invulnerability and invisibility check
-		if((!this.ignoreInvulnerability) && (target instanceof EntityHuman) && (((EntityHuman) target).abilities.isInvulnerable || ((EntityHuman) target).isInvisible())) return false;
+		if((!this.ignoreInvulnerability) && (target instanceof EntityHuman) && (((EntityHuman) target).abilities.isInvulnerable || target.isInvisible())) return false;
 		
 		// range check
 		if(this.maximumDistanceSquared>0 && NativeInterfaces.ENTITY.METHOD_GETDISTANCETOENTITYSQUARED.invoke(this.entity,target)>this.maximumDistanceSquared) return false;

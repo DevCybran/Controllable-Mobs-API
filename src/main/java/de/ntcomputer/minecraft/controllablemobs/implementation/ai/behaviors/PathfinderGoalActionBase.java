@@ -69,9 +69,9 @@ abstract class PathfinderGoalActionBase<A extends ControllableMobActionBase> ext
 	@Override
 	protected void onTick() {
 		this.onTickAction();
-	};
-	
-	@Override
+	}
+
+    @Override
 	protected final void onEnd() {
 		this.onEndAction();
 		if(this.action.getState()!=ActionState.BLOCKED) {
@@ -94,8 +94,11 @@ abstract class PathfinderGoalActionBase<A extends ControllableMobActionBase> ext
 		return true;
 	}
 	protected abstract boolean canContinueAction();
-	protected void onStartAction() {};
-	protected void onTickAction() {};
-	protected void onEndAction() {}
+
+	protected void onStartAction() {}
+
+    protected void onTickAction() {}
+
+    protected void onEndAction() {}
 	
 }

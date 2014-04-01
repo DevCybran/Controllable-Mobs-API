@@ -109,7 +109,7 @@ public class AITargetNearest extends AITargetBehaviorEx {
 	}
 
 	@Override
-	public PathfinderGoal createPathfinderGoal(CraftControllableMob<?> mob) {
+	public PathfinderGoal createPathfinderGoal(CraftControllableMob<? extends LivingEntity> mob) {
 		return new PathfinderGoalTargetNearest(mob, this.maximumNoEyeContactTicks, this.ignoreInvulnerability, this.maximumDistance, this.targetClasses, this.entitySelector);
 	}
 

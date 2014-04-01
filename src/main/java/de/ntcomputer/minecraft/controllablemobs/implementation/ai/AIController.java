@@ -1,23 +1,5 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation.ai;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import net.minecraft.server.v1_7_R1.EntityInsentient;
-import net.minecraft.server.v1_7_R1.PathfinderGoal;
-import net.minecraft.server.v1_7_R1.PathfinderGoalSelector;
-
-import org.bukkit.craftbukkit.v1_7_R1.util.UnsafeList;
-import org.bukkit.entity.LivingEntity;
-
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIState;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIType;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors.AIBehavior;
@@ -26,9 +8,16 @@ import de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors.Path
 import de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors.PathfinderGoalWrapper;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.primitives.NativeFieldObject;
+import net.minecraft.server.v1_7_R1.EntityInsentient;
+import net.minecraft.server.v1_7_R1.PathfinderGoal;
+import net.minecraft.server.v1_7_R1.PathfinderGoalSelector;
+import org.bukkit.craftbukkit.v1_7_R1.util.UnsafeList;
+import org.bukkit.entity.LivingEntity;
+
+import java.util.*;
 
 public abstract class AIController<E extends LivingEntity> implements Comparator<Object> {
-	private List<PathfinderGoalWrapper> actionGoals;
+	private List<PathfinderGoal> actionGoals;
 	private List<CraftAIPart<E,?>> attachedParts;
 	private List<CraftAIPart<E,?>> defaultParts;
 	private PathfinderGoalAIMonitor monitor;
@@ -62,7 +51,7 @@ public abstract class AIController<E extends LivingEntity> implements Comparator
 		}
 		
 		// create action goals and monitor and sort with default goals
-		this.actionGoals = new ArrayList<PathfinderGoalWrapper>();
+		this.actionGoals = new ArrayList<PathfinderGoal>();
 		this.createActionGoals();
 		this.monitor = new PathfinderGoalAIMonitor(this,activeDefaultGoals);
 		this.addActionGoal(0, monitor);
@@ -99,7 +88,7 @@ public abstract class AIController<E extends LivingEntity> implements Comparator
 				break;
 			}
 		}
-		((UnsafeList<Object>.Itr) iterator).valid = false;
+		((UnsafeList.Itr) iterator).valid = false;
 		
 		// remove item
 		iterator = NativeInterfaces.PATHFINDERGOALSELECTOR.FIELD_GOALITEMS.get(this.selector).iterator();
@@ -110,7 +99,7 @@ public abstract class AIController<E extends LivingEntity> implements Comparator
 				break;
 			}
 		}
-		((UnsafeList<Object>.Itr) iterator).valid = false;
+		((UnsafeList.Itr) iterator).valid = false;
 	}
 	
 	private void clearGoals() {
@@ -125,7 +114,7 @@ public abstract class AIController<E extends LivingEntity> implements Comparator
 				iterator.remove();
 			}
 		}
-		((UnsafeList<Object>.Itr) iterator).valid = false;
+		((UnsafeList.Itr) iterator).valid = false;
 		
 		// remove all non-action items
 		iterator = NativeInterfaces.PATHFINDERGOALSELECTOR.FIELD_GOALITEMS.get(this.selector).iterator();
@@ -133,7 +122,7 @@ public abstract class AIController<E extends LivingEntity> implements Comparator
 			searchGoal = NativeInterfaces.PATHFINDERGOALSELECTORITEM.FIELD_GOAL.get(iterator.next());
 			if(!this.actionGoals.contains(searchGoal) ) iterator.remove();
 		}
-		((UnsafeList<Object>.Itr) iterator).valid = false;
+		((UnsafeList.Itr) iterator).valid = false;
 	}
 	
 	private void sortGoals() {
