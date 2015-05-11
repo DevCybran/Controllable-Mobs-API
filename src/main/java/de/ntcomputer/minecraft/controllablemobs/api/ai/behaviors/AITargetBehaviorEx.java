@@ -1,6 +1,6 @@
 package de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors;
 
-import net.minecraft.server.v1_7_R1.EntityLiving;
+import net.minecraft.server.v1_7_R4.EntityLiving;
 
 import org.bukkit.entity.LivingEntity;
 

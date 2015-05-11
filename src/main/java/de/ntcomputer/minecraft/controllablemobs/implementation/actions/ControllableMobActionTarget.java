@@ -1,8 +1,8 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation.actions;
 
-import net.minecraft.server.v1_7_R1.EntityLiving;
+import net.minecraft.server.v1_7_R4.EntityLiving;
 
-import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_7_R4.entity.CraftLivingEntity;
 import org.bukkit.entity.LivingEntity;
 
 import de.ntcomputer.minecraft.controllablemobs.api.actions.ActionType;

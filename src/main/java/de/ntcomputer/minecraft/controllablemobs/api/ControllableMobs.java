@@ -4,16 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
-import net.minecraft.server.v1_7_R1.EntityInsentient;
-import net.minecraft.server.v1_7_R1.EntityLiving;
+import net.minecraft.server.v1_7_R4.EntityInsentient;
+import net.minecraft.server.v1_7_R4.EntityLiving;
 
-import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_7_R4.entity.CraftLivingEntity;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.PluginClassLoader;
 
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
-import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;
 
 /**
  * This is a static class which lets you retrieve instances of {@link ControllableMob}.
@@ -30,20 +27,6 @@ public final class ControllableMobs {
 	}
 	
 	private static void onLoad() {
-		try {
-			PluginClassLoader cl = (PluginClassLoader) ControllableMobs.class.getClassLoader();
-			Plugin[] plugins = NativeInterfaces.JAVAPLUGINLOADER.FIELD_SERVER.get(NativeInterfaces.PLUGINCLASSLOADER.FIELD_LOADER.get(cl)).getPluginManager().getPlugins();
-			for(Plugin plugin: plugins) {
-				if(plugin.getClass().getClassLoader()==cl) {
-					if(plugin.getName().equals("ControllableMobsAPI")) {
-						plugin.getLogger().info("initialized API plugin");
-					} else {
-						plugin.getLogger().info("initialized Controllable Mobs API library");
-					}
-					return;
-				}
-			}
-		} catch(Throwable t) {}
 		Logger.getLogger("Minecraft").info("[ControllableMobsAPI] initialized by an unknown component");
 	}
 	

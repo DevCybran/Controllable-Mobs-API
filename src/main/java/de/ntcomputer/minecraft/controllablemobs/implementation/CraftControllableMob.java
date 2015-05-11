@@ -1,6 +1,6 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation;
 
-import net.minecraft.server.v1_7_R1.EntityInsentient;
+import net.minecraft.server.v1_7_R4.EntityInsentient;
 
 import org.bukkit.entity.LivingEntity;
 

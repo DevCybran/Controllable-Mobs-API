@@ -1,7 +1,6 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces;
 
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server.CBInterfaceJavaPluginLoader;
-import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server.CBInterfacePluginClassLoader;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server.NmsAttributeModifiable;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server.NmsAttributeModifier;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server.NmsAttributeRanged;
@@ -27,7 +26,6 @@ public final class NativeInterfaces {
 	public static final NmsInterfacePathfinderGoal PATHFINDERGOAL = new NmsInterfacePathfinderGoal();
 	public static final NmsPathfinderGoalSelector PATHFINDERGOALSELECTOR = new NmsPathfinderGoalSelector();
 	public static final NmsPathfinderGoalSelectorItem PATHFINDERGOALSELECTORITEM = new NmsPathfinderGoalSelectorItem();
-	public static final CBInterfacePluginClassLoader PLUGINCLASSLOADER = new CBInterfacePluginClassLoader();
 	public static final NmsWorld WORLD = new NmsWorld();
 	public static final NmsIAttribute IATTRIBUTE = new NmsIAttribute();
 	public static final NmsAttributeRanged ATTRIBUTERANGED = new NmsAttributeRanged();

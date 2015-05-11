@@ -1,7 +1,7 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation.ai;
 
-import net.minecraft.server.v1_7_R1.Entity;
-import net.minecraft.server.v1_7_R1.IEntitySelector;
+import net.minecraft.server.v1_7_R4.Entity;
+import net.minecraft.server.v1_7_R4.IEntitySelector;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.EntityFilter;
 
 public final class EntitySelector implements IEntitySelector {

@@ -15,7 +15,7 @@ public class CraftAttributeModifier implements AttributeModifier {
 	private final String name;
 	private final double value;
 	private final ModifyOperation operation;
-	private net.minecraft.server.v1_7_R1.AttributeModifier nativeModifier = null;
+	private net.minecraft.server.v1_7_R4.AttributeModifier nativeModifier = null;
 	private final Set<CraftAttribute> attachedAttributes = new HashSet<CraftAttribute>();
 	private final boolean custom;
 	
@@ -27,7 +27,7 @@ public class CraftAttributeModifier implements AttributeModifier {
 		this.custom = true;
 	}
 	
-	public CraftAttributeModifier(UUID uuid, net.minecraft.server.v1_7_R1.AttributeModifier nativeModifier) {
+	public CraftAttributeModifier(UUID uuid, net.minecraft.server.v1_7_R4.AttributeModifier nativeModifier) {
 		this.uniqueID = uuid;
 		this.nativeModifier = nativeModifier;
 		this.name = NativeInterfaces.ATTRIBUTEMODIFIER.METHOD_GETNAME.invoke(nativeModifier);
@@ -51,9 +51,9 @@ public class CraftAttributeModifier implements AttributeModifier {
 		return this.value;
 	}
 	
-	net.minecraft.server.v1_7_R1.AttributeModifier getNativeModifier() {
+	net.minecraft.server.v1_7_R4.AttributeModifier getNativeModifier() {
 		if(this.nativeModifier==null) {
-			this.nativeModifier = new net.minecraft.server.v1_7_R1.AttributeModifier(uniqueID, name, value, this.operation.getIntType());
+			this.nativeModifier = new net.minecraft.server.v1_7_R4.AttributeModifier(uniqueID, name, value, this.operation.getIntType());
 		}
 		return this.nativeModifier;
 	}

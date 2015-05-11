@@ -1,6 +1,6 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation.ai;
 
-import net.minecraft.server.v1_7_R1.PathfinderGoal;
+import net.minecraft.server.v1_7_R4.PathfinderGoal;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
 
 public interface AIComponentListener<T extends PathfinderGoal> {

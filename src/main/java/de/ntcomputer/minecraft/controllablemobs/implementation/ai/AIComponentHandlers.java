@@ -3,11 +3,11 @@ package de.ntcomputer.minecraft.controllablemobs.implementation.ai;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.minecraft.server.v1_7_R1.PathfinderGoal;
-import net.minecraft.server.v1_7_R1.PathfinderGoalBreakDoor;
-import net.minecraft.server.v1_7_R1.PathfinderGoalDoorInteract;
-import net.minecraft.server.v1_7_R1.PathfinderGoalFloat;
-import net.minecraft.server.v1_7_R1.PathfinderGoalOpenDoor;
+import net.minecraft.server.v1_7_R4.PathfinderGoal;
+import net.minecraft.server.v1_7_R4.PathfinderGoalBreakDoor;
+import net.minecraft.server.v1_7_R4.PathfinderGoalDoorInteract;
+import net.minecraft.server.v1_7_R4.PathfinderGoalFloat;
+import net.minecraft.server.v1_7_R4.PathfinderGoalOpenDoor;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIType;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;

@@ -1,9 +1,9 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation.actions;
 
-import net.minecraft.server.v1_7_R1.World;
+import net.minecraft.server.v1_7_R4.World;
 
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_7_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_7_R4.CraftWorld;
 
 public class ControllableMobActionLookBlock extends ControllableMobActionLook {
 	private final double[] values;
