@@ -1,12 +1,12 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors;
 
-import net.minecraft.server.v1_7_R4.EntityCreature;
-import net.minecraft.server.v1_7_R4.EntityHuman;
-import net.minecraft.server.v1_7_R4.EntityInsentient;
-import net.minecraft.server.v1_7_R4.EntityLiving;
+import net.minecraft.server.v1_8_R3.EntityCreature;
+import net.minecraft.server.v1_8_R3.EntityHuman;
+import net.minecraft.server.v1_8_R3.EntityInsentient;
+import net.minecraft.server.v1_8_R3.EntityLiving;
 
-import org.bukkit.craftbukkit.v1_7_R4.entity.CraftLivingEntity;
-import org.bukkit.craftbukkit.v1_7_R4.event.CraftEventFactory;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_8_R3.event.CraftEventFactory;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent;
 
@@ -57,7 +57,7 @@ public abstract class PathfinderGoalTargetEx extends PathfinderGoalWrapper {
 		if(this.maximumDistanceSquared>0 && NativeInterfaces.ENTITY.METHOD_GETDISTANCETOENTITYSQUARED.invoke(this.entity,target)>this.maximumDistanceSquared) return false;
 		
 		// eye contact check
-		if(this.maximumNoEyeContactTicks>0 && !this.entity.getEntitySenses().canSee(target)) return false;
+		if(this.maximumNoEyeContactTicks>0 && !this.entity.getEntitySenses().a(target)) return false;
 		
 		// call target event
 		final EntityTargetLivingEntityEvent event = CraftEventFactory.callEntityTargetLivingEvent(this.entity, target, reason);
@@ -66,7 +66,7 @@ public abstract class PathfinderGoalTargetEx extends PathfinderGoalWrapper {
 		// set new target!
 		target = ((CraftLivingEntity) event.getTarget()).getHandle();
 		this.entity.setGoalTarget(target);
-		if(this.entity instanceof EntityCreature) ((EntityCreature) this.entity).target = target;
+		if(this.entity instanceof EntityCreature) ((EntityCreature) this.entity).setGoalTarget(target);
 		this.mob.adjustMaximumNavigationDistance(Math.sqrt(NativeInterfaces.ENTITY.METHOD_GETDISTANCETOENTITYSQUARED.invoke(this.entity, target) * 2));
 		
 		return true;
@@ -85,7 +85,7 @@ public abstract class PathfinderGoalTargetEx extends PathfinderGoalWrapper {
 		
 		// eye contact check
 		if(this.maximumNoEyeContactTicks>0) {
-			if(this.entity.getEntitySenses().canSee(target)) this.noEyeContactTicks = 0;
+			if(this.entity.getEntitySenses().a(target)) this.noEyeContactTicks = 0;
 			else {
 				if(++this.noEyeContactTicks > this.maximumNoEyeContactTicks) return false;
 			}

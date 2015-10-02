@@ -1,6 +1,5 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors;
 
-import net.minecraft.server.v1_7_R4.EntityCreature;
 import de.ntcomputer.minecraft.controllablemobs.api.actions.ActionType;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
 import de.ntcomputer.minecraft.controllablemobs.implementation.actions.ControllableMobActionTarget;
@@ -24,7 +23,7 @@ public class PathfinderGoalActionTarget extends PathfinderGoalActionDelayed<Cont
 		// set target for AI goals
 		this.mob.nmsEntity.setGoalTarget(this.action.target);
 		// set target for old AI & bukkit interface (so "getTarget" on Creature will return the correct entity)
-		if(this.mob.nmsEntity instanceof EntityCreature) ((EntityCreature) this.mob.nmsEntity).target = this.action.target;
+		//if(this.mob.nmsEntity instanceof EntityCreature) ((EntityCreature) this.mob.nmsEntity).target = this.action.target;
 	}
 
 	@Override

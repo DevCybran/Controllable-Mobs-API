@@ -13,13 +13,13 @@ import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.
 public class ControllableMobHelper {
 	
 	@SuppressWarnings("deprecation")
-	public static Class<? extends net.minecraft.server.v1_7_R4.Entity> getNmsEntityClass(final Class<? extends LivingEntity> entityClass) throws IllegalArgumentException {
+	public static Class<? extends net.minecraft.server.v1_8_R3.Entity> getNmsEntityClass(final Class<? extends LivingEntity> entityClass) throws IllegalArgumentException {
 		if(entityClass==null) throw new IllegalArgumentException("entityClass must not be null");
-		if(entityClass==HumanEntity.class || entityClass==Player.class) return net.minecraft.server.v1_7_R4.EntityHuman.class;
-		if(entityClass==Monster.class) return net.minecraft.server.v1_7_R4.EntityMonster.class;
-		if(entityClass==Creature.class) return net.minecraft.server.v1_7_R4.EntityCreature.class;
-		if(entityClass==Animals.class) return net.minecraft.server.v1_7_R4.EntityAnimal.class;
-		if(entityClass==LivingEntity.class) return net.minecraft.server.v1_7_R4.EntityLiving.class;
+		if(entityClass==HumanEntity.class || entityClass==Player.class) return net.minecraft.server.v1_8_R3.EntityHuman.class;
+		if(entityClass==Monster.class) return net.minecraft.server.v1_8_R3.EntityMonster.class;
+		if(entityClass==Creature.class) return net.minecraft.server.v1_8_R3.EntityCreature.class;
+		if(entityClass==Animals.class) return net.minecraft.server.v1_8_R3.EntityAnimal.class;
+		if(entityClass==LivingEntity.class) return net.minecraft.server.v1_8_R3.EntityLiving.class;
 		
 		for(EntityType entityType: EntityType.values()) {
 			if(entityType.getEntityClass()==null || entityType.getTypeId()==-1) continue;
@@ -32,12 +32,12 @@ public class ControllableMobHelper {
 	}
 	
 	@SuppressWarnings("deprecation")
-	public static Class<? extends net.minecraft.server.v1_7_R4.Entity> getNmsEntityClass(final EntityType entityType) throws IllegalArgumentException {
+	public static Class<? extends net.minecraft.server.v1_8_R3.Entity> getNmsEntityClass(final EntityType entityType) throws IllegalArgumentException {
 		if(entityType==null) throw new IllegalArgumentException("EntityType must not be null");
-		if(entityType==EntityType.PLAYER) return net.minecraft.server.v1_7_R4.EntityHuman.class;
+		if(entityType==EntityType.PLAYER) return net.minecraft.server.v1_8_R3.EntityHuman.class;
 		
 		try {
-			final Class<? extends net.minecraft.server.v1_7_R4.Entity> entityClass = NativeInterfaces.ENTITYTYPES.METHOD_GETCLASSBYID.invoke(entityType.getTypeId());
+			final Class<? extends net.minecraft.server.v1_8_R3.Entity> entityClass = NativeInterfaces.ENTITYTYPES.METHOD_GETCLASSBYID.invoke(entityType.getTypeId());
 			if(entityClass==null) throw new IllegalArgumentException("EntityType "+entityType+" is not resolvable to a net.minecraft Class");
 			return entityClass;
 		} catch(Exception e) {

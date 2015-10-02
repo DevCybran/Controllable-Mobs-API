@@ -1,14 +1,17 @@
 package de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors;
 
-import net.minecraft.server.v1_7_R4.PathfinderGoal;
+import net.minecraft.server.v1_8_R3.Entity;
+import net.minecraft.server.v1_8_R3.IEntitySelector;
+import net.minecraft.server.v1_8_R3.PathfinderGoal;
 
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.LivingEntity;
 
+import com.google.common.base.Predicate;
+
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIType;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.EntityFilter;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
-import de.ntcomputer.minecraft.controllablemobs.implementation.ai.EntitySelector;
 import de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors.PathfinderGoalTargetNearest;
 
 /**
@@ -20,7 +23,7 @@ import de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors.Path
  *
  */
 public class AITargetNearest extends AITargetBehaviorEx {
-	private final EntitySelector entitySelector;
+	private final Predicate<Entity> entitySelector;
 	
 	/**
 	 * Create with an automatically given priority.
@@ -105,11 +108,12 @@ public class AITargetNearest extends AITargetBehaviorEx {
 	 */
 	public AITargetNearest(int priority, double maximumDistance, boolean ignoreInvulnerability, int maximumNoEyeContactTicks, EntityFilter filter, Class<? extends LivingEntity>... targetClasses) throws IllegalArgumentException {
 		super(priority, maximumNoEyeContactTicks, ignoreInvulnerability, maximumDistance, targetClasses);
-		this.entitySelector = filter==null ? null : new EntitySelector(filter);
+		this.entitySelector = IEntitySelector.d;
 	}
 
 	@Override
 	public PathfinderGoal createPathfinderGoal(CraftControllableMob<?> mob) {
+		// TODO: FARLO SUL SERIO
 		return new PathfinderGoalTargetNearest(mob, this.maximumNoEyeContactTicks, this.ignoreInvulnerability, this.maximumDistance, this.targetClasses, this.entitySelector);
 	}
 

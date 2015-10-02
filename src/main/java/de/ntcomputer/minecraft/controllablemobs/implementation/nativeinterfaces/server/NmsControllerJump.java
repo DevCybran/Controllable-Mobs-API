@@ -1,6 +1,6 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server;
 
-import net.minecraft.server.v1_7_R4.ControllerJump;
+import net.minecraft.server.v1_8_R3.ControllerJump;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.system.NativeMethodPublic;
 
 public class NmsControllerJump {

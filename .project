@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Controllable Mobs API</name>
+	<name>Controllable-Mobs-API</name>
 	<comment></comment>
 	<projects>
 		<project>libraries</project>

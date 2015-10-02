@@ -1,9 +1,8 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.server;
 
-import net.minecraft.server.v1_7_R4.EntityLiving;
-import net.minecraft.server.v1_7_R4.Navigation;
-import net.minecraft.server.v1_7_R4.PathEntity;
-import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.primitives.NativeFieldBoolean;
+import net.minecraft.server.v1_8_R3.EntityLiving;
+import net.minecraft.server.v1_8_R3.NavigationAbstract;
+import net.minecraft.server.v1_8_R3.PathEntity;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.system.NativeMethodPublic;
 
 public class NmsNavigation {
@@ -16,19 +15,19 @@ public class NmsNavigation {
 	public final CreatePathToEntity METHOD_CREATEPATHTOENTITY = new CreatePathToEntity();
 	public final CreatePathToLocation METHOD_CREATEPATHTOLOCATION = new CreatePathToLocation();
 	// first of 4 booleans
-	public final NativeFieldBoolean<Navigation> FIELD_USEOPENDOOR = new NativeFieldBoolean<Navigation>(Navigation.class, "j");
+	//public final NativeFieldBoolean<NmsNavigation> FIELD_USEOPENDOOR = new NativeFieldBoolean<NmsNavigation>(NmsNavigation.class, "f");
 	// second of 4 booleans
-	public final NativeFieldBoolean<Navigation> FIELD_USECLOSEDDOOR = new NativeFieldBoolean<Navigation>(Navigation.class, "k");
+	//public final NativeFieldBoolean<NmsNavigation> FIELD_USECLOSEDDOOR = new NativeFieldBoolean<NmsNavigation>(NmsNavigation.class, "f");
 	// third of 4 booleans
-	public final NativeFieldBoolean<Navigation> FIELD_AVOIDWATER = new NativeFieldBoolean<Navigation>(Navigation.class, "l");
+	//public final NativeFieldBoolean<NmsNavigation> FIELD_AVOIDWATER = new NativeFieldBoolean<NmsNavigation>(NmsNavigation.class, "f");
 	// last of 4 booleans
-	public final NativeFieldBoolean<Navigation> FIELD_CANSWIM = new NativeFieldBoolean<Navigation>(Navigation.class, "m");
+	//public final NativeFieldBoolean<NmsNavigation> FIELD_CANSWIM = new NativeFieldBoolean<NmsNavigation>(NmsNavigation.class, "f");
 
 	public class IsMoveFinished extends NativeMethodPublic {
-		public boolean invoke(final Navigation navigation) {
+		public boolean invoke(final NavigationAbstract navigation) {
 			try {
 				// return (this.c == null) || (this.c.b());
-				return navigation.g();
+				return navigation.m();
 			} catch(Throwable e) {
 				this.handleException(e);
 				return true;
@@ -37,10 +36,10 @@ public class NmsNavigation {
 	}
 	
 	public class StopMove extends NativeMethodPublic {
-		public void invoke(final Navigation navigation) {
+		public void invoke(final NavigationAbstract navigation) {
 			try {
 				// this.c = null;
-				navigation.h();
+				navigation.k();
 			} catch(Throwable e) {
 				this.handleException(e);
 			}
@@ -48,7 +47,7 @@ public class NmsNavigation {
 	}
 	
 	public class MoveToEntity extends NativeMethodPublic {
-		public void invoke(final Navigation navigation, EntityLiving entity, double movementSpeedMultiplicator) {
+		public void invoke(final NavigationAbstract navigation, EntityLiving entity, double movementSpeedMultiplicator) {
 			try {
 				navigation.a(entity, movementSpeedMultiplicator);
 			} catch(Throwable e) {
@@ -58,7 +57,7 @@ public class NmsNavigation {
 	}
 	
 	public class MoveAlongPath extends NativeMethodPublic {
-		public void invoke(final Navigation navigation, PathEntity path, double movementSpeedMultiplicator) {
+		public void invoke(final NavigationAbstract navigation, PathEntity path, double movementSpeedMultiplicator) {
 			try {
 				navigation.a(path, movementSpeedMultiplicator);
 			} catch(Throwable e) {
@@ -68,7 +67,7 @@ public class NmsNavigation {
 	}
 	
 	public class CreatePathToEntity extends NativeMethodPublic {
-		public PathEntity invoke(final Navigation navigation, final EntityLiving entity) {
+		public PathEntity invoke(final NavigationAbstract navigation, final EntityLiving entity) {
 			try {
 				return navigation.a(entity);
 			} catch(Throwable e) {
@@ -79,7 +78,7 @@ public class NmsNavigation {
 	}
 	
 	public class CreatePathToLocation extends NativeMethodPublic {
-		public PathEntity invoke(final Navigation navigation, final double x, final double y, final double z) {
+		public PathEntity invoke(final NavigationAbstract navigation, final double x, final double y, final double z) {
 			try {
 				return navigation.a(x,y,z);
 			} catch(Throwable e) {

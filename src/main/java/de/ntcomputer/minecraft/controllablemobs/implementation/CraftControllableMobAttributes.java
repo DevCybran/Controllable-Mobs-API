@@ -1,9 +1,9 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation;
 
-import net.minecraft.server.v1_7_R4.AttributeInstance;
-import net.minecraft.server.v1_7_R4.AttributeModifiable;
-import net.minecraft.server.v1_7_R4.EntityInsentient;
-import net.minecraft.server.v1_7_R4.IAttribute;
+import net.minecraft.server.v1_8_R3.AttributeInstance;
+import net.minecraft.server.v1_8_R3.AttributeModifiable;
+import net.minecraft.server.v1_8_R3.EntityInsentient;
+import net.minecraft.server.v1_8_R3.IAttribute;
 import de.ntcomputer.minecraft.controllablemobs.api.ControllableMobAttributes;
 import de.ntcomputer.minecraft.controllablemobs.api.attributes.Attribute;
 import de.ntcomputer.minecraft.controllablemobs.implementation.attributes.CraftAttribute;
@@ -90,32 +90,36 @@ public final class CraftControllableMobAttributes implements ControllableMobAttr
 
 	@Override
 	public boolean canSwim() {
-		return NativeInterfaces.NAVIGATION.FIELD_CANSWIM.get(this.nmsEntity.getNavigation());
+		//TODO return NativeInterfaces.NAVIGATION.FIELD_CANSWIM.get(this.nmsEntity.getNavigation());
+		return true;
 	}
 
 	@Override
 	public boolean getAvoidWater() {
-		return NativeInterfaces.NAVIGATION.FIELD_AVOIDWATER.get(this.nmsEntity.getNavigation());
+		//TODO return NativeInterfaces.NAVIGATION.FIELD_AVOIDWATER.get(this.nmsEntity.getNavigation());
+		return false;
 	}
 
 	@Override
 	public void setAvoidWater(boolean avoid) {
-		NativeInterfaces.NAVIGATION.FIELD_AVOIDWATER.set(this.nmsEntity.getNavigation(), avoid);
+		//TODO NativeInterfaces.NAVIGATION.FIELD_AVOIDWATER.set(this.nmsEntity.getNavigation(), avoid);
 	}
 
 	@Override
 	public boolean getMoveThroughDoors() {
-		return NativeInterfaces.NAVIGATION.FIELD_USEOPENDOOR.get(this.nmsEntity.getNavigation());
+		//TODO return NativeInterfaces.NAVIGATION.FIELD_USEOPENDOOR.get(this.nmsEntity.getNavigation());
+		return false;
 	}
 
 	@Override
 	public void setMoveThroughDoors(boolean moveThroughDoors) {
-		NativeInterfaces.NAVIGATION.FIELD_USEOPENDOOR.set(this.nmsEntity.getNavigation(), moveThroughDoors);
+		//TODO NativeInterfaces.NAVIGATION.FIELD_USEOPENDOOR.set(this.nmsEntity.getNavigation(), moveThroughDoors);
 	}
 
 	@Override
 	public boolean canMoveThroughClosedDoors() {
-		return NativeInterfaces.NAVIGATION.FIELD_USECLOSEDDOOR.get(this.nmsEntity.getNavigation());
+		//TODO return NativeInterfaces.NAVIGATION.FIELD_USECLOSEDDOOR.get(this.nmsEntity.getNavigation());
+		return false;
 	}
 
 }

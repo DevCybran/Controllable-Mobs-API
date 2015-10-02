@@ -2,9 +2,9 @@ package de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors;
 
 import org.bukkit.entity.Creature;
 
-import net.minecraft.server.v1_7_R4.EntityCreature;
-import net.minecraft.server.v1_7_R4.PathfinderGoal;
-import net.minecraft.server.v1_7_R4.PathfinderGoalRestrictSun;
+import net.minecraft.server.v1_8_R3.EntityCreature;
+import net.minecraft.server.v1_8_R3.PathfinderGoal;
+import net.minecraft.server.v1_8_R3.PathfinderGoalRestrictSun;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIType;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
 

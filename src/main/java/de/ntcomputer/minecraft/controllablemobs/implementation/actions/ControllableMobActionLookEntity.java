@@ -1,14 +1,14 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation.actions;
 
-import net.minecraft.server.v1_7_R4.World;
+import net.minecraft.server.v1_8_R3.World;
 
-import org.bukkit.craftbukkit.v1_7_R4.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftEntity;
 import org.bukkit.entity.Entity;
 
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
 
 public class ControllableMobActionLookEntity extends ControllableMobActionLook {
-	private final net.minecraft.server.v1_7_R4.Entity entity;
+	private final net.minecraft.server.v1_8_R3.Entity entity;
 
 	public ControllableMobActionLookEntity(final CraftControllableMob<?> mob, final Entity entity) {
 		super(mob.getActionManager());

@@ -1,9 +1,9 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation.actions;
 
-import net.minecraft.server.v1_7_R4.World;
+import net.minecraft.server.v1_8_R3.World;
 
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_7_R4.CraftWorld;
+import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
 
 import de.ntcomputer.minecraft.controllablemobs.api.actions.ActionType;
 

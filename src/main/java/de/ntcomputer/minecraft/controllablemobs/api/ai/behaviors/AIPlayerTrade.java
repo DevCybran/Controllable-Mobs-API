@@ -1,8 +1,8 @@
 package de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors;
 
-import net.minecraft.server.v1_7_R4.EntityVillager;
-import net.minecraft.server.v1_7_R4.PathfinderGoal;
-import net.minecraft.server.v1_7_R4.PathfinderGoalTradeWithPlayer;
+import net.minecraft.server.v1_8_R3.EntityVillager;
+import net.minecraft.server.v1_8_R3.PathfinderGoal;
+import net.minecraft.server.v1_8_R3.PathfinderGoalTradeWithPlayer;
 
 import org.bukkit.entity.Villager;
 

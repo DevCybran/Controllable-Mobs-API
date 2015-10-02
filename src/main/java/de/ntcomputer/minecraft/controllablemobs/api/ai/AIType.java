@@ -3,50 +3,50 @@ package de.ntcomputer.minecraft.controllablemobs.api.ai;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.minecraft.server.v1_7_R4.PathfinderGoal;
-import net.minecraft.server.v1_7_R4.PathfinderGoalArrowAttack;
-import net.minecraft.server.v1_7_R4.PathfinderGoalAvoidPlayer;
-import net.minecraft.server.v1_7_R4.PathfinderGoalBeg;
-import net.minecraft.server.v1_7_R4.PathfinderGoalBreakDoor;
-import net.minecraft.server.v1_7_R4.PathfinderGoalBreed;
-import net.minecraft.server.v1_7_R4.PathfinderGoalDefendVillage;
-import net.minecraft.server.v1_7_R4.PathfinderGoalEatTile;
-import net.minecraft.server.v1_7_R4.PathfinderGoalFleeSun;
-import net.minecraft.server.v1_7_R4.PathfinderGoalFloat;
-import net.minecraft.server.v1_7_R4.PathfinderGoalFollowOwner;
-import net.minecraft.server.v1_7_R4.PathfinderGoalFollowParent;
-import net.minecraft.server.v1_7_R4.PathfinderGoalHurtByTarget;
-import net.minecraft.server.v1_7_R4.PathfinderGoalInteract;
-import net.minecraft.server.v1_7_R4.PathfinderGoalJumpOnBlock;
-import net.minecraft.server.v1_7_R4.PathfinderGoalLeapAtTarget;
-import net.minecraft.server.v1_7_R4.PathfinderGoalLookAtPlayer;
-import net.minecraft.server.v1_7_R4.PathfinderGoalLookAtTradingPlayer;
-import net.minecraft.server.v1_7_R4.PathfinderGoalMakeLove;
-import net.minecraft.server.v1_7_R4.PathfinderGoalMeleeAttack;
-import net.minecraft.server.v1_7_R4.PathfinderGoalMoveIndoors;
-import net.minecraft.server.v1_7_R4.PathfinderGoalMoveThroughVillage;
-import net.minecraft.server.v1_7_R4.PathfinderGoalMoveTowardsRestriction;
-import net.minecraft.server.v1_7_R4.PathfinderGoalMoveTowardsTarget;
-import net.minecraft.server.v1_7_R4.PathfinderGoalNearestAttackableTarget;
-import net.minecraft.server.v1_7_R4.PathfinderGoalOcelotAttack;
-import net.minecraft.server.v1_7_R4.PathfinderGoalOfferFlower;
-import net.minecraft.server.v1_7_R4.PathfinderGoalOpenDoor;
-import net.minecraft.server.v1_7_R4.PathfinderGoalOwnerHurtByTarget;
-import net.minecraft.server.v1_7_R4.PathfinderGoalOwnerHurtTarget;
-import net.minecraft.server.v1_7_R4.PathfinderGoalPanic;
-import net.minecraft.server.v1_7_R4.PathfinderGoalPassengerCarrotStick;
-import net.minecraft.server.v1_7_R4.PathfinderGoalPlay;
-import net.minecraft.server.v1_7_R4.PathfinderGoalRandomLookaround;
-import net.minecraft.server.v1_7_R4.PathfinderGoalRandomStroll;
-import net.minecraft.server.v1_7_R4.PathfinderGoalRandomTargetNonTamed;
-import net.minecraft.server.v1_7_R4.PathfinderGoalRestrictOpenDoor;
-import net.minecraft.server.v1_7_R4.PathfinderGoalRestrictSun;
-import net.minecraft.server.v1_7_R4.PathfinderGoalSit;
-import net.minecraft.server.v1_7_R4.PathfinderGoalSwell;
-import net.minecraft.server.v1_7_R4.PathfinderGoalTakeFlower;
-import net.minecraft.server.v1_7_R4.PathfinderGoalTame;
-import net.minecraft.server.v1_7_R4.PathfinderGoalTempt;
-import net.minecraft.server.v1_7_R4.PathfinderGoalTradeWithPlayer;
+import net.minecraft.server.v1_8_R3.PathfinderGoal;
+import net.minecraft.server.v1_8_R3.PathfinderGoalArrowAttack;
+import net.minecraft.server.v1_8_R3.PathfinderGoalAvoidTarget;
+import net.minecraft.server.v1_8_R3.PathfinderGoalBeg;
+import net.minecraft.server.v1_8_R3.PathfinderGoalBreakDoor;
+import net.minecraft.server.v1_8_R3.PathfinderGoalBreed;
+import net.minecraft.server.v1_8_R3.PathfinderGoalDefendVillage;
+import net.minecraft.server.v1_8_R3.PathfinderGoalEatTile;
+import net.minecraft.server.v1_8_R3.PathfinderGoalFleeSun;
+import net.minecraft.server.v1_8_R3.PathfinderGoalFloat;
+import net.minecraft.server.v1_8_R3.PathfinderGoalFollowOwner;
+import net.minecraft.server.v1_8_R3.PathfinderGoalFollowParent;
+import net.minecraft.server.v1_8_R3.PathfinderGoalHurtByTarget;
+import net.minecraft.server.v1_8_R3.PathfinderGoalInteract;
+import net.minecraft.server.v1_8_R3.PathfinderGoalJumpOnBlock;
+import net.minecraft.server.v1_8_R3.PathfinderGoalLeapAtTarget;
+import net.minecraft.server.v1_8_R3.PathfinderGoalLookAtPlayer;
+import net.minecraft.server.v1_8_R3.PathfinderGoalLookAtTradingPlayer;
+import net.minecraft.server.v1_8_R3.PathfinderGoalMakeLove;
+import net.minecraft.server.v1_8_R3.PathfinderGoalMeleeAttack;
+import net.minecraft.server.v1_8_R3.PathfinderGoalMoveIndoors;
+import net.minecraft.server.v1_8_R3.PathfinderGoalMoveThroughVillage;
+import net.minecraft.server.v1_8_R3.PathfinderGoalMoveTowardsRestriction;
+import net.minecraft.server.v1_8_R3.PathfinderGoalMoveTowardsTarget;
+import net.minecraft.server.v1_8_R3.PathfinderGoalNearestAttackableTarget;
+import net.minecraft.server.v1_8_R3.PathfinderGoalOcelotAttack;
+import net.minecraft.server.v1_8_R3.PathfinderGoalOfferFlower;
+import net.minecraft.server.v1_8_R3.PathfinderGoalOpenDoor;
+import net.minecraft.server.v1_8_R3.PathfinderGoalOwnerHurtByTarget;
+import net.minecraft.server.v1_8_R3.PathfinderGoalOwnerHurtTarget;
+import net.minecraft.server.v1_8_R3.PathfinderGoalPanic;
+import net.minecraft.server.v1_8_R3.PathfinderGoalPassengerCarrotStick;
+import net.minecraft.server.v1_8_R3.PathfinderGoalPlay;
+import net.minecraft.server.v1_8_R3.PathfinderGoalRandomLookaround;
+import net.minecraft.server.v1_8_R3.PathfinderGoalRandomStroll;
+import net.minecraft.server.v1_8_R3.PathfinderGoalRandomTargetNonTamed;
+import net.minecraft.server.v1_8_R3.PathfinderGoalRestrictOpenDoor;
+import net.minecraft.server.v1_8_R3.PathfinderGoalRestrictSun;
+import net.minecraft.server.v1_8_R3.PathfinderGoalSit;
+import net.minecraft.server.v1_8_R3.PathfinderGoalSwell;
+import net.minecraft.server.v1_8_R3.PathfinderGoalTakeFlower;
+import net.minecraft.server.v1_8_R3.PathfinderGoalTame;
+import net.minecraft.server.v1_8_R3.PathfinderGoalTempt;
+import net.minecraft.server.v1_8_R3.PathfinderGoalTradeWithPlayer;
 
 /**
  * An enum that lists all AI components built into the minecraft server core.<br>
@@ -59,7 +59,7 @@ import net.minecraft.server.v1_7_R4.PathfinderGoalTradeWithPlayer;
  */
 public enum AIType {
 	ATTACK_RANGED(PathfinderGoalArrowAttack.class),
-	MOVE_AVOIDPLAYER(PathfinderGoalAvoidPlayer.class),
+	MOVE_AVOIDPLAYER(PathfinderGoalAvoidTarget.class),
 	ACTION_BEG(PathfinderGoalBeg.class),
 	ACTION_DOORBREAK(PathfinderGoalBreakDoor.class),
 	ACTION_BREED(PathfinderGoalBreed.class),

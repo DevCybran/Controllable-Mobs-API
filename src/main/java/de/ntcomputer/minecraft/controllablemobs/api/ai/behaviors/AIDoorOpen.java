@@ -1,7 +1,7 @@
 package de.ntcomputer.minecraft.controllablemobs.api.ai.behaviors;
 
-import net.minecraft.server.v1_7_R4.PathfinderGoal;
-import net.minecraft.server.v1_7_R4.PathfinderGoalOpenDoor;
+import net.minecraft.server.v1_8_R3.PathfinderGoal;
+import net.minecraft.server.v1_8_R3.PathfinderGoalOpenDoor;
 
 import org.bukkit.entity.LivingEntity;
 
