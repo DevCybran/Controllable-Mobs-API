@@ -1,6 +1,6 @@
 package de.ntcomputer.minecraft.controllablemobs.implementation.ai.behaviors;
 
-import net.minecraft.server.v1_7_R1.PathEntity;
+import net.minecraft.server.v1_8_R3.PathEntity;
 import de.ntcomputer.minecraft.controllablemobs.api.actions.ActionType;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
 import de.ntcomputer.minecraft.controllablemobs.implementation.actions.ControllableMobActionMoveAbstract;

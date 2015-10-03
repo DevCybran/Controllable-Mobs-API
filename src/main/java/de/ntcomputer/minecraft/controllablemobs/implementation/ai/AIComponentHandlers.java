@@ -3,14 +3,15 @@ package de.ntcomputer.minecraft.controllablemobs.implementation.ai;
 import java.util.HashMap;
 import java.util.Map;
 
-import net.minecraft.server.v1_7_R1.PathfinderGoal;
-import net.minecraft.server.v1_7_R1.PathfinderGoalBreakDoor;
-import net.minecraft.server.v1_7_R1.PathfinderGoalDoorInteract;
-import net.minecraft.server.v1_7_R1.PathfinderGoalFloat;
-import net.minecraft.server.v1_7_R1.PathfinderGoalOpenDoor;
+import net.minecraft.server.v1_8_R3.Navigation;
+import net.minecraft.server.v1_8_R3.PathfinderGoal;
+import net.minecraft.server.v1_8_R3.PathfinderGoalBreakDoor;
+import net.minecraft.server.v1_8_R3.PathfinderGoalDoorInteract;
+import net.minecraft.server.v1_8_R3.PathfinderGoalFloat;
+import net.minecraft.server.v1_8_R3.PathfinderGoalOpenDoor;
 import de.ntcomputer.minecraft.controllablemobs.api.ai.AIType;
 import de.ntcomputer.minecraft.controllablemobs.implementation.CraftControllableMob;
-import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;
+//import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.NativeInterfaces;
 
 @SuppressWarnings("unchecked")
 public final class AIComponentHandlers {
@@ -34,12 +35,14 @@ public final class AIComponentHandlers {
 		AIComponentListener<PathfinderGoalDoorInteract> closedDoorListener = new AIComponentListener<PathfinderGoalDoorInteract>() {
 			@Override
 			public void onAdd(CraftControllableMob<?> mob, PathfinderGoalDoorInteract goal) {
-				NativeInterfaces.NAVIGATION.FIELD_USECLOSEDDOOR.set(mob.nmsEntity.getNavigation(), true);
+				((Navigation) mob.nmsEntity.getNavigation()).a(true);
+				//NativeInterfaces.NAVIGATION.FIELD_USECLOSEDDOOR.set(mob.nmsEntity.getNavigation(), true);
 			}
 			@Override
 			public void onRemoved(CraftControllableMob<?> mob, PathfinderGoalDoorInteract goal) {
 				if(!mob.getAI().hasBehavior(AIType.ACTION_DOOROPEN, AIType.ACTION_DOORBREAK)) {
-					NativeInterfaces.NAVIGATION.FIELD_USECLOSEDDOOR.set(mob.nmsEntity.getNavigation(), false);
+					((Navigation) mob.nmsEntity.getNavigation()).a(false);
+					//NativeInterfaces.NAVIGATION.FIELD_USECLOSEDDOOR.set(mob.nmsEntity.getNavigation(), false);
 				}
 			}
 		};
@@ -48,12 +51,14 @@ public final class AIComponentHandlers {
 		add(PathfinderGoalFloat.class, new AIComponentListener<PathfinderGoalFloat>() {
 			@Override
 			public void onAdd(CraftControllableMob<?> mob, PathfinderGoalFloat goal) {
-				NativeInterfaces.NAVIGATION.FIELD_CANSWIM.set(mob.nmsEntity.getNavigation(), true);
+				((Navigation) mob.nmsEntity.getNavigation()).b(true);
+				// TODO: NativeInterfaces.NAVIGATION.FIELD_CANSWIM.set(mob.nmsEntity.getNavigation(), true);
 			}
 			@Override
 			public void onRemoved(CraftControllableMob<?> mob, PathfinderGoalFloat goal) {
 				if(!mob.getAI().hasBehavior(AIType.MOVE_SWIM)) {
-					NativeInterfaces.NAVIGATION.FIELD_CANSWIM.set(mob.nmsEntity.getNavigation(), false);
+					((Navigation) mob.nmsEntity.getNavigation()).b(false);
+					// TODO: NativeInterfaces.NAVIGATION.FIELD_CANSWIM.set(mob.nmsEntity.getNavigation(), false);
 				}
 			}
 		});

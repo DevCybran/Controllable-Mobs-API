@@ -4,9 +4,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.UUID;
 
-import net.minecraft.server.v1_7_R1.AttributeModifiable;
-import net.minecraft.server.v1_7_R1.AttributeModifier;
-import net.minecraft.server.v1_7_R1.IAttribute;
+import net.minecraft.server.v1_8_R3.AttributeModifiable;
+import net.minecraft.server.v1_8_R3.AttributeModifier;
+import net.minecraft.server.v1_8_R3.IAttribute;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.system.NativeMethodPublic;
 
 public final class NmsAttributeModifiable {
@@ -21,7 +21,7 @@ public final class NmsAttributeModifiable {
 	public final class GetTemplate extends NativeMethodPublic {
 		public IAttribute invoke(AttributeModifiable attribute) {
 			try {
-				return attribute.a();
+				return attribute.getAttribute();
 			} catch(Throwable t) {
 				this.handleException(t);
 				return null;

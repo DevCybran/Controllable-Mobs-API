@@ -2,7 +2,7 @@ package de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces
 
 import java.util.UUID;
 
-import net.minecraft.server.v1_7_R1.AttributeModifier;
+import net.minecraft.server.v1_8_R3.AttributeModifier;
 import de.ntcomputer.minecraft.controllablemobs.implementation.nativeinterfaces.system.NativeMethodPublic;
 
 public final class NmsAttributeModifier {
